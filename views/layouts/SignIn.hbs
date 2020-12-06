@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32"/>
+    <title>Edu Own Your Knowledge</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Course, Education">
+    <meta name="description" content="Web Video Courses">
+    <meta name="author" content="nmcntt_18CLC2_Group 11">
+    <meta http-equiv="refresh" content="30">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<base href="https://www.w3schools.com/" target="_blank">-->
+    <style>
+        body{
+            background-image:url("images/bg.png");
+            background-size: cover;
+            background-position: center;
+            position: sticky;
+            top:0;
+            right:0;
+        }
+        tr {
+            height:fit-content;
+        }
+        .im {
+            max-width:210px;
+            max-height:95px;
+            width: auto;
+            height: auto;
+        }
+        .allde{
+            max-width:600px;
+            max-height:360px;
+            width: auto;
+            height: 300px;
+            margin-top:120px;
+        }
+        .f {
+            width:400px;
+            height:40px;
+            font-size:130%;
+            padding-left:15px;
+        }
+        .f:hover {
+            background-color: rgb(205, 241, 229);
+            outline: 0;
+            border: 2px solid rgb(140, 140, 173);
+            border-radius: 7px;
+        }
+        .f:focus{
+            background-color: rgb(205, 241, 229);
+            outline: 0;
+            border: 2px solid blueviolet;
+            border-radius: 7px;
+        }
+        .but {
+            width:160px;
+            height:50px;
+            background-color: red;
+            font-size: 125%;
+            color:white;
+            border-radius: 20px;
+            font-stretch:semi-condensed;
+        }
+    </style>
+</head>
+<body>
+    <!-- phần này liên quan fb
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xf
+        bml=1&version=v8.0" nonce="rKqWtgGD"></script>
+    -->
+<form method="get">
+    <table style="width:90%;margin-left:50px;" cellspacing="5px">
+        <colgroup>
+            <col width="500px">
+            <col width="auto">
+        </colgroup>
+        <tr>
+            <td><img src="images/logo1.png" class="im" alt="logo"></td>
+            <td align="right"><a href="SignUp.html" style="color:red;margin-right:110px;">Đăng ký tài khoản mới</a></td>
+        </tr>
+        <tr>
+            <td ><div style="text-align:center;"><h1>Nền tảng giáo dục trực tuyến<br>lớn nhất Đông Nam Á</h1></div></td>
+            <td rowspan="7"><img src="images/all_device.png" alt="Devices using OYK" class="allde"></td>
+        </tr>
+        <tr>
+            <td style="color:rgb(78, 78, 78)">Nơi mọi người chia sẻ , khám phá và học hỏi bất cứ điều gì</td>
+        </tr>
+        <tr>
+            <td>Đăng kí nhanh với</td>
+        </tr>
+        <tr>
+            <td>
+                <!--
+                <div class="fb-login-button" data-size="large" data-button-type="continue_with" 
+                data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+                -->
+                <button>Faccebook</button>
+                <button>Gmail</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Hoặc đăng nhập bằng</td>
+        </tr>
+        <tr>
+            <td><input class="f" id="tk" type="text" name="mail/phone" placeholder="Email hoặc số điện thoại" maxlength="50" required></td>
+        </tr>
+        <tr>
+            <td><input class="f" id="pass" type="password" name="pass" placeholder="Mật khẩu" maxlength="20" required></td>
+        </tr>
+    </table>
+    <div>
+        <table style="margin-left:50px;" cellspacing="15">
+            <tr>
+                <td><input id="submit" class="but" type="submit" name="send" value="Đăng nhập"></td>
+                <td>
+                    <!-- phan nay lien ket voi co so du lieu, chua thuc hien duoc-->
+                    <p><a href="SignIn.html">Quên mật khẩu?</a></p>
+                </td>
+            </tr>
+    </table>
+    </div>
+</form>
+<script src="javascript/SignIn.js"></script>
+</body>
+</html>

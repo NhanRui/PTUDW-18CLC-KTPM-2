@@ -1,6 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
+const hbs_sections = require('express-handlebars-sections');
+const numeral=require('numeral');
+var mongoose=require('mongoose');
+var path = require('path');
+const session = require('express-session');
+//them tiep
+
 var path = require('path');
 
 const app = express();
@@ -22,6 +29,12 @@ app.set('views', path.join(__dirname, "views"));
 app.use(express.urlencoded({
   extended: true
 }));
+
+
+//--------------------------------view------------------------------------------
+app.use('/', require('./controllers/product_controller'));
+app.use('/index', require('./controllers/product_controller'));
+
 
 app.get('/SignIn', function (req, res) {
   res.render('home',{layout: 'SignIn.hbs'});

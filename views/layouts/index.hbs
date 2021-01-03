@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Học Online tại EduOYK - Nền tảng học tập trực tuyến hàng đầu Đông Nam Á với hơn 3000+ Khoá Học và 3 triệu học viên. Đồng hành cùng EduOYK là đội ngũ giảng viên, chuyên gia hàng đầu trong nhiều lĩnh vực">
+    
+    <title>Học Online với 3000+ Khoá Học từ những Chuyên Gia hàng đầu | EduOYK</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class ="fas fa-bars"></i>
+            </label>
+            <ul>
+                <li><a href="#" class="active">Trang chủ</a></li>
+                <li><a href="#" class="active">Kích hoạt khóa học</a></li>
+                <li><a href="#" class="active">Kiểm tra đơn hàng</a></li>
+                <li><a href="#" class="active">Chăm sóc khách hàng</a></li>
+                <li><a href="#" class="active">Trở thành giảng viên</a></li>
+                <li><a href="#" class="active">Khóa học của tôi</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <div class="header__logo">
+                <img src="images/logo1.png" width=140px height="40px">
+            </div>
+            <div class="box">
+                <input class="search__txt" type="text" name="" placeholder="Tìm kiếm khóa học ngay" size=35>
+                <div class="search_history">
+                    <hr>
+                    <h6 class="search_history_heading">Từ khóa phổ biến</h6>
+                    <ul class="history_list">
+                        <li class="history_item">
+                            <a href="#"><i class="fas fa-fire"></i>&nbsp;&nbsp;Cách học giỏi tiếng anh</a>
+                        </li>
+                        <li class="history_item">
+                            <a href="#"><i class="fas fa-fire"></i>&nbsp;&nbsp;Cách kinh doanh</a>
+                        </li>
+                        <li class="history_item">
+                            <a href="#"><i class="fas fa-fire"></i>&nbsp;&nbsp;Học guitar</a>
+                        </li>
+                        <li class="history_item">
+                            <a href="#"><i class="fas fa-fire"></i>&nbsp;&nbsp;Lập trình python</a>
+                        </li>
+                        <li class="history_item">
+                            <a href="#"><i class="fas fa-fire"></i>&nbsp;&nbsp;Yoga</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="search-btn-pos">
+                <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-btn-pos">
+                <div class="cart-btn-focus" id="cart-btn-click">
+                    {{#if auth}}
+                        <div class="amount-cart">{{cartSummary}}</div>
+                    {{/if}}
+                    <i class="cart-btn fas fa-shopping-cart" id="cart-item"></i>
+                    <div class="cart_list" id="cart_list_focus">
+                        <i class="list_ca fas fa-shopping-cart"></i>
+                        <p>Bạn chưa có khóa học nào trong giỏ hàng</p>
+                        <!--<p class="check-num-card">Giỏ hàng - 0 khóa</p>
+                        <div class="scroll-container-item">
+                            {{#each this.items}}
+                            <a href="/course-detail/{{course_id}}">
+                                <div class="shop-cart-course">
+                                    <img class="card-img-shop" src={{intro_image}} alt="">
+                                    <div class="container-cart-item">
+                                        <p class="title-in-card">{{course_name}}</p>
+                                        <p class="price-in-cart">{{format_number reduce_price}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            {{/each}}
+                        </div>
+                        <div class="footer-total-bill">
+                            <div class="total-in-cart">
+                                <p class="total-price-item-text">Tổng: </p>
+                                <p class="total-price-item">1,000,000 đ</p>
+                            </div>
+                            <a href="#" class="btn-view-cart">
+                                Xem giỏ hàng
+                            </a>
+                        </div>-->
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="heart-btn-pos">
+                <div class="heart-btn-focus" id="heart-btn-click">
+                    {{#if auth}}
+                        {{#if numberOfitems}}
+                        <div class="amount-cart">{{cartSummary}}</div>
+                        {{/if}}
+                    {{/if}}
+                    <i class="heart-btn far fa-heart" id="heart-item"></i>
+                    <div class="heart_list" id="heart_list_focus">
+                        {{#if numberOfitems}}
+                            <div class="check-num-card">Yêu thích - {{cartSummary}} khóa</div>
+                            <div class="scroll-container-item">
+                                {{#each this.items}}
+                                <a href="/course-detail/{{course_id}}">
+                                    <div class="shop-cart-course">
+                                        <img class="card-img-shop" src={{intro_image}} alt="">
+                                        <div class="container-cart-item">
+                                            <p class="title-in-card">{{course_name}}</p>
+                                            <p class="price-in-cart">{{format_number reduce_price}}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                {{/each}}
+                            </div>
+                            {{#if auth}}
+                            <div class="footer-total-bill">
+                                <div class="total-in-cart">
+                                    <p class="total-price-item-text">Tổng: </p>
+                                    <p class="total-price-item">{{format_number cartTotal}}</p>
+                                </div>
+                                <a href="#" class="btn-view-cart">
+                                    Xem giỏ hàng
+                                </a>
+                            </div>
+                            {{/if}}  
+                        {{else}}
+                            <i class="list_fa far fa-heart"></i>
+                            <p class="hear-is-empty">Bạn chưa có khóa học trong danh sách yêu thích</p>  
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="bell-btn-pos">
+                <i class="bell-btn far fa-bell"></i>
+            </div>
+            {{#if auth}}
+            <div class="container-authen">
+                <div class="container-name-user">
+                    <p><img src="images/BecomeInstructor/ltn.jpg" alt="" class="image-auth"></p>
+                    <p class="name-user-auth">{{authUser.name}}</p>
+                    <p class="down-icon-auth"><i class="fas fa-sort-down"></i></p>
+                </div>
+                <div class="option-authen-menu" id="option-show-auth">
+                    <div class="option-item-auth">
+                        <a href="#" class="option-select-auth">Thông tin tài khoản</a>
+                    </div>
+                    <div class="option-item-auth">
+                        <a href="#" class="option-select-auth">Danh sách yêu thích</a>
+                    </div>
+                    <hr>
+                    <div class="option-item-auth">
+                        <a href="javascript: $('#frmLogout').submit();" class="option-select-auth">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="sign-in__btn">
+                <a href="/account/login"><button class="sign-in-bg">Đăng nhập</button></a>
+            </div>
+            <div class="sign-up__btn">
+                <a href="/account/register"><button class="sign-up-bg">Đăng ký</button></a>
+            </div>
+            {{/if}}
+        </div>
+
+
+        
+    </div>
+</body>
+</html>

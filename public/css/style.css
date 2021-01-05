@@ -137,6 +137,11 @@ section{
     position: relative;
 }
 
+.container-box{
+    display: flex;
+    flex-direction: row;
+}
+
 .header__logo
 {
     width: 0%;
@@ -162,11 +167,6 @@ section{
     width: 150px;
 }
 
-.search-btn-pos
-{
-    margin-top: 8.5px;
-    margin-left: 2px;
-}
 .search-btn
 {
     background: rgb(221, 31, 31);
@@ -293,7 +293,7 @@ button.sign-in-bg:hover
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 0 3px #d1d1d1;
-    display: none;
+    margin-top: 5px;
 }
 
 .search_history hr{
@@ -355,13 +355,15 @@ button.sign-in-bg:hover
     margin-left: 85px;
     margin-top: 15px;
 }
-/*.cart_list p{
+
+.cart_list .cart-is-empty{
+    text-align: center;
     margin-top: 15px;
-    margin-left: 15px;
+    margin-left: 50px;
     width: 65%;
     font-size: 16px;
     color: rgb(124, 121, 121)
-}*/
+}
 
 .cart_list::after{
     content: "";
@@ -458,4 +460,187 @@ button.sign-in-bg:hover
     margin-top: 13px;
 }
 
-/*van con*/
+.title-in-card{
+    padding-bottom: 30px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 15px;
+    -webkit-line-clamp: 2;
+    height: 30px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    color: rgb(48, 46, 46);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+}
+
+.check-num-card{
+    margin-top: 15px;
+    margin-left: 15px;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scroll-container-item{
+    width: 285px;
+    height: auto;
+    max-height:290px;
+    overflow-y: auto;
+}
+
+.scroll-container-item:hover a{
+    text-decoration: none;
+}
+
+.footer-total-bill{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-view-cart{
+    right: 0;
+    position: absolute;
+}
+
+.price-in-cart{
+    color: rgba(77, 80, 233, 0.801);
+    font-weight: bold;
+}
+
+.total-price-item-text{
+    margin-left: 15px;
+    margin-top: 12px;
+    margin-bottom: -5px;
+}
+
+.total-price-item{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: #ff0000d5;
+    font-size: 20px;
+    margin-left: 15px;
+    padding-bottom: 10px;
+}
+
+.btn-view-cart{
+    background-color: #ff0000d5;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-right: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.btn-view-cart:hover {
+    background-color: #c20b0b;
+}
+
+.container-name-user{
+    display: flex;
+    flex-direction: row;
+    padding: 7px 8px 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container-name-user p{
+    margin-bottom: 0px;
+}
+
+.image-auth{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.container-authen{
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.name-user-auth{
+    margin-top: 5px;
+    margin-left: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+.option-authen-menu{
+    background: white;
+    height: auto;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 0 3px #d1d1d1;
+    position: absolute;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.option-authen-menu::after{
+    content: "";
+    position: absolute;
+    right: 90px;
+    top: -30px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    margin-top: 10px;
+}
+
+.option-item-auth{
+    padding: 10px 0px 10px 20px;
+}
+
+.option-item-auth:hover{
+    background-color: rgb(241, 241, 241);
+}
+
+.option-item-auth:hover .option-select-auth{
+    color: #d60e0e;
+    text-decoration: none;
+}
+
+.line-user{
+    margin: 0;
+}
+
+.down-icon-auth{
+    margin-top: 2px;
+    margin-left: 40px;
+}
+
+.option-select-auth{
+    color: rgb(94, 91, 91);
+    font-size: 13px;
+}
+
+.container-name-user:hover{
+    background-color: rgb(241, 241, 241);
+}
+
+#frmLogout{
+    display: none;
+}
+
+.amount-cart{
+    position: absolute;
+    margin-top: -3px;
+    margin-left: 22px;
+    padding: 2px 8px 2px 8px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #d10d0d;
+    border-radius: 5px;
+}

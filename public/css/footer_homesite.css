@@ -1,0 +1,76 @@
+.ctn_footer{
+    display: flex;
+    background: white;
+    position: relative;
+}
+
+.col_footer_1{
+    width: 18%;
+    margin-left: 120px;
+    padding-bottom: 30px;
+    margin-top: 20px;
+}
+.logo_footer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+ .company-full-name{
+     font-size: 13px;
+     font-family: 'Times New Roman', Times, serif;
+     color: rgb(88, 88, 88);
+ }
+
+ .col_footer_2{
+    width: 18%;
+    margin-left: 80px;
+    padding-bottom: 30px;
+    margin-top: 40px;
+}
+
+ .introduce h4{
+     font-size: 18px;
+     font-family: 'Times New Roman', Times, serif;
+     font-weight: bold;
+     color: rgb(39, 39, 39);
+ }
+
+ .introduce ul li a{
+    font-size: 13px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(88, 88, 88);
+ }
+ .introduce ul{
+     margin-top: 10px;
+ }
+
+ .col_footer_3{
+    width: 18%;
+    margin-left: 50px;
+    padding-bottom: 30px;
+    margin-top: 40px;
+}
+
+.media{
+    display: flex;
+}
+
+.media p{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 13px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(88, 88, 88);
+}
+
+.cnt_app{
+    display: flex;
+}
+
+.app{
+    margin-top: 10px;
+}
+
+.app-mobile{
+    margin-left: 5px;
+    margin-top: 10px;
+}

@@ -1,0 +1,199 @@
+
+.img-with-deal{
+    width: 100%;
+    position: absolute;
+}
+
+.card-img{
+    width: 100%;
+    height: 110px;
+    position: absolute;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-product{
+    margin-top: 30px;
+    width: 258px;
+    height: 275px;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 5px #d1d1d1;
+}
+
+.card-product-topbs{
+    margin-top: 30px;
+    width: 208px;
+    height: 275px;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 5px #d1d1d1;
+}
+
+.deal-img{
+    height: 30px;
+    width: 45px;
+    padding-left: 5px;
+    padding-top: 4px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    background: rgb(241, 47, 47);
+    border-radius: 5px;
+    position: absolute;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
+.card-title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    color: rgb(70, 69, 69);
+    margin-left: 5px;
+    margin-top: 160px;
+    font-weight: bold;
+    position: absolute;
+}
+
+.card-text-author{
+    display: flex;
+    flex-wrap: nowrap;
+    position: absolute;
+    margin-top: 170px;
+}
+
+.author-img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.author-name{
+    margin-left: 8px;
+    margin-top: 25px;
+    font-size: 13px;
+    color: rgb(182, 172, 172);
+}
+
+.price{
+    display: flex;
+    justify-content: flex-end;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 8px;
+}
+
+.real-price{
+    text-decoration-line: line-through;
+    margin-right: 10px;
+    font-size: 12px;
+    color: rgb(151, 154, 156);
+    padding-top: 3px;
+}
+
+.reduce-price{
+    color: red;
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+.number-rating{
+    color: black;
+}
+
+p.number-students{
+    position: absolute;
+    color: white;
+    margin-top: 1px;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.item__overlay {
+
+    left:0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background-color: rgba(2, 2, 2, 0.5);
+    overflow: hidden;
+    transition: .2s ease;
+  }
+
+.card-product:hover .item__overlay{
+      height: 100%;
+}
+
+.card-product:hover .favourite_course_container button i{
+    cursor: pointer;
+    display: block;
+}
+
+.card-product-topbs:hover .item__overlay{
+    height: 100%;
+}
+
+.card-product-topbs:hover .favourite_course_container button i{
+  display: block;
+}
+
+.container_slide_up{
+    margin-top: 86px;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+}
+
+.favourite_course_container button i{
+    position: absolute;
+    padding: 10px;
+    right: 0;
+    margin-right: 15px;
+    background: white;
+    z-index: 1;
+    border-radius: 8px;
+    color: rgb(196, 193, 193);
+    display: none;
+}
+
+.favourite_course_container{
+    width: 100%;
+    position: absolute;
+}
+
+.favourite_course_container:hover .fa_ca{
+    color: black;
+}
+
+.img-top-business-container{
+    width: 435px;
+    height: 275px;
+    margin-top: 30px;
+}
+
+.img-top-business{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+#faActive{
+    background-color: rgba(216, 1, 1, 0.986);
+    color: white;
+}
+
+.card-text-author:hover{
+    text-decoration: none;
+}

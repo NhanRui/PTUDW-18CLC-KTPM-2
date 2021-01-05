@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32"/>
+    <title>Edu Own Your Knowledge</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Course, Education">
+    <meta name="description" content="Web Video Courses">
+    <meta name="author" content="nmcntt_18CLC2_Group 11">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/activate.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="body">
+    <form method="POST" id="veri">
+        <div id="logo">
+            <a href="/"><img src="images/logo1.png" alt="EduYOK logo"></a>
+        </div>
+        <div>
+            <fieldset>
+                <p id="kichhoat">Kích hoạt tài khoản</p>
+                <label for="input">
+                    <p>Nhập mã kích hoạt tài khoản gửi tới <b>{{email}}</b></p>
+                </label>
+                <input type="text" maxlength="10" size="30" placeholder="Nhập mã" autocomplete="off" id="input" name="verification" value=""><br>
+                {{#if err_message}}
+                    <p style="color: red;">{{err_message}}</p>
+                {{/if}}
+                <button type="submit" class="activate">Kích hoạt tài khoản</button>
+                <p id="resend-text">Gửi lại mã xác nhận</p>
+            </fieldset>
+        </div>
+    </form>
+    </div>
+    <div id="footer">
+        <div id="upper">
+            <div>
+                <img src="images/logo1.png" alt="logo" style="width:100%; height:auto;"><br/><br/>
+                <span>EduOYK - học mọi lúc mọi nơi</span>
+            </div>
+            <div>
+                <span class="sp-foot">Thông tin</span>
+                <ul>
+                    <li><a href="#" class="a-foot">Giới thiệu</a></li>
+                    <li><a href="#" class="a-foot">Điều khoản sử dụng</a></li>
+                    <li><a href="#" class="a-foot">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div>
+                <span class="sp-foot">Trợ giúp</span><br/><br/>
+                <a href="#" class="a-foot">Trung tâm hỗ trợ</a>
+            </div>
+            <div>
+                <span class="sp-foot">Tuyển dụng</span><br/><br/>
+                <a href="#" class="a-foot">Trở thành giảng viên</a>
+            </div>
+        </div>
+        <hr id="up-low">
+        <div style="display:flex;justify-content:flex-end;">
+            <img src="images/bo-cong-thuong.png" style="width:129px;height:48px;">
+        </div>
+        <div id="actual-footer">
+            <span>COPYRIGHT BY EDU_OYK - 2020</span>
+        </div>
+    </div>
+    <button id="ho_tro">
+        <span style="margin:15px;">Hỗ trợ</span>
+    </button>
+    <script>
+        $(document).ready(function(){
+            $('#resend-text').on('click',function(){
+                $.getJSON({
+                    url: `/account/sendtoken`,
+                    success: function(data){
+                        //nothing
+                    }
+                })
+            })
+            $("#veri").on('submit',function(event){
+                event.preventDefault();
+                if($('#input').val()===""){
+                    alert("Xin hãy nhập mã kích hoạt"); 
+                    return;
+                }
+                $("#veri").off('submit').submit();
+            })
+        })
+    </script>
+</body>

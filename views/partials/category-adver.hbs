@@ -1,0 +1,141 @@
+<div class="container-item-adver">
+    <div class="all-subcategory-container">
+        <div class="background-item">
+            <ul>
+                <label class="category-label-item">
+                <p class="category-label">Danh mục</p>
+                </label>
+                {{#each this.menuList}}
+                <li class="category-menu-item" id="{{category_id}}">
+                    <a class="main-category-level" href="/search/{{category_id}}">
+                        <span class="item-level1" id="{{category_id}}_name">{{category_name}}</span>
+                    </a>
+                </li>
+                {{/each}}
+                <!--<li class="category-menu-item" id="category-1">
+                    <a class="main-category-level" href="#">
+                        <span class="item-level1" id="ngoai-ngu">Ngoại ngữ</span>
+                    </a>
+                </li>
+                <li class="category-menu-item" id="category-2">
+                    <a class="main-category-level" href="#">
+                        <span class="item-level1" id="am-nhac">Âm nhạc</span>
+                    </a>
+                </li>
+                <li class="category-menu-item" id="category-3">
+                    <a class="main-category-level" href="#">
+                        <span class="item-level1" id="IT">Công nghệ thông tin</span>
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+        <!--English-->
+        {{#each this.allListMenu}}
+        <div class="submenu-wrap" id="{{menu}}-menu"><!--khac id-->
+            <div class="submenu-container-1">
+                <ul>
+                    <label class="category-label-item">
+                    <p class="category-label">{{name}}</p>
+                    </label>
+                    {{#each this.submenu}}
+                    <li class="category-menu-item" id="mini-menu-english"><!--khac id-->
+                        <a class="main-category-level" href="#">
+                            <span class="item-level1">{{category_name}}</span>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="childmenu-container-1">
+                <label class="category-label-item">
+                    <p class="category-label">{{name}} - Featured Course</p>
+                </label>
+                <div class="product-menu-col">
+                    {{#each this.top4_course_menu}}
+                        {{>product_menu_music}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{#each this.menuList}}
+            <script>
+                hover_menu("{{{category_id}}}","{{{category_id}}}-menu","{{{category_id}}}_name");
+            </script>
+        {{/each}}
+        <!--Music-->
+        <!--IT-->
+    </div>
+    <div class="deal-slide-container">
+        <div class="background-image">
+            <div class ="slider">
+                <div class="slides">
+                    <!--radio button start-->
+                    <input type="radio" name="radio-btn" id="radio1">
+                    <input type="radio" name="radio-btn" id="radio2">
+                    <input type="radio" name="radio-btn" id="radio3">
+                    <input type="radio" name="radio-btn" id="radio4">
+                    <!--radio button end-->
+                    <!--slide images start-->
+                    <div class="slide first">
+                        <a href="#"><img src="images/adver1.jpg" alt=""></a>
+                    </div>
+                    <div class="slide second">
+                        <a href="#"><img src="images/adver2.jpg" alt=""></a>
+                    </div>
+                    <div class="slide third">
+                        <a href="#"><img src="images/adver3.jpg" alt=""></a>
+                    </div>
+                    <div class="slide four">
+                        <a href="#"><img src="images/adver4.jpg" alt=""></a>
+                    </div>
+                    <!--slide images end-->
+                    <!--automatic navigation start-->
+                    <div class="navigation-auto">
+                        <div class="auto-btn1"></div>
+                        <div class="auto-btn2"></div>
+                        <div class="auto-btn3"></div>
+                        <div class="auto-btn4"></div>
+                    </div>
+                    <!--automatic navigation end-->
+                </div>
+                <!--manual navigation start-->
+                <div class="navigation-manual">
+                    <label for="radio1" class="manual-btn"></label>
+                    <label for="radio2" class="manual-btn"></label>
+                    <label for="radio3" class="manual-btn"></label>
+                    <label for="radio4" class="manual-btn"></label>
+                </div>
+                <!--manual navigation end-->
+                <script type="text/javascript">
+                var counter = 1;
+                setInterval(function(){
+                    document.getElementById('radio' + counter).checked=true;
+                    counter++;
+                    if(counter>4)
+                    {
+                        counter=1;
+                    }
+                },3000);
+                </script>
+            </div>
+        </div>
+        <div class="box-advertise">
+            <div class="background-deal1">
+                <div class="deal1">
+                    <a href="#"><img src="images/ad1.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="background-deal2">
+                <div class="deal2">
+                    <a href="#"><img src="images/ad2.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="background-deal3">
+                <div class="deal3">
+                    <a href="#"><img src="images/ad3.jpg" alt=""></a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

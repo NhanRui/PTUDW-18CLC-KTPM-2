@@ -1,0 +1,351 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #f9fafc !important;
+}
+
+.container {
+    width: 100%;
+    padding: 3vw 18vw;
+    display: flex;
+}
+
+    .left-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .quick-user-info {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border-bottom: 1px solid gray;
+        }
+
+            .quick-name {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            .quick-role {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                margin: 15px auto;
+            }
+
+            .logo img{
+                width: 160px;
+                height: auto;
+            }
+
+            .avatar {
+                margin: auto;
+            }
+
+            .avatar img{
+                border-radius: 50%;
+                border: none;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+
+            .activate-btn {
+                width: 80%;
+                margin: auto;
+                text-align: center;
+                height: 2.5rem;
+                font-weight: 500;
+                font-size: 16px;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                background-color: rgb(0, 174, 255);
+                color: white;
+                border: none;
+                outline: none;  
+            }
+
+            .activate-btn:hover {
+                cursor: pointer;
+            }
+
+            .activate-btn > i {
+                margin-right: 5px;
+            }
+
+            .categories {
+                margin-top: 10px;
+            }
+
+                .category {
+                    margin: 10px 0;
+                    height: 2.5rem;
+                    display: flex;
+                    align-items: center;
+                    padding-left: 5px;
+                }
+
+                .category > a {
+                    text-align: left;
+                    text-decoration: none;
+                    color: gray;
+                    font-weight: 400;
+                    font-size: 15px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .category > .choosen {
+                    color: red !important;
+                }
+
+                .category > a > i {
+                    margin-right: 8px;
+                    font-weight: 500;
+                    font-size: 25px;
+                }
+
+                .category:hover {
+                    background-color: gainsboro;
+                    cursor: pointer;
+                    border-radius: 3px;
+                }
+
+    .right-container {
+        flex: 4;
+        width: 100%;
+        padding: 0 15px;
+    }
+
+        .search form {
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+
+        .search #search {
+            height: 2.5rem;
+            width: 15vw;
+            background-color: #ecedf1;
+            border: none;
+            border-radius: 3px;
+            outline: none;
+            padding-left: 10px;
+        }
+
+        .search #btn {
+            height: 2.5rem;
+            width: 5rem;
+            margin-left: 10px;
+            border: none;
+            border-radius: 3px;
+            outline: none;
+            background-color: white;
+            font-weight: 500;
+        }
+
+        .courses {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+            .course {
+                margin: 5px;
+                width: 33%;
+            }
+
+            .course .picture {
+                width: 84%;
+                height: 20vh;
+                margin: auto;
+            }
+
+            .course img{
+                border-radius: 5px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            a {
+                text-decoration: none !important;
+                color: black !important;
+            }
+
+            .course-name {
+                font-weight: 600;
+                width: 83%;
+                margin: auto;
+            }
+
+            .description {
+                height: 10vh;
+            }
+
+            .author {
+                font-size: 13px;
+                width: 83%;
+                margin: auto;
+            }
+
+            .progress_container {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 84%;
+                margin: auto
+            }
+
+            .rating {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 84%;
+                margin: auto;
+                padding: 10px 20px 0 0;
+            }
+
+            .rating_text {
+                background: none;
+                border: none;
+                outline: none !important;
+                color: black;
+            }
+
+            .rating_text:hover {
+                color: #007bff;
+            }
+
+            .star {
+                width: 25px;
+                height: 25px;
+                border-radius: 4px;
+                background-color: #ffc53b;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .rating_container {
+                width: 100%;
+                padding: 20px 30px;
+                border: 1px solid #444;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .star_widget > form > input{
+                display: none;
+            }
+
+            .star_widget > form > label {
+                font-size: 40px;
+                color: #444;
+                padding: 10px;
+                float: right;
+                transition: all 0.2s ease;
+            }
+
+            input:not(:checked) ~ label:hover,
+            input:not(:checked) ~ label:hover ~label {
+                color: #fd4;
+            }
+
+            input:checked ~label {
+                color: #fd4;
+            }
+
+            input#rate-5:checked ~label {
+                color: #fe7;
+            }
+
+            #rate-1:checked ~ header:before {
+                content: 'Chúng tôi rất tiếc';
+            }
+
+            #rate-2:checked ~ header:before {
+                content: 'Chúng tôi rất tiếc';
+            }
+
+            #rate-3:checked ~ header:before {
+                content: 'Chúng tôi sẽ cố gắng cải thiện';
+            }
+
+            #rate-4:checked ~ header:before {
+                content: 'Chúng tôi rất vui vì bạn thích khóa học này!';
+            }
+
+            #rate-5:checked ~ header:before {
+                content: 'Chúng tôi rất vui vì bạn thích khóa học này!';
+            }
+
+            form > header {
+                width: 100%;
+                font-size: 13px;
+                color: black;
+                font-weight: 500;
+                margin: 5px 0 20px 0;
+                text-align: center;
+                transition: all 0.2s ease;
+            }
+
+            form > .textarea {
+                height: 100px;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            form > .textarea > textarea {
+                height: 100%;
+                width: 100%;
+                outline: none;
+                color: #222;
+                border: 1px solid #333;
+                border-radius: 5px;
+                background: #eee;
+                padding: 10px;
+                font-size: 17px;
+                resize: none;
+            }
+
+            form > .button {
+                height: 45px;
+                width: 100%;
+                margin: 15px 0;
+            }
+
+            form .button button {
+                height: 100%;
+                width: 100%;
+                outline: 0;
+                border: #df322f;
+                border-radius: 5px;
+                background-color: #df322f;
+                color: white;
+                font-size: 17px;
+                font-weight: 500;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+@media screen and (max-width: 1839px) {
+    .container {
+        padding: 3vh 5vw;
+    }
+}

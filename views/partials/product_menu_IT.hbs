@@ -1,0 +1,31 @@
+{{#each this.product_menu_IT}}
+<div class="menu-product-container">
+    <a href="#" class="container-image-with-favourite">
+        <div class="image-menu-product">
+            <img src={{deal_image}} alt="">
+        </div>
+        <a href="#" class="favourite_course_menu">
+            <i class="fa_ca far fa-heart" id=""></i>
+        </a>
+    </a>
+    <div class="container-content-mnproduct">
+        <a href="#"><p class="tittle-menu-product">{{title_product}}</p></a>
+        <div class="{{product_ID_rts}}">
+            <div class="wrap-stars-menu">
+                <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                </div>
+                <span class="number-rating"><b>{{rating_stars}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+            </div>
+        </div>
+        <script>
+            var ob_rating="{{{product_ID_rts}}}";
+            document.addEventListener('DOMContentLoaded',getRatings({{rating_stars}},ob_rating))
+        </script><!--về sau tham số là tên product-->
+        <div class="price-menu">
+            <div class="real-price-menu">{{real_price}} đ</div>
+            <div class="reduce-price-menu">{{reduce_price}} đ</div>
+        </div>
+    </div>
+</div>
+{{/each}}

@@ -1,0 +1,58 @@
+{{#if this.empty}}
+<h5 class="card-title">Không có dữ liệu!</h5>
+<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+{{else}}
+<div class="row">
+    {{#each this.product_popular}}
+    <div class="col-sm-4">
+        <div class="card-product">
+                <div class="favourite_course_container">
+                    <a href="#"><i class="fa_ca far fa-heart" id=""></i></a>
+                </div>
+                <a href="/course-detail/{{course_id}}">
+                <div class="container_slide_up">
+                    <div class="item__overlay">
+                        <p class="number-students">Học viên: {{number_student}}</p>
+                    </div>
+                </div>
+                </a>
+                <a href="/course-detail/{{course_id}}">
+                <div class="img-with-deal">
+                    <img class="card-img" src={{intro_image}} alt="">
+                    <div class="deal-img">
+                        <p>-{{deal_value}}%</p>
+                    </div>
+                </div>
+                </a>
+                <a href="/course-detail/{{course_id}}">
+                <div class="{{course_id}}">
+                    <div class="wrap-stars">
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                        <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+                    </div>
+                </div>
+                <h4 class="card-title">{{course_name}}</h4>
+                </a>
+                <script>
+                    var ob_rating="{{{course_id}}}";
+                    document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
+                </script><!--về sau tham số là tên product-->
+                <div class="card-body">
+                    <a href="/course-detail/{{course_id}}" class="card-text-author">
+                        <img class="author-img" src="/public/{{author_image}}" alt="">
+                        <p class="author-name">{{author_name}}</p>
+                    </a>
+                    <a href="/course-detail/{{course_id}}">
+                    <div class="price">
+                        <div class="real-price">{{format_number price}}</div>
+                        <div class="reduce-price">{{format_number reduce_price}}</div>
+                    </div>
+                    </a>
+                </div>
+        </div> 
+    </div>
+    {{/each}}
+</div>
+{{/if}}

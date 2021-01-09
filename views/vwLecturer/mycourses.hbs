@@ -1,0 +1,31 @@
+<link href="./css/lecturer_courses.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div style="width:90%;margin-left:50px;">
+    <div class="top_margin">
+        <h1>Quản trị khóa học</h1>
+        <div class="dropbox">
+            <div class="show">
+                Tất cả khóa học ({{count}})
+            </div>
+        </div>
+        
+        {{#each courses}}
+        <a href="/lecturer/{{course_id}}">
+            <div class="course_element">
+                <div class="course_image">
+                    <img alt="{{course_name}}" src="{{intro_image}}">
+                </div>
+                <div class="body_txt">
+                    <p class="title"><span id="hov">{{course_name}}</span></p>
+                    <p class="status"><span>{{status}}</span></p>
+                    <p class="date">Created date: <span id="date">{{create_date}}</span></p>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</div>

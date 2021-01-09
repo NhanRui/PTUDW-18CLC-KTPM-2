@@ -1,0 +1,200 @@
+{{>search-header}}
+<section>
+    <div class="selection-search-container">
+        <div class="result-search"></div><!--Xử lý kết quả-->
+        <div class="choice-container">
+            <div class="filter-box">
+                <div class="title-search">TRÌNH ĐỘ</div>
+                <div class="form-check">
+                    <ul class="level-choice">
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-1" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-1"> Sơ cấp </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-2" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-2"> Trung cấp </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-3" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-3"> Chuyên sâu </label>
+                        </li class="item">
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-10" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-10"> Trọn bộ </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="title-search">CHÍNH SÁCH</div>
+                <div class="form-check">
+                    <ul class="level-choice">
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-4" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-4"> Khuyễn mại </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-5" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-5"> Miễn phí </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="title-search">THỜI LƯỢNG</div>
+                <div class="form-check">
+                    <ul class="level-choice">
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-6" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-6"> Dưới 2 giờ </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-7" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-7"> Dưới 3 giờ </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-8" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-8"> Dưới 5 giờ </label>
+                        </li>
+                        <li class="item">
+                            <input type="hidden" name="filter_url" value="">
+                            <input id="filter_level_filter-9" type="radio" class="layer-input-filter" name="filter_level_filter">
+                            <label for="filter_level_filter-9"> 5 giờ trở lên </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="title-search">ĐÁNH GIÁ</div>
+                <div class="form-check">
+                    <ul class="level-choice">
+                        {{#with this.cateId}}
+                        {{#if categoryById}}
+                            <li class="item {{#if active_5}}activate_choice noHover{{/if}}">
+                                <a href="/search/{{Id}}/rating-5">
+                                    <label class="text_star {{#if active_5}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 5.0 </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_4}}activate_choice noHover{{/if}}">
+                                <a href="/search/{{Id}}/rating-up-4">
+                                    <label class="text_star {{#if active_up_4}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 4.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_3}}activate_choice noHover{{/if}}" >
+                                <a href="/search/{{Id}}/rating-up-3">
+                                    <label class="text_star {{#if active_up_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 3.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_down_3}}activate_choice noHover{{/if}}">
+                                <a href="/search/{{Id}}/rating-down-3">
+                                    <label class="text_star {{#if active_down_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> Dưới 3.0 </label>
+                                </a>
+                            </li>
+                        {{else}}
+                            <li class="item {{#if active_5}}activate_choice noHover{{/if}}">
+                                <a href="/search/keyword/{{Id}}/rating-5">
+                                    <label class="text_star {{#if active_5}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 5.0 </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_4}}activate_choice noHover{{/if}}">
+                                <a href="/search/keyword/{{Id}}/rating-up-4">
+                                    <label class="text_star {{#if active_up_4}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 4.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_3}}activate_choice noHover{{/if}}" >
+                                <a href="/search/keyword/{{Id}}/rating-up-3">
+                                    <label class="text_star {{#if active_up_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 3.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_down_3}}activate_choice noHover{{/if}}">
+                                <a href="/search/keyword/{{Id}}/rating-down-3">
+                                    <label class="text_star {{#if active_down_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> Dưới 3.0 </label>
+                                </a>
+                            </li>
+                        {{/if}}
+                        {{/with}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="menu-sort">
+            {{#with this.cateId}}
+            {{#if categoryById}}
+            <div class="menusub-choices">
+                <span class="style-submenu menu0">
+                    <i class="fas fa-sort-amount-up"></i> Sắp xếp
+                </span>
+                <span class="blur-style diff-char"> | </span>
+                <a href="/search/{{Id}}/most-study">
+                    <span class="style-submenu menu1 blur-style" {{#if active_m_st}}id="active_most"{{/if}}>Học nhiều nhất</span>
+                </a>
+                <a href="/search/{{Id}}/most-overall">
+                    <span class="style-submenu menu2 blur-style"{{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
+                </a>
+                <a href="/search/{{Id}}/newest">
+                    <span class="style-submenu menu3 blur-style">Mới nhất</span>
+                </a>
+                <a href="/search/{{Id}}/price-ascend">
+                    <span class="style-submenu menu4 blur-style"{{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
+                </a>
+                <a href="/search/{{Id}}/price-descend">
+                    <span class="style-submenu menu5 blur-style"{{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
+                </a>
+            </div>
+            {{else}}
+            <div class="menusub-choices">
+                <span class="style-submenu menu0">
+                    <i class="fas fa-sort-amount-up"></i> Sắp xếp
+                </span>
+                <span class="blur-style diff-char"> | </span>
+                <a href="/search/keyword/{{Id}}/most-study">
+                    <span class="style-submenu menu1 blur-style" {{#if active_m_st}}id="active_most"{{/if}}>Học nhiều nhất</span>
+                </a>
+                <a href="/search/keyword/{{Id}}/most-overall">
+                    <span class="style-submenu menu2 blur-style"{{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
+                </a>
+                <a href="/search/keyword/{{Id}}/newest">
+                    <span class="style-submenu menu3 blur-style">Mới nhất</span>
+                </a>
+                <a href="/search/keyword/{{Id}}/price-ascend">
+                    <span class="style-submenu menu4 blur-style"{{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
+                </a>
+                <a href="/search/keyword/{{Id}}/price-descend">
+                    <span class="style-submenu menu5 blur-style"{{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
+                </a>
+            </div>
+            {{/if}}
+            {{/with}}
+            <div class="container123">
+                {{>product_in_search}}
+                    <!--<div class="button-next">
+                        <input class="button-next-page active-button" type="button" name="" id="" value="1">
+                        <input class="button-next-page" type="button" name="" id="" value="2">
+                        <input class="button-next-page" type="button" name="" id="" value="3">
+                    </div>-->
+            </div>
+                <div class="container-pagination">
+                    <div class="button-next">
+                        {{#if checkPreviousPage}}
+                            <a class="button-next-page" href="?page={{previousPage}}"> < </a>
+                        {{/if}}
+                        {{#each this.page_numbers}}
+                        {{#if isCurrentPage}}
+                            <a class ="button-next-page active-button" href="javascript:;">{{value}}</a>
+                        {{else}}
+                            <a class ="button-next-page" href="?page={{value}}">{{value}}</a>
+                        {{/if}}
+                        {{/each}}
+                        {{#if checkNextPage}}
+                            <a class="button-next-page" href="?page={{nextPage}}">></a>
+                        {{/if}}
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+{{>footer-index}}

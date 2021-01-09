@@ -1,0 +1,61 @@
+{{#if this.empty_top8}}
+<h5 class="card-title">Không có dữ liệu!</h5>
+<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+{{else}}
+<div class="row">
+{{#each this.product_top8}}
+    <div class="col-sm-3">
+        <div class="card-product">
+                <form action="/cart/add" method="POST" class="favourite_course_container">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <i class="fa_ca far fa-heart" id="{{#if isHaving}}faActive{{/if}}"></i>
+                    </button>
+                </form>
+                <a href="#">
+                <div class="container_slide_up">
+                    <div class="item__overlay">
+                        <p class="number-students">Học viên: {{number_student}}</p>
+                    </div>
+                </div>
+                </a>
+                <a href="#">
+                <div class="img-with-deal">
+                    <img class="card-img" src={{deal_image}} alt="">
+                    <div class="deal-img">
+                        <p>{{deal_value}}</p>
+                    </div>
+                </div>
+                </a>
+                <a href="#">
+                <div class="{{product_ID_rts}}">
+                    <div class="wrap-stars">
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                        <span class="number-rating"><b>{{rating_stars}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+                    </div>
+                </div>
+                <h4 class="card-title">{{title_product}}</h4>
+                </a>
+                <script>
+                    var ob_rating="{{{product_ID_rts}}}";
+                    document.addEventListener('DOMContentLoaded',getRatings({{rating_stars}},ob_rating))
+                </script><!--về sau tham số là tên product-->
+                <div class="card-body">
+                    <a href="#" class="card-text-author">
+                        <img class="author-img" src={{author_image}} alt="">
+                        <p class="author-name">{{author_name}}</p>
+                    </a>
+                    <a href="">
+                    <div class="price">
+                        <div class="real-price">{{real_price}} đ</div>
+                        <div class="reduce-price">{{reduce_price}} đ</div>
+                    </div>
+                    </a>
+                </div>
+        </div>
+    </div>
+{{/each}}
+</div>
+{{/if}}

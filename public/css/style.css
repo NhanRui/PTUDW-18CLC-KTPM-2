@@ -337,7 +337,7 @@ button.sign-in-bg:hover
 .cart_list{
     background: white;
     height: auto;
-    max-height:380px;
+    max-height:400px;
     width: 310px;
     border-radius: 8px;
     box-shadow: 0 0 3px #d1d1d1;
@@ -482,6 +482,7 @@ button.sign-in-bg:hover
     color: black;
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 0;
 }
 
 .scroll-container-item{
@@ -500,6 +501,11 @@ button.sign-in-bg:hover
     flex-direction: row;
 }
 
+.footer-total-bill .btn-view-cart:hover{
+    text-decoration: none;
+    color: white;
+}
+
 .btn-view-cart{
     right: 0;
     position: absolute;
@@ -508,6 +514,11 @@ button.sign-in-bg:hover
 .price-in-cart{
     color: rgba(77, 80, 233, 0.801);
     font-weight: bold;
+}
+
+.author-in-cart{
+    color: rgb(126, 122, 122);
+    font-size: 13px;
 }
 
 .total-price-item-text{
@@ -643,4 +654,22 @@ button.sign-in-bg:hover
     font-weight: bold;
     background-color: #d10d0d;
     border-radius: 5px;
+}
+
+.fa_tranfer{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 15px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: #d10d0d;
+}
+
+.footer-total-bill .fa_tranfer:hover{
+    text-decoration: none;
+    background-color: #edf1f1;
+    color: #d10d0d;
 }

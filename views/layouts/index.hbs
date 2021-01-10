@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Học Online tại EduOYK - Nền tảng học tập trực tuyến hàng đầu Đông Nam Á với hơn 3000+ Khoá Học và 3 triệu học viên. Đồng hành cùng EduOYK là đội ngũ giảng viên, chuyên gia hàng đầu trong nhiều lĩnh vực">
-    
+    <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32"/>
     <title>Học Online với 3000+ Khoá Học từ những Chuyên Gia hàng đầu | EduOYK</title>
     <link rel="stylesheet" href="css/styles.css"/>
-
+    <link rel="stylesheet" href="css/section.css"/>
+    <link rel="stylesheet" href="css/footer_homesite.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/slide_show.css">
+    <link rel="stylesheet" href="css/star.css">
+    <link rel="stylesheet" href="css/product-menu.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="javascript/test.js"></script>
+    <script src="javascript/Star.js"></script>
+    <script src="javascript/menu-hover.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
@@ -21,11 +31,11 @@
             </label>
             <ul>
                 <li><a href="index" class="active">Trang chủ</a></li>
-                <li><a href="#" class="active">Kích hoạt khóa học</a></li>
+                <li><a href="CourseActivate" class="active">Kích hoạt khóa học</a></li>
                 <li><a href="#" class="active">Kiểm tra đơn hàng</a></li>
-                <li><a href="#" class="active">Chăm sóc khách hàng</a></li>
-                <li><a href="#" class="active">Trở thành giảng viên</a></li>
-                <li><a href="#" class="active">Khóa học của tôi</a></li>
+                <li><a href="faq" class="active">Chăm sóc khách hàng</a></li>
+                <li><a href="BecomeInstructor" class="active">Trở thành giảng viên</a></li>
+                <li><a href="MyCourse" class="active">Khóa học của tôi</a></li>
             </ul>
         </nav>
         <div class="search-box">
@@ -68,15 +78,16 @@
             <div class="cart-btn-pos">
                 <div class="cart-btn-focus" id="cart-btn-click">
                     {{#if auth}}
-                        <div class="amount-cart">{{cartSummary}}</div>
+                        {{#if shopCartSummary}}
+                            <div class="amount-cart">{{shopCartSummary}}</div>
+                        {{/if}}
                     {{/if}}
                     <i class="cart-btn fas fa-shopping-cart" id="cart-item"></i>
                     <div class="cart_list" id="cart_list_focus">
-                        <i class="list_ca fas fa-shopping-cart"></i>
-                        <p class="cart-is-empty">Bạn chưa có khóa học nào trong giỏ hàng</p>
-                        <!--<p class="check-num-card">Giỏ hàng - 0 khóa</p>
+                        {{#if shopCartSummary}}
+                        <p class="check-num-card">Giỏ hàng - {{shopCartSummary}} khóa</p>
                         <div class="scroll-container-item">
-                            {{#each this.items}}
+                            {{#each this.shopping_list}}
                             <a href="/course-detail/{{course_id}}">
                                 <div class="shop-cart-course">
                                     <img class="card-img-shop" src={{intro_image}} alt="">
@@ -91,12 +102,16 @@
                         <div class="footer-total-bill">
                             <div class="total-in-cart">
                                 <p class="total-price-item-text">Tổng: </p>
-                                <p class="total-price-item">1,000,000 đ</p>
+                                <p class="total-price-item">{{format_number shopcartTotal}}</p>
                             </div>
-                            <a href="#" class="btn-view-cart">
+                            <a href="/cart" class="btn-view-cart">
                                 Xem giỏ hàng
                             </a>
-                        </div>-->
+                        </div>
+                        {{else}}
+                            <i class="list_ca fas fa-shopping-cart"></i>
+                            <p class="cart-is-empty">Bạn chưa có khóa học nào trong giỏ hàng</p>
+                        {{/if}}
                     </div>
                     <div></div>
                 </div>
@@ -119,7 +134,7 @@
                                         <img class="card-img-shop" src={{intro_image}} alt="">
                                         <div class="container-cart-item">
                                             <p class="title-in-card">{{course_name}}</p>
-                                            <p class="price-in-cart">{{format_number reduce_price}}</p>
+                                            <p class="author-in-cart">{{author_name}}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -127,12 +142,8 @@
                             </div>
                             {{#if auth}}
                             <div class="footer-total-bill">
-                                <div class="total-in-cart">
-                                    <p class="total-price-item-text">Tổng: </p>
-                                    <p class="total-price-item">{{format_number cartTotal}}</p>
-                                </div>
-                                <a href="#" class="btn-view-cart">
-                                    Xem giỏ hàng
+                                <a href="/account/wishlist" class="fa_tranfer">
+                                    Xem danh sách
                                 </a>
                             </div>
                             {{/if}}  
@@ -158,7 +169,7 @@
                         <a href="/account/profile" class="option-select-auth">Thông tin tài khoản</a>
                     </div>
                     <div class="option-item-auth">
-                        <a href="#" class="option-select-auth">Danh sách yêu thích</a>
+                        <a href="/account/wishlist" class="option-select-auth">Danh sách yêu thích</a>
                     </div>
                     <hr class="line-user">
                     <div class="option-item-auth">
@@ -174,7 +185,7 @@
                 <a href="/account/register"><button class="sign-up-bg">Đăng ký</button></a>
             </div>
             {{/if}}
-        </div>   
+        </div>
     </div>
     <div>
         <section>

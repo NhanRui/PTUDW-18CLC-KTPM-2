@@ -275,15 +275,17 @@
             font-weight: 400;
             padding: 13px 0 13px 20px;
             width: 100%;
+            color: black;
         }
 
         .favor-list-tab:hover {
             background-color: beige;
             cursor: pointer;
+            color: black;
         }
 
 .column#col-2 {
-    width: 78%;
+    width: 850px;
     border-radius: 6px;
 }
 
@@ -442,4 +444,14 @@ body {
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
+}
+
+.user-fa-fieldset {
+    width: 95%;
+    margin-left: 15px;
+    padding-bottom: 15px;
+}
+
+.ctn_footer{
+    margin-top: 100px;
 }

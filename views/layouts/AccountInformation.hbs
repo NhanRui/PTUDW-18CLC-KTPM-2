@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Information</title>
+    <link rel="stylesheet" href="./css/accountInfo.css">
+    <link rel="stylesheet" href="./css/footer_homesite.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {{#with user}}
+    <div class="page-wrapper">
+        {{>search-header}}
+        <main class="main-container" id="container">
+            <div class="direction">
+                <div class="wrapper-breadcrumb">
+                    <div class="breadcrumbs">
+                        <ul class="items">
+                            <li class="item Home">
+                                <a href="/" title="Trang chủ">Trang chủ</a>
+                            </li>
+                            <li class="item Account Information">Thông tin tài khoản</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row_1">
+                <div class="column" id="col-1">
+                    <div class="block-account">
+                        <div class="quick-view-user">
+                            <div class="user-avatar">
+                                <img src="{{avatar}}" id="avatar-image" class="avatar-customer">
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name">{{name}}</span>
+                                <span class="user-role">Học viên</span>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <div class="user-info-tab">
+                                <span>Thông tin tài khoản</span>
+                            </div>
+                            <a href="/account/wishlist" class="favor-list-tab">
+                                <span>Danh sách yêu thích</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column" id="col-2">
+                    <div class="form-tittle">
+                        <span>Thông tin tài khoản</span>
+                    </div>
+                    <div class="user-info-fieldset">
+                        <div class="user-avatar" id="user-ava-fieldset">
+                            <img src="{{avatar}}" class="avatar-image">
+                        </div>
+                        <form action="/account/profile" class="form-edit-account" method="POST">
+                            <div class="fieldset">
+                                <div class="field">
+                                    <label for="ho" class="label"><span>Họ</span></label>
+                                    <div class="input-field">
+                                        <input type="text" value="{{../lastName}}" name="ho">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="ten" class="label"><span>Tên</span></label>
+                                    <div class="input-field">
+                                        <input type="text" value="{{../firstName}}" name="ten">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="phone_number" class="label"><span>Số điện thoại</span></label>
+                                    <div class="input-field">
+                                        <input type="text" name="phone_number" value="{{phone_number}}">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="email" class="label"><span>Email</span></label>
+                                    <div class="input-field">
+                                        <input type="text" name="email" value="{{email}}">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="dob" class="label"><span>Ngày sinh</span></label>
+                                    <div class="input-field">
+                                        <input type="date" name="dob" placeholder="{{dob}}"
+                                            onfocus="(this.type='date')">
+                                    </div>
+                                </div>
+                                <div class="field-radio">
+                                    <label class="label"><span>Giới tính</span></label>
+                                    <div class="radio-options">
+                                        <div class="male">
+                                            <input type="radio" id="male" name="gender" value="Nam">
+                                            <label for="male" class="label"><span>Nam</span></label>
+                                        </div>
+                                        <div class="male">
+                                            <input type="radio" id="female" name="gender" value="Nữ">
+                                            <label for="female" class="label"><span>Nữ</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{#if ../error_message}}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{../error_message}}
+                                </div>
+                                {{/if}}
+                                {{#if ../message}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{../message}}
+                                </div>
+                                {{/if}}
+                                <div class="password-change">
+                                    <div class="sb-box">
+                                        <button class="save-btn" type="submit">
+                                            Lưu thay đổi
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="pcb-box">
+                            <button class="password-change-btn" type="button" data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                <i class="fa fa-lock" style="font-size: 15px;"></i>
+                                Thay đổi mật khẩu
+                            </button>
+                        </div>
+                        <!-- Modal -->
+                        <form action="/account/password-change" class="password_form" method="POST">
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Thay đổi mật khẩu</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">Mật khẩu
+                                                        cũ</span>
+                                                </div>
+                                                <input type="password" class="form-control" aria-label="Small"
+                                                    aria-describedby="inputGroup-sizing-sm" name="old_ps">
+                                            </div>
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">Mật khẩu
+                                                        mới</span>
+                                                </div>
+                                                <input type="password" class="form-control" aria-label="Small"
+                                                    aria-describedby="inputGroup-sizing-sm" name="new_ps">
+                                            </div>
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">Xác nhận
+                                                        mật khẩu</span>
+                                                </div>
+                                                <input type="password" class="form-control" aria-label="Small"
+                                                    aria-describedby="inputGroup-sizing-sm" name="confirm_ps">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="ctn_footer">
+        <div class="col_footer_1">
+            <div class="logo_footer">
+                <a href="#">
+                    <img src="images/logo-bo-cong-thuong.png" title="Bộ công thương" alt="" width="150">
+                </a>
+            </div>
+            <div>
+                <p class="company-full-name"><span>Công ty cổ phần Công nghệ và phát triển Đào tạo Topica Edumall</span>
+                    <br>MST: 0316316793 do Sở kế hoạch và Đầu tư thành phố Hồ Chí Minh cấp ngày 09 tháng 6 năm 2020
+                    <br>Địa chỉ: Số&nbsp;62 Trần Quang Khải, Phường Tân Định, quận 1, thành phố Hồ Chí Minh <br>Hotline:
+                    18006816 - Email: cskh@edumall.vn
+                </p>
+            </div>
+        </div>
+        <div class="col_footer_2">
+            <div class="introduce">
+                <h4>VỀ EDUOYK</h4>
+                <p>&nbsp;</p>
+                <ul>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Trung tâm chăm sóc khách hàng</a></li>
+                    <li><a href="#">Chính sách hoàn tiền</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Blog </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col_footer_3">
+            <div class="introduce">
+                <h4>CÁC KHÓA HỌC KHÁC</h4>
+                <p>&nbsp;</p>
+                <ul>
+                    <li><a href="#">Khóa học Ngoại ngữ</a></li>
+                    <li><a href="#">Khóa học Phát triển cá nhân</a></li>
+                    <li><a href="#">Khóa học Kinh doanh khởi nghiệp</a></li>
+                    <li><a href="#">Khóa học Multimedia</a></li>
+                    <li><a href="#">Chính sách hoàn tiền</a></li>
+                    <li><a href="#">Khóa học Hôn nhân gia đình</a></li>
+                    <li><a href="#">Học tiếng anh - Topica Native</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col_footer_3">
+            <div class="media">
+                <a href="#"> <img src="images/app_icon.jpg" width="50"> </a>
+                <p>Tải ngay App Edumall <br> Học tốt hơn - thoải mái hơn</p>
+            </div>
+            <div class="cnt_app">
+                <div class="app">
+                    <a href="#"> <img src="images/app_store_icon.png" width="111" height="34"> </a>
+                </div>
+                <div class="app-mobile">
+                    <a href="#"> <img title="Tải app Edumall" src="images/google_store_icon.png" alt="Tải app Edumall"
+                            width="111" height="34"> </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {{/with}}
+</body>
+
+</html>

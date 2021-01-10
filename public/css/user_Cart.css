@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    top: 0;
+    left: 0;
+    background-color: #f4f4f4;
+}
+
+.page_wrapper {
+    width: 85%;
+    margin: auto;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+}
+
+.left_container {
+    flex: 2;
+    width: 100%;
+    padding: 0 2% 5% 2%;
+}
+
+.intro {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.intro > i {
+    margin-right: 10px;
+}
+
+/* These lines are for cart */
+.right_container {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 68vh;
+    margin-top: 47px;
+}
+
+.bill_title > p{
+    width: 100%;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.temp {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding-bottom: 30px;
+}
+
+.total {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sale_off > form {
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    border-width: thin;
+}
+
+.sale_off > form > input {
+    flex: 1;
+    border: 1px solid gray;
+    border-width: thin;
+    padding: 5px;
+}
+
+.buy_btn {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.buy_btn > form {
+    width: 100%;
+}
+
+.buy_btn > form > input {
+    height: 48px;
+    width: 100%;
+    background-color: #df322f;
+    color: whitesmoke;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.buy_btn > form > input:hover {
+    color: #df322f;
+    background-color: #c3c3c3;
+}
+
+.delivery_detail_line > span > i{
+    margin-right: 5px;
+}
+
+.delivery_detail_line > span{
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* These lines are for watch list */
+.course_container {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.course_img {
+    height: 100%;
+    flex: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.course_img > img {
+    height: 100%;
+    width: 100%;
+}
+
+.author {
+    flex: 4;
+    padding: 0 20px;
+}
+
+.price {
+    flex: 2;
+    font-size: 18px;
+    color: #df322f;
+}
+
+.price > p {
+    color: #df322f;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.buttons_group {
+    flex: 1;
+}
+
+.buttons_group > .form_btn {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form_btn > form {
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+
+.buttons_group > .form_btn > form > button {
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    width: 50%;
+    height: 25px;
+}
+
+.header-top {
+    width: 85%;
+    margin: auto;
+    margin-top: 18vh;
+}
+
+.header-top .direction {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  max-width: 150px;
+  margin-left: 5vh;
+}
+
+.direction > i {
+    margin: 3px 5px 0 0;
+}
+
+li {
+  display: inline-block;
+  flex: 1;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (max-width: 875px) {
+    form {
+        flex-direction: column;
+    }
+
+    .form_control .input {
+        height: 48px;
+        width: 100%;
+    }
+
+    .btn1 > input{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .dropdown-toggle {
+        margin-top: 10vh;
+        visibility: visible !important;
+        z-index: 100;
+    }
+}
+
+.reduce_price{
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: -.2px;
+    color: #9b9b9b;
+    text-decoration: line-through;
+    margin-left: 34px;
+}

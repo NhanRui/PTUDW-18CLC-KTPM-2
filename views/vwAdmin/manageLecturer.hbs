@@ -1,0 +1,341 @@
+<style>
+    thead{
+        background-color: wheat;
+    }
+    tbody tr:nth-child(odd){
+        background-color:beige;
+    }
+    tbody tr:nth-child(even){
+        background-color:azure;
+    }
+    .card {
+        display: none;
+        position: fixed;
+        top:15px;
+        right:15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        font-family: arial;
+        transition: 1s;
+    }
+
+    .card .title {
+        color: grey;
+        margin-top: 5px;
+        font-size: 18px;
+    }
+
+    .card h4{
+        text-align: center;
+    }
+
+    .card a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+    .card p{
+        margin-left: 10px;
+        margin-bottom:15px;
+        font-weight: bolder;
+    }
+
+    .card span{
+        font-weight: normal;
+    }
+</style>
+
+<h2>Giảng viên</h2>
+<hr>
+    <div class="row" style="display:block;">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="text-success">Hoạt động</h4>
+        </div>
+        <div class="card-body" id="list-section" data-count="{{list_length}}">
+            {{#if list_empty}}
+            <h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có tài khoản giảng viên nào được hoạt động</p>
+            {{else}} 
+            <table class="table table-hover" style="outline:1px solid grey;">
+            <thead>
+                <tr>
+                <th scope="col">Mã giảng viên</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Email</th>
+                <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="active-body">
+                {{#each this.list}}
+                <tr>
+                <th scope="row">{{user_id}}</th>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td class="text-right">
+                    <a name="" id="lock" class="btn btn-sm btn-warning" title="Tạm khóa tài khoản"
+                    data-id="{{user_id}}" role="button">Khóa
+                    <i class="fab fa-accessible-icon"></i>
+                    </a>
+                    <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn tài khoản"
+                    data-id="{{user_id}}" role="button">Xóa
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+                </tr>
+                {{/each}}
+            </tbody>
+            </table>
+            {{/if}}
+        </div>
+    </div>
+    <div class="row" style="display:block;">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="text-danger">Khóa</h4>
+        </div>
+        <div class="card-body" id="lock-section" data-count="{{lock_length}}">
+            {{#if lock_empty}}
+            <h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có tài khoản giảng viên nào hiện đang bị khóa.</p>
+            {{else}}
+            <table class="table table-hover" style="outline:1px solid grey;">
+            <thead>
+                <tr>
+                <th scope="col">Mã giảng viên</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Email</th>
+                <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="lock-body">
+                {{#each this.lock}}
+                <tr>
+                <th scope="row">{{user_id}}</th>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td class="text-right">
+                    <a name="" id="open" class="btn btn-sm btn-success" title="Mở khóa tài khoản"
+                    data-id="{{user_id}}" role="button">Mở
+                    <i class="fas fa-user-check"></i>
+                    </a>
+                    <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn tài khoản"
+                    data-id="{{user_id}}" role="button">Xóa
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+                </tr>
+                {{/each}}
+            </tbody>
+            </table>
+            {{/if}}
+        </div>
+    </div>
+<hr>
+<footer class="text-center">
+ <div class="mb-2">
+   <small>
+     © 2021 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="#">
+       EduOYK Team
+     </a>
+   </small>
+ </div>
+ <div>
+   <a href="https://github.com/TrashCodeEveryDay" target="_blank">
+     <img alt="GitHub followers" src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social" />
+   </a>
+   <a href="#" target="_blank">
+     <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social" />
+   </a>
+ </div>
+</footer>
+
+<div class="card">
+  <img id="i" src="/w3images/team2.jpg" alt="AVT" style="width:100%;max-height:46vh;">
+  <h4><span id="n">Name</span></h4>
+  <p>Gender: <span id="g"></span></p>
+  <p>Date of Birth: <span id="d"></span></p>
+  <p>Phone: <span id="p"></span></p>
+  <p>Address: <span id="a"></span></p>
+  <p class="title">CEO & Founder, Example</p>
+  <div style="margin: 24px 0; text-align: center;">
+    <a href="#"><i class="fa fa-dribbble"></i></a> 
+    <a href="#"><i class="fa fa-twitter"></i></a>  
+    <a href="#"><i class="fa fa-linkedin"></i></a>  
+    <a href="#"><i class="fa fa-facebook"></i></a> 
+  </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('body').on('click','#lock',function(e){
+            var id = $(this).attr('data-id');
+            $(this).parent('td').parent('tr').remove();
+
+            var count1 = +$('#list-section').attr('data-count');
+            count1--;
+            $('#list-section').attr('data-count',count1.toString());
+            if(count1 === 0){
+                $('#list-section').empty();
+                $('#list-section').append(`<h5 class="card-title">Không có dữ liệu!</h5>
+                <p class="card-text">Không có tài khoản giảng viên nào được hoạt động</p>`);
+            }
+
+            var count = +$('#lock-section').attr('data-count');
+            if(count === 0){
+                $('#lock-section').empty();
+                $('#lock-section').append(`<table class="table table-hover" style="outline:1px solid grey;">
+                    <thead>
+                        <tr>
+                        <th scope="col">Mã giảng viên</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lock-body">
+                    </tbody>
+                    </table>`);
+            }
+            count++;
+            $('#lock-section').attr('data-count',count.toString());
+            $.getJSON({
+                url: `/admin/lecturer/lock/${id}`,
+                success: function(data){
+                    $('#lock-body').append(`<tr>
+                        <th scope="row">${data.user_id}</th>
+                        <td>${data.name}</td>
+                        <td>${data.email}</td>
+                        <td class="text-right">
+                            <a name="" id="open" class="btn btn-sm btn-success" title="Mở khóa tài khoản"
+                            data-id="${data.user_id}" role="button">Mở
+                            <i class="fas fa-user-check"></i>
+                            </a>
+                            <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn tài khoản"
+                            data-id="${data.user_id}" role="button">Xóa
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        </tr>`);
+                }
+            })
+        })
+
+        //Mở ============================================================================
+        $('body').on('click','#open',function(e){
+            var id = $(this).attr('data-id');
+            $(this).parent('td').parent('tr').remove();
+
+            var count1 = +$('#lock-section').attr('data-count');
+            count1--;
+            $('#lock-section').attr('data-count',count1.toString());
+            if(count1 === 0){
+                $('#lock-section').empty();
+                $('#lock-section').append(`<h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có tài khoản giảng viên nào hiện đang bị khóa.</p>`);
+            }
+
+            var count = +$('#list-section').attr('data-count');
+            if(count === 0){
+                $('#list-section').empty();
+                $('#list-section').append(`<table class="table table-hover" style="outline:1px solid grey;">
+                    <thead>
+                        <tr>
+                        <th scope="col">Mã giảng viên</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="active-body">
+                    </tbody>
+                    </table>`);
+            }
+            count++;
+            $('#list-section').attr('data-count',count.toString());
+            $.getJSON({
+                url: `/admin/lecturer/open/${id}`,
+                success: function(data){
+                    $('#active-body').append(`<tr>
+                        <th scope="row">${data.user_id}</th>
+                        <td>${data.name}</td>
+                        <td>${data.email}</td>
+                        <td class="text-right">
+                            <a name="" id="lock" class="btn btn-sm btn-warning" title="Tạm khóa tài khoản"
+                            data-id="${data.user_id}" role="button">Khóa
+                            <i class="fab fa-accessible-icon"></i>
+                            </a>
+                            <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn tài khoản"
+                            data-id="${data.user_id}" role="button">Xóa
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        </tr>`);
+                }
+            })
+        })
+            //Xóa ============================================================================
+        $('body').on('click','#list-section #delete',function(e){
+            var id = $(this).attr('data-id');
+            $(this).parent('td').parent('tr').remove();
+
+            var x = $('#list-section');
+            var count1 = +x.attr('data-count');
+            count1--;
+            x.attr('data-count',count1.toString());
+            if(count1 === 0){
+                x.empty();
+                x.append(`<h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có tài khoản giảng viên nào được hoạt động</p>`);
+            }
+
+            $.getJSON({
+                url: `/admin/lecturer/delete/${id}`,
+                success: function(data){
+                    //do nothing
+                }
+            })
+        })
+        $('body').on('click','#lock-section #delete',function(e){
+            var id = $(this).attr('data-id');
+            $(this).parent('td').parent('tr').remove();
+
+            var x = $('#lock-section');
+            var count1 = +x.attr('data-count');
+            count1--;
+            x.attr('data-count',count1.toString());
+            if(count1 === 0){
+                x.empty();
+                x.append(`<h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có tài khoản giảng viên nào hiện đang bị khóa.</p>`);
+            }
+
+            $.getJSON({
+                url: `/admin/lecturer/delete/${id}`,
+                success: function(data){
+                    //do nothing
+                }
+            })
+        })
+        $('body').on('mouseover','tbody tr th',function(e){
+            var id = $(this).html();
+            $.getJSON({
+                url: `/admin/lecturer/${id}`,
+                success: function(data){
+                    $('#i').attr('src',data.avatar);
+                    $('#n').html(data.name);
+                    $('#g').html(data.gender || 'n/A');
+                    $('#d').html(data.dob || 'n/A');
+                    $('#a').html(data.address || 'n/A');
+                    $('#p').html(data.phone_number || 'n/A');
+                    $('.title').html(data.email);
+                    $('.card').css('display','block');
+                }
+            })
+            $('.card').css('display','block');
+        })
+        $('body').on('mouseleave','tbody tr th,tbody tr td:nth-child(1)',function(e){
+            $('.card').css('display','none');
+        })
+    })
+</script>

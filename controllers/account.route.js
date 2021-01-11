@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('../utils/db');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 router.use(express.static('public'));
@@ -7,6 +8,8 @@ const userModel = require('../models/user.model');
 const auth = require('../middleware/auth.mdw');
 const moment = require('moment');
 const speakeasy = require('speakeasy');
+const menuCategory=require('../models/category-menu.model');
+const categoryModel = require('../models/product_modle');
 
 const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
@@ -32,7 +35,21 @@ router.get('/sendtoken',function(req,res){
     secret: req.session.tempsecret,
     encoding: 'base32',
     step: 20
+  });
+  let mailOptions = {
+    from: 'tt5335084@gmail.com',
+    to: req.body.email,
+    subject: 'Verify code', 
+    html: `<span>Your verification code is </span><h1>${req.session.token}</h1><br><p>This verification code will expires after 10mins.`
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      console.log(error);
+    }else{
+      console.log('Email sent: '+ info.response);
+    }
   })
+  req.session.authUser.password_lvl2 = req.session.token;
   console.log(req.session.token);
   res.json(true);
 })
@@ -94,7 +111,7 @@ router.post('/verification',async function(req,res){
       encoding: 'base32',
       token: req.body.verification,
       step:20,
-      window: 2
+      window: 5
     });
     if(tokenValidates){
       await userModel.add(req.session.authUser);
@@ -153,6 +170,13 @@ router.get('/is-available-usname', async function (req, res) {
 
     req.session.auth = true;
     req.session.authUser = user;
+    var sql = `select course_id from bill where user_id = '${user.user_id}'`;
+    const [rows, fields] = await db.load(sql);
+    if(rows.length === 0){
+      req.session.courses = null;
+    }
+    else req.session.courses = rows;
+    console.log(req.session.courses);
   
     const url = req.session.retUrl || '/';
     res.redirect(url);
@@ -169,15 +193,110 @@ router.get('/is-available-usname', async function (req, res) {
     res.redirect(url);
   })
 
-  router.get('/profile', function(req, res, next){
+  router.get('/profile',auth.auth, async function(req, res, next){
+    const shopping_list=req.session.shopCart;
+    const menuList=await menuCategory.getCateMenu();
+    const submenuList=await menuCategory.getCateSubMenu();
+    const allListMenu=[];
+    const items=req.session.cart;
+    for (const i of menuList)
+    {
+      const menu_list=await categoryModel.allById(i.category_id);
+      categoryModel.checkIsHaving(items,menu_list);
+      const item={
+        menu: i.category_id,
+        name: i.category_name,
+        submenu: [],
+        top4_course_menu: menu_list
+      };
+      allListMenu.push(item);
+    }
+  
+    for (const j of submenuList)
+    {
+      for (i=0;i<allListMenu.length;i++)
+      {
+        if (allListMenu[i].menu===j.parent_id)
+        {
+          allListMenu[i].submenu.push(j);
+        }
+      }
+    }
+
     const user = req.session.authUser;
     const firstName = user.name.substr(user.name.indexOf(' ')+1);
     const lastName = user.name.substr(0, user.name.indexOf(' '));
     res.render('layouts/AccountInformation',{
+      shopping_list,
+      items,
+      menuList: menuList,
+      empty_menu: menuList.length!==0,
+      allListMenu: allListMenu,
       layout:false,
       user,
       firstName,
       lastName
+    });
+  })
+
+  router.get('/wishlist',auth.auth, async function(req, res){
+    const shopping_list=req.session.shopCart;
+    const menuList=await menuCategory.getCateMenu();
+    const submenuList=await menuCategory.getCateSubMenu();
+    const allListMenu=[];
+    const items=req.session.cart;
+    for (const i of menuList)
+    {
+      const menu_list=await categoryModel.allById(i.category_id);
+      categoryModel.checkIsHaving(items,menu_list);
+      const item={
+        menu: i.category_id,
+        name: i.category_name,
+        submenu: [],
+        top4_course_menu: menu_list
+      };
+      allListMenu.push(item);
+    }
+  
+    for (const j of submenuList)
+    {
+      for (i=0;i<allListMenu.length;i++)
+      {
+        if (allListMenu[i].menu===j.parent_id)
+        {
+          allListMenu[i].submenu.push(j);
+        }
+      }
+    }
+
+    const user = req.session.authUser;
+    const firstName = user.name.substr(user.name.indexOf(' ')+1);
+    const lastName = user.name.substr(0, user.name.indexOf(' '));
+    const fa_list=req.session.cart;
+    const cart_list=req.session.shopCart;
+    //console.log(fa_list[0].course_id);
+    for (i=0;i<cart_list.length;i++)
+    {
+      for (j=0;j<fa_list.length;j++)
+      {
+        if (cart_list[i].course_id===fa_list[j].course_id)
+        {
+          fa_list[j].isHaving=1;
+          break;
+        }
+      }
+    }
+    res.render('layouts/AccountFaCart',{
+      shopping_list,
+      items,
+      menuList: menuList,
+      empty_menu: menuList.length!==0,
+      allListMenu: allListMenu,
+      user,
+      firstName,
+      lastName,
+      fa_list: fa_list,
+      layout:false,
     });
   })
 

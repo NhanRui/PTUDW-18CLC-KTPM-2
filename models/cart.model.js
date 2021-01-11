@@ -1,4 +1,6 @@
 const db = require('../utils/db');
+const uniqid = require('uniqid');
+
 module.exports={
     getPriceOfItems(cart){
         let n=0;
@@ -112,5 +114,31 @@ module.exports={
                         WHERE s.user_id='${id}'`
         const [rows, fields] = await db.load(sql);
         return rows;
+    },
+    async addBillTotal(listCart){
+        const total=this.getPriceOfItems(listCart);
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '/' + dd;
+        const id=uniqid('B');
+        const sql=`INSERT final_bill(final_bill_id,status,date,price) VALUES('${id}','Hoàn Thành','${today}','${total}')`
+        const [rows, fields] = await db.load(sql);
+        return id;
+    },
+    async addBill(listCart,id,userId){
+        if (listCart.length===0)
+        {
+            return;
+        }
+        for (i=0;i<listCart.length;i++)
+        {
+            const sql=`INSERT bill VALUES('${listCart[i].user_id}','${listCart[i].course_id}','${id}','${listCart[i].reduce_price}')`;
+            await db.load(sql);
+            const sql1=`DELETE FROM shopping_cart WHERE user_id='${userId}' AND course_id='${listCart[i].course_id}'`;
+            await db.load(sql1);
+        }
+        return;
     },
 }

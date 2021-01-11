@@ -1,4 +1,5 @@
 <header>
+    <form id="frmLogout" action="/account/logout" method="POST"></form>
             <div class="header-container">
                 <div class="header-upper">
                     <div class=header-logo>
@@ -6,10 +7,10 @@
                             <img src="/public/images/logo1.png" alt="main-logo" width="150" height="40">
                         </a>
                     </div>
-                    <div class=header-search>
-                        <form class="search-block" id="mini-search-field">
+                    <div class="header-search">
+                        <form class="search-block" id="mini-search-field" action="/search" method="POST">
                             <div>
-                                <input class="search-field" type="text" placeholder="Tìm kiếm khóa học">
+                                <input class="search-field" type="text" name="contentSearch" placeholder="Tìm kiếm khóa học">
                             </div>
                             <div>
                                 <button class="search-button" type="submit" title="Search">
@@ -19,35 +20,193 @@
                         </form>
                     </div>
                     <div class="group-icons">
-                        <div class=header-cart>
-                            <a href="shopping.html" title="Purchase courses"><span class="cart-icon fa fa-shopping-cart fa-lg" aria-hidden="true"></span></a>
+                        <div class="header-cart">
+                            <div class="cart-btn-focus" id="cart-btn-click">
+                                {{#if auth}}
+                                    {{#if shopCartSummary}}
+                                        <div class="amount-cart">{{shopCartSummary}}</div>
+                                    {{/if}}
+                                {{/if}}
+                                <i class="cart-btn fas fa-shopping-cart" id="cart-item"></i>
+                                <!--<a href="shopping.html" title="Purchase courses"><span class="cart-icon fa fa-shopping-cart fa-lg" aria-hidden="true"></span></a>-->
+                                <div class="cart_list" id="cart_list_focus">
+                                    {{#if shopCartSummary}}
+                                    <p class="check-num-card">Giỏ hàng - {{shopCartSummary}} khóa</p>
+                                    <div class="scroll-container-item">
+                                        {{#each this.shopping_list}}
+                                        <a href="/course-detail/{{course_id}}">
+                                            <div class="shop-cart-course">
+                                                <img class="card-img-shop" src={{intro_image}} alt="">
+                                                <div class="container-cart-item">
+                                                    <p class="title-in-card">{{course_name}}</p>
+                                                    <p class="price-in-cart">{{format_number reduce_price}}</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        {{/each}}
+                                    </div>
+                                    <div class="footer-total-bill">
+                                        <div class="total-in-cart">
+                                            <p class="total-price-item-text">Tổng: </p>
+                                            <p class="total-price-item">{{format_number shopcartTotal}}</p>
+                                        </div>
+                                        <a href="/cart" class="btn-view-cart">
+                                            Xem giỏ hàng
+                                        </a>
+                                    </div>
+                                    {{else}}
+                                        <i class="list_ca fas fa-shopping-cart"></i>
+                                        <p class="cart-is-empty">Bạn chưa có khóa học nào trong giỏ hàng</p>
+                                    {{/if}}
+                                </div>
+                            </div>
                         </div>
-                        <div class=header-favor>
-                            <a href="favor.html" title="Favorite courses"><span class="favor-icon fa fa-heart fa-lg" aria-hidden="true"></span></a>
+                        <div class="header-favor">
+                            <div class="heart-btn-focus" id="heart-btn-click">
+                                {{#if auth}}
+                                    {{#if cartSummary}}
+                                    <div class="amount-cart">{{cartSummary}}</div>
+                                    {{/if}}
+                                {{/if}}
+                                <i class="heart-btn far fa-heart" id="heart-item"></i>
+                                <div class="heart_list" id="heart_list_focus">
+                                    {{#if cartSummary}}
+                                        <div class="check-num-card">Yêu thích - {{cartSummary}} khóa</div>
+                                        <div class="scroll-container-item">
+                                            {{#each this.items}}
+                                            <a href="/course-detail/{{course_id}}">
+                                                <div class="shop-cart-course">
+                                                    <img class="card-img-shop" src={{intro_image}} alt="">
+                                                    <div class="container-cart-item">
+                                                        <p class="title-in-card">{{course_name}}</p>
+                                                        <p class="author-in-cart">{{author_name}}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            {{/each}}
+                                        </div>
+                                        {{#if auth}}
+                                        <div class="footer-total-bill">
+                                            <a href="/account/wishlist" class="fa_tranfer">
+                                                Xem danh sách
+                                            </a>
+                                        </div>
+                                        {{/if}}  
+                                    {{else}}
+                                        <i class="list_fa far fa-heart"></i>
+                                        <p class="hear-is-empty">Bạn chưa có khóa học trong danh sách yêu thích</p>  
+                                    {{/if}}
+                                </div>
+                            </div>
                         </div>
-                        <div class=header-notification>
-                            <a href="noti.html" title="Notification"><span class="notification-icon fa fa-bell fa-lg" aria-hidden="true"></span></a>
+                        <div class="header-notification">
+                            <!--<a href="noti.html" title="Notification"><span class="notification-icon fa fa-bell fa-lg" aria-hidden="true"></span></a>-->
                         </div>
+                        {{#if auth}}
+                        <div class="container-authen">
+                            <div class="container-name-user">
+                                <p><img src="{{authUser.avatar}}" alt="" class="image-auth"></p>
+                                <p class="name-user-auth">{{authUser.name}}</p>
+                                <p class="down-icon-auth"><i class="fas fa-sort-down"></i></p>
+                            </div>
+                            <div class="option-authen-menu" id="option-show-auth">
+                                <div class="option-item-auth">
+                                    <a href="/account/profile" class="option-select-auth">Thông tin tài khoản</a>
+                                </div>
+                                <div class="option-item-auth">
+                                    <a href="/account/wishlist" class="option-select-auth">Danh sách yêu thích</a>
+                                </div>
+                                <hr class="line-user">
+                                <div class="option-item-auth">
+                                    <a href="javascript: $('#frmLogout').submit();" class="option-select-auth">Đăng xuất</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="sign-in__btn">
+                            <a href="/account/login"><button class="sign-in-bg">Đăng nhập</button></a>
+                        </div>
+                        <div class="sign-up__btn">
+                            <a href="/account/register"><button class="sign-up-bg">Đăng ký</button></a>
+                        </div>
+                        {{/if}}
+
                     </div>
                 </div>
                 <div class="header-lower">
                     <ul class="list-options">
                         <li>
-                            <a class="category-nav" href="">
-                                Danh mục
-                                <span aria-hidden="true" class="fa fa-angle-down"></span>
-                            </a>
+                            <div class="container-for-cate">
+                                <div class="category-nav">
+                                    Danh mục
+                                    <span aria-hidden="true" class="fa fa-angle-down"></span>
+                                </div>
+                            </div>
+                            <div class="all-subcategory-container">
+                                <div class="container-form-cate">
+                                    <ul>
+                                        <label class="category-label-item">
+                                        <p class="category-label">Danh mục</p>
+                                        </label>
+                                        {{#each this.menuList}}
+                                        <li class="category-menu-item" id="{{category_id}}">
+                                            <a class="main-category-level" href="/search/{{category_id}}">
+                                                <span class="item-level1" id="{{category_id}}_name">{{category_name}}</span>
+                                            </a>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                {{#each this.allListMenu}}
+                                <div class="submenu-wrap" id="{{menu}}-menu"><!--khac id-->
+                                    <div class="submenu-container-1">
+                                        <ul>
+                                            <label class="category-label-item">
+                                                <p class="category-label">{{name}}</p>
+                                            </label>
+                                            <!--{{#each this.submenu}}-->
+                                            <li class="category-menu-item" id="mini-menu-english"><!--khac id-->
+                                                <a class="main-category-level" href="#">
+                                                    <span class="item-level1">{{category_name}}</span>
+                                                </a>
+                                            </li>
+                                            <!--{{/each}}-->
+                                        </ul>
+                                    </div>
+                                    <div class="childmenu-container-1">
+                                        <label class="category-label-item">
+                                            <p class="category-label">{{name}} - Featured Course</p>
+                                        </label>
+                                        <div class="product-menu-col">
+                                            {{#each this.top4_course_menu}}
+                                                {{>product_menu_music}}
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                {{#each this.menuList}}
+                                    <script>
+                                        hover_menu("{{{category_id}}}","{{{category_id}}}-menu","{{{category_id}}}_name");
+                                    </script>
+                                {{/each}}
+                            </div>
+                            <script>
+                                document.addEventListener("click", (evt) => {
+                                    //const deactive_cart = document.getElementById("cart-btn-click");
+                                    const deactive_cart_menu = document.getElementsByClassName("container-form-cate")[0];
+                                        if (event.target.closest(".container-for-cate")) {
+                                            deactive_cart_menu.style.display="block";
+                                            return;
+                                        }
+                                        deactive_cart_menu.style.display="none";
+                                });
+                            </script>
                         </li>
-                        <li>
-                            <a class="activate-btn" href="https://lms.edumall.vn/new-cod/active_new">
-                                <img alt="Kích hoạt khóa học" src="https://dvch1hlupt.cdn.hostvn.net/button/image/4_2_3.png">
-                                Kích hoạt khóa học
-                            </a>
-                        </li>
-                        <li>
-                            <a class="btn-activation" href="https://lms.edumall.vn">
+                        <li class="my-course-option">
+                            <a class="btn-activation" href="/MyCourse">
                                 <img alt="Khóa học của tôi" src="https://dvch1hlupt.cdn.hostvn.net/button/image/1_1_3.png"> 
-                                Khóa học của tôi
+                                <span class="tittle-option">Khóa học của tôi</span>
                             </a>
                         </li>
                     </ul>

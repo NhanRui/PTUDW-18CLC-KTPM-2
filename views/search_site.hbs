@@ -4,71 +4,6 @@
         <div class="result-search"></div><!--Xử lý kết quả-->
         <div class="choice-container">
             <div class="filter-box">
-                <div class="title-search">TRÌNH ĐỘ</div>
-                <div class="form-check">
-                    <ul class="level-choice">
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-1" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-1"> Sơ cấp </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-2" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-2"> Trung cấp </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-3" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-3"> Chuyên sâu </label>
-                        </li class="item">
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-10" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-10"> Trọn bộ </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="title-search">CHÍNH SÁCH</div>
-                <div class="form-check">
-                    <ul class="level-choice">
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-4" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-4"> Khuyễn mại </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-5" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-5"> Miễn phí </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="title-search">THỜI LƯỢNG</div>
-                <div class="form-check">
-                    <ul class="level-choice">
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-6" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-6"> Dưới 2 giờ </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-7" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-7"> Dưới 3 giờ </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-8" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-8"> Dưới 5 giờ </label>
-                        </li>
-                        <li class="item">
-                            <input type="hidden" name="filter_url" value="">
-                            <input id="filter_level_filter-9" type="radio" class="layer-input-filter" name="filter_level_filter">
-                            <label for="filter_level_filter-9"> 5 giờ trở lên </label>
-                        </li>
-                    </ul>
-                </div>
                 <div class="title-search">ĐÁNH GIÁ</div>
                 <div class="form-check">
                     <ul class="level-choice">
@@ -129,19 +64,19 @@
                     <i class="fas fa-sort-amount-up"></i> Sắp xếp
                 </span>
                 <span class="blur-style diff-char"> | </span>
-                <a href="/search/{{Id}}/most-study">
+                <a href="/search/{{Id}}/mode/most-study">
                     <span class="style-submenu menu1 blur-style" {{#if active_m_st}}id="active_most"{{/if}}>Học nhiều nhất</span>
                 </a>
-                <a href="/search/{{Id}}/most-overall">
+                <a href="/search/{{Id}}/mode/most-overall">
                     <span class="style-submenu menu2 blur-style"{{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
                 </a>
-                <a href="/search/{{Id}}/newest">
-                    <span class="style-submenu menu3 blur-style">Mới nhất</span>
+                <a href="/search/{{Id}}/mode/newest">
+                    <span class="style-submenu menu3 blur-style" {{#if active_new}}id="active_most"{{/if}}>Mới nhất</span>
                 </a>
-                <a href="/search/{{Id}}/price-ascend">
+                <a href="/search/{{Id}}/mode/price-ascend">
                     <span class="style-submenu menu4 blur-style"{{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
                 </a>
-                <a href="/search/{{Id}}/price-descend">
+                <a href="/search/{{Id}}/mode/price-descend">
                     <span class="style-submenu menu5 blur-style"{{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
                 </a>
             </div>
@@ -151,20 +86,20 @@
                     <i class="fas fa-sort-amount-up"></i> Sắp xếp
                 </span>
                 <span class="blur-style diff-char"> | </span>
-                <a href="/search/keyword/{{Id}}/most-study">
+                <a href="/search/keyword/{{Id}}/mode/most-study">
                     <span class="style-submenu menu1 blur-style" {{#if active_m_st}}id="active_most"{{/if}}>Học nhiều nhất</span>
                 </a>
-                <a href="/search/keyword/{{Id}}/most-overall">
-                    <span class="style-submenu menu2 blur-style"{{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
+                <a href="/search/keyword/{{Id}}/mode/most-overall">
+                    <span class="style-submenu menu2 blur-style" {{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
                 </a>
-                <a href="/search/keyword/{{Id}}/newest">
-                    <span class="style-submenu menu3 blur-style">Mới nhất</span>
+                <a href="/search/keyword/{{Id}}/mode/newest">
+                    <span class="style-submenu menu3 blur-style" {{#if active_new}}id="active_most"{{/if}}>Mới nhất</span>
                 </a>
-                <a href="/search/keyword/{{Id}}/price-ascend">
-                    <span class="style-submenu menu4 blur-style"{{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
+                <a href="/search/keyword/{{Id}}/mode/price-ascend">
+                    <span class="style-submenu menu4 blur-style" {{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
                 </a>
-                <a href="/search/keyword/{{Id}}/price-descend">
-                    <span class="style-submenu menu5 blur-style"{{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
+                <a href="/search/keyword/{{Id}}/mode/price-descend">
+                    <span class="style-submenu menu5 blur-style" {{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
                 </a>
             </div>
             {{/if}}

@@ -118,8 +118,20 @@ p.number-students{
     padding-right: 10px;
 }
 
-.item__overlay {
+p.new_tittle{
+    position: absolute;
+    color: white;
+    margin-top: 1px;
+    width: 100%;
+    height: 100%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+}
 
+.item__overlay {
     left:0;
     bottom: 0;
     right: 0;
@@ -135,7 +147,24 @@ p.number-students{
       height: 100%;
 }
 
-.card-product:hover .favourite_course_container a i{
+.item__overlay_2 {
+    left:0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background-color: rgba(255, 0, 0, 0.5);
+    overflow: hidden;
+    transition: .2s ease;
+  }
+
+.card-product:hover .item__overlay_2{
+      height: 100%;
+}
+
+.card-product:hover .favourite_course_container button i{
+    cursor: pointer;
     display: block;
 }
 
@@ -143,7 +172,7 @@ p.number-students{
     height: 100%;
 }
 
-.card-product-topbs:hover .favourite_course_container a i{
+.card-product-topbs:hover .favourite_course_container button i{
   display: block;
 }
 
@@ -154,18 +183,38 @@ p.number-students{
     position: absolute;
     z-index: 1;
 }
+.container_slide_up_2{
+    margin-top: 61px;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+}
+.new_container{
+    margin-top: 40px;
+    width: 70px;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+    background-color: red;
+    border-radius: 0px 20px 20px 0px;
+}
 
-.favourite_course_container a i{
+.favourite_course_container button i{
     position: absolute;
     padding: 10px;
     right: 0;
-    margin-top: 10px;
-    margin-right: 10px;
+    margin-right: 15px;
     background: white;
     z-index: 1;
     border-radius: 8px;
     color: rgb(196, 193, 193);
     display: none;
+}
+
+.favourite_course_container{
+    width: 100%;
+    position: absolute;
 }
 
 .favourite_course_container:hover .fa_ca{
@@ -191,4 +240,29 @@ p.number-students{
 
 .noHover{
     pointer-events: none;
+}
+
+.container-for-new{
+    position: absolute;
+    margin-top: 128px;
+    margin-right: 30px;
+    right: 0;
+    width: 38px;
+    height: 18px;
+    border-radius: 3px;
+    background-color: #17b99f;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -.19px;
+    text-transform: uppercase;
+}
+
+#faActive{
+    background-color: rgba(216, 1, 1, 0.986);
+    color: white;
 }

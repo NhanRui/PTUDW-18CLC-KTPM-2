@@ -1,4 +1,4 @@
-const { get5starCourse, getUp4starCourse, getCateBySearch, get5starCourseSearch } = require('../utils/db');
+const { get5starCourse, getUp4starCourse, getCateBySearch, get5starCourseSearch, countByCatCondition, mostByCatIDCondition, getStarCourseSearchCondition, countByCatSearchCondition } = require('../utils/db');
 const db = require('../utils/db');
 
 const list = [
@@ -458,10 +458,26 @@ const list = [
         }
         return numberOfitems;
       },
+      checkisHaving(listCart, list2)
+      {
+          let numberOfitems=0
+        for (const i of listCart){
+            numberOfitems++;
+            for (const j of list2)
+            {
+              if (j.course_id===i.course_id)
+              {
+                j.IsHaving=1;
+                continue;
+              }
+            }
+        }
+        return numberOfitems;
+      },
       async allById(id){
         const sql = `SELECT *
         FROM (
-          SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving
+          SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,0 as IsNew,0 as IsHot
                 FROM (
                     SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id
                     FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -478,25 +494,26 @@ const list = [
           //return list;
       },
       async all(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving
+        const sql = `SELECT temp4.*,c.category_name
         FROM (
-            SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id
-            FROM (SELECT c.*,count( b.course_id ) AS number_student
-                        FROM bill b RIGHT JOIN course c ON b.course_id = c.course_id 
-                        GROUP BY c.course_id) AS temp1 JOIN 
-                        (SELECT c.course_id,ROUND(AVG(s.num_star),1) as overall_star,COUNT(s.course_id) as number_rating
-                        FROM star_rating s RIGHT JOIN course c on s.course_id=c.course_id
-                        GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
-        ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id
-        WHERE U.role=1
-        ORDER BY temp3.number_student DESC
-        LIMIT 4`;
+        SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.course_name,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,0 as IsNew,1 as IsHot
+                FROM (
+                    SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,course_name,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id
+                    FROM (SELECT c.*,count( b.course_id ) AS number_student
+                                FROM bill b RIGHT JOIN course c ON b.course_id = c.course_id 
+                                GROUP BY c.course_id) AS temp1 JOIN 
+                                (SELECT c.course_id,ROUND(AVG(s.num_star),1) as overall_star,COUNT(s.course_id) as number_rating
+                                FROM star_rating s RIGHT JOIN course c on s.course_id=c.course_id
+                                GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
+                ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id
+                ORDER BY temp3.number_student DESC
+                LIMIT 4) as temp4 join category c on c.category_id=temp4.categoty_id`;
         const [rows, fields] = await db.load(sql);
         return rows;
           //return list;
       },
       async top10_new_1(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view,0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,1 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view,0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -514,7 +531,7 @@ const list = [
           //return list;
       },
       async top10_new_2(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view,0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,1 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view,0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -532,7 +549,7 @@ const list = [
           //return list;
       },
       async top10_new_3(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view,0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,1 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view,0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -550,7 +567,7 @@ const list = [
           //return list;
       },
       async top10_view_1(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view,0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,0 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view,0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -568,7 +585,7 @@ const list = [
           //return list;
       },
       async top10_view_2(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view, 0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,0 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view, 0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -586,7 +603,7 @@ const list = [
           //return list;
       },
       async top10_view_3(){
-        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,temp3.create_date,temp3.num_view, 0 as top
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,0 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view, 0 as top
         FROM (
             SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
             FROM (SELECT c.*,count( b.course_id ) AS number_student
@@ -611,36 +628,12 @@ const list = [
         const [rows, fields] = await db.countBySearch(textSearch);
         return rows[0].total;
       },
-      async countByCat_5star(id){
-        const [rows, fields] = await db.countByCat_5star(id);
+      async countByCatCondition(id,condition){
+        const [rows, fields] = await db.countByCatCondition(id,condition);
         return rows[0].total;
       },
-      async countByCat_5starSearch(textSearch){
-        const [rows, fields] = await db.countByCat_5starSearch(textSearch);
-        return rows[0].total;
-      },
-      async countByCat_Up4star(id){
-        const [rows, fields] = await db.countByCat_Up4star(id);
-        return rows[0].total;
-      },
-      async countByCat_Up4starSearch(textSearch){
-        const [rows, fields] = await db.countByCat_Up4starSearch(textSearch);
-        return rows[0].total;
-      },
-      async countByCat_Up3star(id){
-        const [rows, fields] = await db.countByCat_Up3star(id);
-        return rows[0].total;
-      },
-      async countByCat_Up3starSearch(textSearch){
-        const [rows, fields] = await db.countByCat_Up3starSearch(textSearch);
-        return rows[0].total;
-      },
-      async countByCat_Down3star(id){
-        const [rows, fields] = await db.countByCat_Down3star(id);
-        return rows[0].total;
-      },
-      async countByCat_Down3starSearch(id){
-        const [rows, fields] = await db.countByCat_Down3starSearch(id);
+      async countByCatSearchCondition(textSearch,condition){
+        const [rows, fields] = await db.countByCatSearchCondition(textSearch,condition);
         return rows[0].total;
       },
       async getCateList(id){
@@ -655,61 +648,88 @@ const list = [
         const [rows, fields] = await db.getCateBySearch(textSearch,offset);
         return rows;
       },
-      async get5starCourse(id,offset){
-        const [rows, fields] = await db.get5starCourse(id,offset);
-        return rows;
-      },
-      async get5starCourseSearch(textSearch,offset){
-        const [rows, fields] = await db.get5starCourseSearch(textSearch,offset);
-        return rows;
-      },
-      async getUp4starCourse(id,offset){
-        const [rows, fields] = await db.getUp4starCourse(id,offset);
-        return rows;
-      },
-      async getUp4starCourseSearch(textSearch,offset){
-        const [rows, fields] = await db.getUp4starCourseSearch(textSearch,offset);
-        return rows;
-      },
-      async getUp3starCourse(id,offset){
-        const [rows, fields] = await db.getUp3starCourse(id,offset);
-        return rows;
-      },
-      async getUp3starCourseSearch(textSearch,offset){
-        const [rows, fields] = await db.getUp3starCourseSearch(textSearch,offset);
-        return rows;
-      },
-      async getDown3starCourse(id,offset){
-        const [rows, fields] = await db.getDown3starCourse(id,offset);
-        return rows;
-      },
-      async getDown3starCourseSearch(textSearch,offset){
-        const [rows, fields] = await db.getDown3starCourseSearch(textSearch,offset);
-        return rows;
-      },
 
-      async mostStudyByCatID(id, offset){
-        const [rows, fields] = await db.mostStudyByCatID(id, offset);
+      async mostByCatIDCondition(id, offset,condition,mode){
+        const [rows, fields] = await db.mostByCatIDCondition(id, offset,condition,mode);
         return rows;
       },
-      async mostOverallByCatID(id, offset){
-        const [rows, fields] = await db.mostOverallByCatID(id, offset);
+      async getStarCourseCondition(id,offset,condition){
+        const [rows, fields] = await db.getStarCourseCondition(id,offset,condition);
         return rows;
       },
-      async ascPriceByCatID(id, offset){
-        const [rows, fields] = await db.ascPriceByCatID(id, offset);
+      async getStarCourseSearchCondition(textSearch,offset,condition){
+        const [rows, fields] = await db.getStarCourseSearchCondition(textSearch,offset,condition);
         return rows;
       },
-      async descPriceByCatID(id, offset){
-        const [rows, fields] = await db.descPriceByCatId(id, offset);
-        return rows;
-      },
-
       async mostMenuChooseSearch(textSearch,offset,order,mode){
         const [rows, fields] = await db.mostMenuChooseSearch(textSearch,offset,order,mode)
         return rows;
       },
-      
+      async checkBill(list,listBuy){
+        for (i=0;i<listBuy.length;i++)
+        {
+          for (j=0;j<list.length;j++)
+          {
+            if (list[j].course_id===listBuy[i].course_id)
+            {
+              list[j].IsBuy=1;
+              break;
+            }
+          }
+        }
+        return;
+      },
+      async checkHot(list,listHot){
+        for (i=0;i<listHot.length;i++)
+        {
+          for (j=0;j<list.length;j++)
+          {
+            if (list[j].course_id===listHot[i].course_id)
+            {
+              list[j].IsHot=1;
+              break;
+            }
+          }
+        }
+        return;
+      },
+      async checkNew(list,listNew){
+        for (i=0;i<listNew.length;i++)
+        {
+          for (j=0;j<list.length;j++)
+          {
+            if (list[j].course_id===listNew[i].course_id)
+            {
+              list[j].IsNew=1;
+              break;
+            }
+          }
+        }
+        return;
+      },
+      async getBuyList(userId){
+        const sql = `SELECT * FROM bill WHERE user_id='${userId}'`;
+        const [rows, fields] = await db.load(sql);
+        return rows;
+          //return list;countByCat_5star
+      },
+      async getNewList(){
+        const sql = `SELECT U.name as author_name,U.avatar as author_image,TEMP3.course_id,TEMP3.deal_value,temp3.intro_image, temp3.number_student,temp3.number_rating,temp3.description,temp3.price,temp3.reduce_price,temp3.overall_star,temp3.categoty_id, 0 as isHaving,0 as IsBuy,1 as IsNew,0 as IsHot,temp3.create_date,temp3.num_view,0 as top
+        FROM (
+            SELECT temp1.course_id,deal_value,intro_image,temp1.number_student,temp2.overall_star,temp2.number_rating,description,price,ROUND((price-price*deal_value/100)) as reduce_price,lecturer_id,categoty_id,num_view,create_date
+            FROM (SELECT c.*,count( b.course_id ) AS number_student
+                        FROM bill b RIGHT JOIN course c ON b.course_id = c.course_id 
+                        GROUP BY c.course_id) AS temp1 JOIN 
+                        (SELECT c.course_id,ROUND(AVG(s.num_star),1) as overall_star,COUNT(s.course_id) as number_rating
+                        FROM star_rating s RIGHT JOIN course c on s.course_id=c.course_id
+                        GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
+        ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id
+        ORDER BY temp3.create_date DESC
+        LIMIT 10`;
+        const [rows, fields] = await db.load(sql);
+        return rows;
+          //return list;countByCat_5star
+      },
       all_top8(){
           return list_top8;
       },

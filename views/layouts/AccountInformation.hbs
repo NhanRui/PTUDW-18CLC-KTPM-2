@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Information</title>
+    <link rel="stylesheet" href="/public/css/search-site.css">
+    <link rel="stylesheet" href="/public/css/star_search.css">
+    <link rel="stylesheet" href="/public/css/product_search.css">
+    <link rel="stylesheet" href="/public/css/search_header.css">
+    <script src="/public/javascript/Star.js"></script>
+    <link rel="stylesheet" href="/css/product-menu.css">
+    <script src="/javascript/menu-hover.js"></script>
+    <script src="/javascript/test.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
     <link rel="stylesheet" href="./css/accountInfo.css">
     <link rel="stylesheet" href="./css/footer_homesite.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,9 +34,9 @@
 </head>
 
 <body>
+    {{>search-header}}
     {{#with user}}
     <div class="page-wrapper">
-        {{>search-header}}
         <main class="main-container" id="container">
             <div class="direction">
                 <div class="wrapper-breadcrumb">

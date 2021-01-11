@@ -1,20 +1,40 @@
 {{#if this.empty}}
 <h5 class="card-title">Không có dữ liệu!</h5>
-<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 {{else}}
 <div class="row">
     {{#each this.product_popular}}
     <div class="col-sm-4">
         <div class="card-product">
-                <div class="favourite_course_container">
+                {{#if IsBuy}}
+                {{else}}
+                <!--<div class="favourite_course_container">
                     <a href="#"><i class="fa_ca far fa-heart" id=""></i></a>
-                </div>
+                </div>-->
+                <form action="/cart/add" method="POST" class="favourite_course_container">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <i class="fa_ca far fa-heart" id="{{#if IsHaving}}faActive{{/if}}"></i>
+                    </button>
+                </form>
+                {{/if}}
                 <a href="/course-detail/{{course_id}}">
                 <div class="container_slide_up">
                     <div class="item__overlay">
                         <p class="number-students">Học viên: {{number_student}}</p>
                     </div>
                 </div>
+                <div class="container_slide_up_2">
+                    <div class="item__overlay_2">
+                        <p class="number-students">{{category_name}}</p>
+                    </div>
+                </div>
+                {{#if IsHot}}
+                <div class="new_container">
+                    <div class="for_new">
+                        <p class="new_tittle"><i class="fas fa-fire"> HOT</i></p>
+                    </div>
+                </div>
+                {{/if}}
                 </a>
                 <a href="/course-detail/{{course_id}}">
                 <div class="img-with-deal">
@@ -32,6 +52,11 @@
                         </div>
                         <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
                     </div>
+                    {{#if IsNew}}
+                    <div class="container-for-new">
+                        <p>NEW</p>
+                    </div>
+                    {{/if}}
                 </div>
                 <h4 class="card-title">{{course_name}}</h4>
                 </a>
@@ -41,7 +66,7 @@
                 </script><!--về sau tham số là tên product-->
                 <div class="card-body">
                     <a href="/course-detail/{{course_id}}" class="card-text-author">
-                        <img class="author-img" src="/public/{{author_image}}" alt="">
+                        <img class="author-img" src="{{author_image}}" alt="">
                         <p class="author-name">{{author_name}}</p>
                     </a>
                     <a href="/course-detail/{{course_id}}">

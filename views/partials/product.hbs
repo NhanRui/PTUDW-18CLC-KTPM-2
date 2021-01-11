@@ -18,6 +18,18 @@
                         <p class="number-students">Học viên: {{number_student}}</p>
                     </div>
                 </div>
+                <div class="container_slide_up_2">
+                    <div class="item__overlay_2">
+                        <p class="number-students">{{category_name}}</p>
+                    </div>
+                </div>
+                {{#if IsHot}}
+                <div class="new_container">
+                    <div class="for_new">
+                        <p class="new_tittle"><i class="fas fa-fire"> HOT</i></p>
+                    </div>
+                </div>
+                {{/if}}
                 </a>
                 <a href="#">
                 <div class="img-with-deal">
@@ -36,7 +48,7 @@
                         <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
                     </div>
                 </div>
-                <h4 class="card-title">{{description}}</h4>
+                <h4 class="card-title">{{course_name}}</h4>
                 </a>
                 <script>
                     var ob_rating="{{{course_id}}}";

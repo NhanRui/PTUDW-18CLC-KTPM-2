@@ -1,10 +1,17 @@
-const { patch } = require('../utils/db');
 const db = require('../utils/db');
 const moment = require('moment')
 
 module.exports ={
     async singleByEmail(email){
         const sql = `select * from user where email= '${email}'`;
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)
+            return null;
+        return rows[0];
+    },
+
+    async singleById(id){
+        const sql = `select * from user where user_id= '${id}'`;
         const [rows, fields] = await db.load(sql);
         if(rows.length === 0)
             return null;
@@ -33,5 +40,37 @@ module.exports ={
         const sql = `update user set password = '${newPassword}' where user_id = '${userID}'`;
         const [rows, fields] = await db.load(sql);
         return true;
+    },
+
+    async brief(){
+        const sql = `select user_id,name,email from user where role = 0`;
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)
+            return null;
+        return rows;
+    },
+
+    async lock(){
+        const sql = `select user_id,name,email from user where role = 3`;
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)
+            return null;
+        return rows;
+    },
+
+    async briefLect(){
+        const sql = `select user_id,name,email from user where role = 1`;
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)
+            return null;
+        return rows;
+    },
+
+    async lockLect(){
+        const sql = `select user_id,name,email from user where role = 4`;
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)
+            return null;
+        return rows;
     }
 }

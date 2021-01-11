@@ -34,8 +34,9 @@ module.exports = {
             return res.redirect('/account/login');
         }
         next();
-    },
+    }
 
+    /*
     authCanWatch(req,res,next){   //dảnh riêng cho trang xem video khóa học
         var found = false;
         console.log(req.session.courses);
@@ -53,4 +54,5 @@ module.exports = {
             });
         }
     }
+    */
 }

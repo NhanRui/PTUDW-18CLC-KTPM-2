@@ -1,0 +1,219 @@
+<div class="header">
+    {{>search-header}}
+    {{#with course_detail}}
+    <div class="header-top">
+        <ul class="direction">
+            <li><a href="#">Trang chủ</a></li>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <li><a href="#">{{../parent}}</a></li>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <li><a href="#">{{../main}}</a></li>
+        </ul>
+    </div>
+    <div class="header-bot">
+        <h1>{{course_name}}</h1>
+        <p>{{description}}</p>
+        <div class="header-bot-stuff">
+            <div class="item-quick">
+                <img src="{{../lecturer.avatar}}" alt="lecture-img">
+                <span class="lec-name">{{../lecturer.name}}</span>
+            </div>
+            <div class="item-quick">
+                <span><i class="fa fa-user" aria-hidden="true"></i><span
+                        style="color: rgb(255, 187, 0); font-weight: 600">{{../object.num_of_student}}</span> học
+                    viên</span>
+            </div>
+            <div class="item-quick">
+
+                <div class="{{../object.product_ID}}">
+                    <div class="wrap-stars-menu">
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var ob_rating = "{{{object.product_ID}}}";
+                    document.addEventListener('DOMContentLoaded', getRatings({{ object.rating_stars }}, ob_rating))
+                    console.log({{ object.rating_stars }});
+                </script>
+                <!--về sau tham số là tên product-->
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="left-container">
+        <div class="categories">
+            <ul class="categories-ul">
+                <li class="category"><a href="#ttc">Thông tin chung</a></li>
+                <li class="category"><a href="#lt">Giáo trình</a></li>
+                <li class="category"><a href="#ltr">Giảng viên</a></li>
+                <li class="category"><a href="#cm">Đánh giá</a></li>
+                <li class="jump"></li>
+            </ul>
+        </div>
+        <section class="course-intro-container" id="ttc">
+            <div class="video">
+                <iframe width="620" height="420" src={{../object.course_video}}>
+                </iframe>
+                <p><i>Video giới thiệu khóa học</i></p>
+            </div>
+            <div id="course-intro" class="course-quick-intro">
+                <p style="color: #464646;">{{{course_intro_description}}}</p>
+            </div>
+            <div id="course-intro" class="course-benefit">
+                <p style="color: #464646;"><b>Lợi ích từ khóa học</b></p>
+                <p>{{{course_benefit_description}}}</p>
+            </div>
+            <div id="course-intro" class="course-suitability">
+                <p style="color: #464646;"><b>Phù hợp với</b></p>
+                <p>{{{course_suitability}}}</p>
+            </div>
+        </section>
+        <section class="lecture" id="lt">
+            <h3>Giáo trình</h3>
+            <div class="quick_lecture">
+                <span class="quick-lecture-item" style="flex: 2;">Thể loại: <b style="color: deepskyblue;">
+                        {{../main}}</b></span>
+                <span class="quick-lecture-item"><i class="fa fa-play-circle" aria-hidden="true"></i>Số bài:
+                    <b style="color: deepskyblue;"> {{../lesson.length}}</b></span>
+                <span class="quick-lecture-item"><i class="fa fa-clock-o" aria-hidden="true"></i>Thời lượng:
+                    <b style="color: deepskyblue;"> {{../object.lecture_time}}</b></span>
+            </div>
+            <div class="lecture_content">
+                {{#each ../lesson as |ls|}}
+                <div class="lecture-chap">
+                    <button class="chapter">Chương {{ls.chapter_number}}: {{ls.chapter_name}}<span class="arrow"><i
+                                class="fa arrow-1 fa-angle-down" aria-hidden="true"></i></span></button>
+                    <div class="lessons">
+                        {{#each ../../videos as |v|}}
+                        {{#when v.chapter_number 'eq' ls.chapter_number}}
+                        <div class="lesson">
+                            <div class="lesson_name">
+                                <span><i class="fa fa-play-circle" aria-hidden="true"></i>Bài {{v.video_number}}:
+                                    {{v.video_name}}</span>
+                            </div>
+                        </div>
+                        {{/when}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section class="lecturer_container" id="ltr">
+            <h3>Thông tin giảng viên</h3>
+            <div class="lecturer_info">
+                <div class="left_l_info">
+                    <div class="left_l_info_img"><a href="#">
+                            <img src="{{../lecturer.avatar}}" alt="lecturer-image"></a>
+                    </div>
+                    <div class="left_l_info_text">
+                        <p>Giảng viên</p>
+                        <h2>{{../lecturer.name}}</h2>
+                        <div class="starts">
+                        </div>
+                    </div>
+                </div>
+                <div class="right_l_info">
+                    <div>
+                        <p style="font-size: 25px; font-weight: 700">{{../object.total_courses}}</p>
+                        <p style="font-size: 10px;">KHÓA HỌC</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 25px; font-weight: 700">{{../object.total_students}}</p>
+                        <p style="font-size: 10px;">HỌC VIÊN</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lecturer_description">
+                {{#each ../object.lecturer_exp}}
+                <div>
+                    <p>{{this}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section class="comments" id="cm">
+            <div class="static">
+                <p class="overall" style="text-align: center;">{{../object.overall}}</p>
+                <div class="stars">
+                    {{!-- added later --}}
+                </div>
+                <p class="num_of_comments" style="text-align: center;">{{../comments.length}} người đã bình luận</p>
+                {{#each ../object.stars}}
+                <div class="rating_star">
+                    <span>{{this.star}} <i class="fa fa-star-o text-warning" aria-hidden="true"></i></span>
+                    <div class="progress" style="flex: 9;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: {{this.rate}}%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{this.rate}}%</div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <div class="separate_line"></div>
+            <div class="comment_detail">
+                {{#each ../comments}}
+                <div class="detail">
+                    <div class="cmt_detail">
+                        <div class="user">
+                            <div class="user_avatar">
+                                <img src="{{user_avatar}}" alt="user-avatar">
+                            </div>
+                            <span class="user-name">{{user_name}}</span>
+                        </div>
+                        <p class="content">{{comment}}</p>
+                    </div>
+                    <div class="comment_time" style="margin-bottom: 40px">
+                        <div class="cm_{{user_id}}">
+                            <div class="">
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                <span class="number-rating"><b>{{num_star}}</b> ({{number_rating}})</span>
+                            </div>
+                        </div>
+                        <script>
+                            var ob_rating = "cm_{{{user_id}}}";
+                            document.addEventListener('DOMContentLoaded', getRatings({{ num_star }}, ob_rating))
+                        </script>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+    <div class="right-container">
+        <div class="intro-img" id="intro-img">
+            <img src="{{intro_image}}" alt="course-intro-image">
+        </div>
+        <div class="under-intro-img">
+            <div class="price">
+                <span class="old-price">{{price}}&nbsp;₫</span>
+                <span class="current-price">{{../new_price}}&nbsp;₫</span>
+            </div>
+            <div class="favorite">
+                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="payment-buttons">
+            <button type="submit" class="buy-now-btn">MUA NGAY</button>
+            <button type="submit" class="add-cart-btn">THÊM GIỎ HÀNG</button>
+            <button type="submit" class="instruction-btn">TƯ VẤN</button>
+        </div>
+        <div class="ship-area">
+            <p class="ship-item"><i class="fa fa-percent" aria-hidden="true"></i>Giảm 10% khi thanh toán online (tối đa
+                20k)</p>
+            <p class="ship-item"><i class="fa fa-truck" aria-hidden="true"></i>Miễn phí giao hàng</p>
+            <p class="ship-item"><i class="fa fa-undo" aria-hidden="true"></i>Cam kết hoàn tiền</p>
+            <p class="ship-item"><i class="fa fa-laptop" aria-hidden="true"></i>Học trên máy tính và ứng dụng di động
+            </p>
+        </div>
+    </div>
+</div>
+{{/with}}
+<div class="footer">
+    {{>footer-index}}
+</div>

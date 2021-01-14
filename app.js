@@ -144,6 +144,6 @@ app.use('/admin',auth.authAdmin, require('./controllers/admin_controller'));
 app.use('/MyCourse',auth.authIndexCart, require('./controllers/courses_controller'));
 
 const PORT = 3000;
-app.listen(process.env.PORT || PORT, function () {
+app.listen(PORT, function () {
   console.log(`E-Commerce app is listening at http://localhost:${PORT}`)
 })

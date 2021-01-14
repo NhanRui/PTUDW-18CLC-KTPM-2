@@ -73,5 +73,11 @@ module.exports ={
         if(rows.length === 0)
             return null;
         return rows;
+    },
+
+    async patchStatus(status){
+        const condition = {course_id: status.course_id};
+        const [rows,fields] = await db.patch(status,condition,'course');
+        return rows;
     }
 }

@@ -58,9 +58,31 @@ router.get('/', async function (req, res) {
     const top10_view_2=await categoryModel.top10_view_2();
     const top10_view_3=await categoryModel.top10_view_3();
 
-    const top10_new_1=await categoryModel.top10_new_1();
-    const top10_new_2=await categoryModel.top10_new_2();
-    const top10_new_3=await categoryModel.top10_new_3();
+    const top_10_new_list=await categoryModel.top10_new_fix();
+    const top10_new_1=[];
+    const top10_new_2=[];
+    const top10_new_3=[];
+    let in_count=0;
+    for (const i of top_10_new_list)
+    {
+      in_count++;
+      if (in_count>0 && in_count<=4)
+      {
+        top10_new_1.push(i);
+      }
+      if (in_count>4 && in_count<=8)
+      {
+        top10_new_2.push(i);
+      }
+      if (in_count>8 && in_count<=10)
+      {
+        top10_new_3.push(i);
+      }
+    }
+
+    //const top10_new_1=await categoryModel.top10_new_1();
+    //const top10_new_2=await categoryModel.top10_new_2();
+    //const top10_new_3=await categoryModel.top10_new_3();
 
     numberOfitems+=categoryModel.checkIsHaving(items,list);
     numberOfitems+=categoryModel.checkIsHaving(items,top10_view_1);

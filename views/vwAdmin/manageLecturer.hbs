@@ -45,6 +45,82 @@
     .card span{
         font-weight: normal;
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 8;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        margin: 100px auto;
+        border: 1px solid #999;
+        width: 60%;
+      }
+      h2,p {
+        margin: 0 0 20px;
+        font-weight: 400;
+        color: #999;
+      }      
+      form {
+        padding: 25px;
+        margin: 25px;
+        box-shadow: 0 2px 5px #f5f5f5;
+        background: #eee;
+      }
+      input,
+      textarea {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #1c87c9;
+        outline: none;
+      }
+      .contact-form button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background: #1c87c9;
+        font-size: 16px;
+        font-weight: 400;
+        color: #fff;
+      }
+      button:hover {
+        background: #2371a0;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      button.button {
+        background: none;
+        border-top: none;
+        outline: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: #02274a 1px solid;
+        padding: 0 0 3px 0;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button.button:hover {
+        border-bottom: #a99567 1px solid;
+        color: #a99567;
+      }
 </style>
 
 <h2>Giảng viên</h2>
@@ -52,6 +128,7 @@
     <div class="row" style="display:block;">
         <div class="card-header d-flex justify-content-between">
           <h4 class="text-success">Hoạt động</h4>
+          <a id="addLect" class="btn btn-primary" href="#" role="button">Cấp tài khoản</a>
         </div>
         <div class="card-body" id="list-section" data-count="{{list_length}}">
             {{#if list_empty}}
@@ -130,7 +207,24 @@
             </table>
             {{/if}}
         </div>
+        <div id="modalOne" class="modal">
+            <div class="modal-content">
+                <div class="contact-form">
+                <a class="close">&times;</a>
+                <form action="/admin/lecturer/add" method="POST" id="formLect">
+                    <h2>Create Lecturer Account</h2>
+                    <div>
+                    <input class="fname" type="text" name="name" placeholder="Full name">
+                    <input type="text" name="email" placeholder="Email" id="email">
+                    <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" id="moreLect">Submit</button>
+                </form>
+                </div>
+            </div>
+            </div>
     </div>
+
 <hr>
 <footer class="text-center">
  <div class="mb-2">
@@ -165,6 +259,8 @@
     <a href="#"><i class="fa fa-facebook"></i></a> 
   </div>
 </div>
+
+
 
 <script>
     $(document).ready(function(){
@@ -337,5 +433,51 @@
         $('body').on('mouseleave','tbody tr th,tbody tr td:nth-child(1)',function(e){
             $('.card').css('display','none');
         })
+
+        $('#addLect').on('click',function(e){
+            e.preventDefault();
+            $('#modalOne').css('display','block');
+        })
+        $('.close').on('click',function(e){
+            $('#modalOne').css('display','none');
+        })
+        $('#moreLect').on('click',function(e){
+            e.preventDefault();
+            $('#formLect').submit();
+        })
+
+        function validateEmail(email) {
+            var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (email.match(validRegex)) {
+                return true;
+            } else {
+                alert("Invalid email address!");
+                return false;
+            }
+        }
+
+        $('#formLect').on('submit',function(e){
+            e.preventDefault();
+            var x= $(this);
+            var email = $('#email').val();
+            if(validateEmail(email)===false)     return;
+            $.getJSON({
+                url: `/account/is-available?email=${email}`,
+                success: function(data){
+                    if(data=== true){
+                        x.off('submit').submit();
+                        $('#modalOne').css('display','none');
+                    }else{
+                        alert('This email has been registered !!!');
+                    }
+                }
+            })
+        })
+
+        window.onclick = function(event) {
+            if(event.target.className === "modal") {
+            event.target.style.display = "none";
+            }
+        }
     })
 </script>

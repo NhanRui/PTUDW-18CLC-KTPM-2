@@ -1,0 +1,288 @@
+<link href="./css/upload_course.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div style="width:90%;margin-left:50px;" id="main">
+    <form method="POST">
+    <div class="top_margin">
+        <h3 class="title-curriculum">Nội dung khóa học: {{course.course_name}}</h3>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input type="checkbox" name="complete" value="Hoàn thành" id="check">
+            <span class="slider round"></span>
+        </label>
+        <span id="sta">{{course.status}}</span>
+    </div>
+    <div>
+        <div class="section" data-count-chapter="{{count_lession}}">
+            {{#if lessons}}
+                {{#each lessons}}
+                    <div class="chapter">
+                        <div class="content">
+                            <div class="content-top">
+                                <div class="content-top-left">
+                                    <div class="chapter-text">
+                                        Chương <span class="chapter-index">{{this.chapter_number}}</span>:
+                                    </div>
+                                    <input class="chapter-name" maxlength="70" name="chapter[]" placeholder="Tên chương" value="{{this.chapter_name}}">
+                                </div>
+                                <div class="content-top-right">
+                                    <div class="chapter-collapse icon-close" id="collapse">
+                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="chapter-collapse icon-close" id="close">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="video-all" data-count-video="{{this.videos.length}}">
+                                {{#each this.videos}}
+                                    <div class="video-info">
+                                        <div class="main-video">
+                                            <div class="play-icon">
+                                                <i class="far fa-play-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="video-text">
+                                                Bài <span class="video-index">{{this.video_number}}</span>:
+                                            </div>
+                                            <input class="video-name" placeholder="Tên bài" value="{{this.video_name}}" name="video[]">
+                                            <div class="chapter-collapse icon-close video-delete">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="extension">
+                                            <div class="chapter-text">
+                                                Video URL: 
+                                            </div>
+                                            <input class="video-name customize" id="link" name="link[]" maxlength="100" value="{{this.url}}" placeholder="https://www.youtube.com/watch?v=B3-IZ20X3AY" value="">
+                                            <input type="hidden" class="video-duration" value="{{this.video_duration}}" name="duration[]">
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                            <input type="hidden" name=count[] id="count-video" value="{{this.videos.length}}">
+                            <div class="video-add"> 
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <span class="add-text more">Thêm bài</span>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="chapter-add"> 
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="add-text">Thêm chương</span>
+    </div>
+    <div class="button-area">
+        <button type="button" class="cancel-btn" onclick="back()"><span>Quay lại</span></button>
+        <button type="button" class="submit-btn" onclick="sub()"><span>Lưu lại</span></button>
+    </div>
+    </form>
+</div>
+
+<script>             
+     function back(){
+        location.replace('/lecturer/mycourses');
+     }
+     function sub(){
+         $('form').submit();
+     }
+    $('body').on('click','.video-add',function(){
+        var x = $(this).parent('div').children('div.video-all');
+        var count = +x.attr('data-count-video');
+        count++;
+        x.attr('data-count-video',count.toString());
+        x.parent('div').children('#count-video').val(count.toString());
+        x.append(`<div class="video-info">
+                    <div class="main-video">
+                        <div class="play-icon">
+                            <i class="far fa-play-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="video-text">
+                            Bài <span class="video-index">`+count+`</span>:
+                        </div>
+                        <input class="video-name" placeholder="Tên bài" value="" name="video[]">
+                        <div class="chapter-collapse icon-close video-delete">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="extension">
+                        <div class="chapter-text">
+                            Video URL: 
+                        </div>
+                        <input class="video-name customize" id="link" name="link[]" maxlength="100" placeholder="https://www.youtube.com/watch?v=B3-IZ20X3AY" value="">
+                        <input type="hidden" class="video-duration" value="" name="duration[]">
+                    </div>
+                </div>`);
+    });   
+    $('body').on('click','.chapter-add',function(){
+        var x = $('.section');
+        var count = +x.attr('data-count-chapter');
+        count++;
+        x.attr('data-count-chapter',count.toString());
+        x.append(`<div class="chapter">
+                    <div class="content">
+                        <div class="content-top">
+                            <div class="content-top-left">
+                                <div class="chapter-text">
+                                    Chương <span class="chapter-index">`+count+`</span>:
+                                </div>
+                                <input name="chapter[]" class="chapter-name" maxlength="70" placeholder="Tên chương" value="">
+                            </div>
+                            <div class="content-top-right">
+                                <div class="chapter-collapse icon-close" id="collapse">
+                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                </div>
+                                <div class="chapter-collapse icon-close" id="close">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-all" data-count-video="0">
+                        </div>
+                        <input type="hidden" name=count[] id="count-video">
+                        <div class="video-add"> 
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            <span class="add-text more">Thêm bài</span>
+                        </div>
+                    </div>
+                </div>`);
+    });
+</script>
+<script>
+    function getYoutubeIdByUrl( url ){
+          var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+          var match = url.match(regExp);
+          if(match&&match[7].length==11){ 
+            return match[7];
+          }
+          return false;
+        }
+        function convert_time(duration) {
+            var a = duration.match(/\d+/g);
+            if (duration.indexOf('M') >= 0 && duration.indexOf('H') == -1 && duration.indexOf('S') == -1) {
+                a = [0, a[0], 0];
+            }
+            if (duration.indexOf('H') >= 0 && duration.indexOf('M') == -1) {
+                a = [a[0], 0, a[1]];
+            }
+            if (duration.indexOf('H') >= 0 && duration.indexOf('M') == -1 && duration.indexOf('S') == -1) {
+                a = [a[0], 0, 0];
+            }
+            duration = 0;
+            if (a.length == 3) {
+                duration = duration + parseInt(a[0]) * 3600;
+                duration = duration + parseInt(a[1]) * 60;
+                duration = duration + parseInt(a[2]);
+            }
+            if (a.length == 2) {
+                duration = duration + parseInt(a[0]) * 60;
+                duration = duration + parseInt(a[1]);
+            }
+            if (a.length == 1) {
+                duration = duration + parseInt(a[0]);
+            }
+            return duration;
+        }
+        
+    $(document).ready(function(){
+        //Phan nay la de dan duration cho tung video youtube
+        $('body').on('change','#link',function(e){
+            e.preventDefault();
+            var x = $(this);
+            var yt_video_id = getYoutubeIdByUrl( x.val() );
+            
+            if( yt_video_id ){
+                $.getJSON({
+                    url: 'https://www.googleapis.com/youtube/v3/videos?part=contentDetails&key=AIzaSyBTZE_MFmDAk0LkP8jxZSTGq5U__c4qnEM&id='+yt_video_id,
+                    success: function(data){
+                        var yt_duration = convert_time(data.items[0]['contentDetails'].duration);
+                        x.next().val(yt_duration.toString());
+                        alert(x.next().val());
+                    },
+                });
+            }
+        });
+        $('body').on('click','.main-video',function(e){
+            e.preventDefault();
+            if($(this).parent('div').css('height')==='40px'){
+                //$(this).parent('div').children('div').children('div.video-delete').css("display","block");
+                $(this).parent('div').children('div.extension').css('display','block');
+                $(this).parent('div').children('div.extension').css('display','block');
+                $(this).parent('div').css('height','80px');
+            }
+            else{
+                //$(this).parent('div').children('div').children('div.video-delete').css("display","none");
+                $(this).parent('div').children('div.extension').css('display','none');
+                $(this).parent('div').children('div.extension').css('display','none');
+                $(this).parent('div').css('height','40px');
+            }
+        });
+        $('body').on('mouseenter','.video-info',function(e){
+            $(this).children('div').children('div.video-delete').css("display","block");
+        });
+        $('body').on('mouseleave','.video-info',function(e){
+            $(this).children('div').children('div.video-delete').css("display","none");
+        });
+        
+        $('body').on('click','.video-delete',function(e){
+            e.preventDefault();
+            var index= +($(this).parent('div').children('.video-text').children('.video-index').text());
+            //giam so video trong chuong
+            var x= $(this).parent('div').parent('div');
+            var count = +x.parent('.video-all').attr('data-count-video');
+            count--;
+            x.parent('.video-all').attr('data-count-video',count.toString());
+            //giam bai cua nhung chuong ke tiep
+            for(var i=index+1; i<count+2;i++){
+                var idx = +x.parent('.video-all').children('.video-info:nth-of-type('+i+')').children('.main-video').children('.video-text').children('.video-index').text();
+                idx--;
+                x.parent('.video-all').children(`.video-info:nth-child(${i})`).children('.main-video').children('.video-text').children('span').text(idx.toString());
+            }
+            x.parent('div').parent('div').children('#count-video').val(count.toString());
+            x.remove();
+        });
+        $('body').on('click','#collapse',function(e){
+            e.preventDefault();
+            if($(this).hasClass('rotated')){
+                $(this).removeClass('rotated');
+                $(this).addClass('norotate');
+            }
+            else{
+                $(this).addClass('rotated');
+                $(this).removeClass('norotate');
+            }
+            $(this).parent('div').parent('div').next().toggle();
+        });
+        $('body').on('click','#close',function(e){
+            e.preventDefault();
+            var x = $('.section');
+            var count = +x.attr('data-count-chapter');
+            count--;
+            x.attr('data-count-chapter',count.toString());
+            var index= +($(this).parent('div').parent('div').find('.chapter-index').text());
+            for(var i=index+1; i<count+2;i++){
+                var idx = +x.children('.chapter:nth-of-type('+i+')').find('.chapter-index').text();
+                idx--;
+                x.children('.chapter:nth-of-type('+i+')').find('.chapter-index').text(idx.toString());
+            }
+            x.parent('div').parent('div').children('#count-video').val(count.toString());
+            $(this).parent('div').parent('div').parent('div').parent('div').remove();
+        })
+        if($('#sta').html()==='Chưa hoàn thành'){
+            //do nothing
+        }else{
+            $('#check').attr('checked','true');
+        }
+        $('body').on('change','#check',function(e){
+            if($(this).parent('label').next().html()==='Chưa hoàn thành'){
+                $(this).parent('label').next().html('Hoàn thành');
+            }
+            else $(this).parent('label').next().html('Chưa hoàn thành');
+        })
+    })
+</script>

@@ -1,0 +1,42 @@
+                        <div class="top-object">
+                            <h3 class="top-num">{{top}}</h3>
+                            <a href="/course-detail/{{course_id}}"><img src={{intro_image}} class="top-object-image"></a>
+                            {{#if IsBuy}}
+                            {{else}}
+                            <form action="/cart/add" method="POST" class="favourite_course_container_top">
+                                <input type="hidden" value="{{course_id}}" name="id">
+                                <button type="submit">
+                                    <i class="fa_ca far fa-heart" id="{{#if isHaving}}faActive{{/if}}"></i>
+                                </button>
+                            </form>
+                            {{/if}}
+                            {{#if IsHot}}
+                            <div class="hot-course-top">
+                                <p>HOT</p>
+                            </div>
+                            {{/if}}
+                            <div class="top-content">
+                                <a href="/course-detail/{{course_id}}" class="card-title-in-top">{{course_name}}</a>
+                                <div class="{{course_id}}_new">
+                                    <div class="wrap-stars-in-top">
+                                        <div class="stars-outer">
+                                            <div class="stars-inner"></div>
+                                        </div>
+                                        <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+                                    </div>
+                                    {{#if IsNew}}
+                                    <div class="new-course-top">
+                                        <p>NEW</p>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <script>
+                                    var ob_rating="{{{course_id}}}_new";
+                                    document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
+                                </script>
+                                <div class="price-in-top">
+                                    <div class="real-price">{{format_number price}}</div>
+                                    <div class="reduce-price">{{format_number reduce_price}}</div>
+                                </div>
+                            </div>
+                        </div>

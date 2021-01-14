@@ -76,11 +76,11 @@ module.exports = {
     }
   },
 
-  async getCompleteVideos(courseID) {
+  async getCompleteVideos(courseID,userID) {
     let sql = `select count(*) as c from complete_video
     join video on complete_video.video_id = video.video_id
     join lesson_list on video.list_id = lesson_list.list_id
-    where lesson_list.course_id = '${courseID}'`;
+    where lesson_list.course_id = '${courseID}' AND complete_video.user_id='${userID}'`;
     const [result, fields] = await db.load(sql);
     return result[0].c;
   },

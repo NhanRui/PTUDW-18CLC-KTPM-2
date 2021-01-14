@@ -8,7 +8,7 @@ router.get("/", async function (req, res) {
   for (const object of list) {
     let course = await coursesModel.courseByID(object.course_id);
     let lecturer = await coursesModel.lecturerByID(course.lecturer_id);
-    let completeVideos = await coursesModel.getCompleteVideos(object.course_id);
+    let completeVideos = await coursesModel.getCompleteVideos(object.course_id,req.session.authUser.user_id);
     let allVideos = await coursesModel.getAllVideosByCourseID(object.course_id);
     let progress = Math.ceil(completeVideos/allVideos*100);
     if (allVideos === 0)

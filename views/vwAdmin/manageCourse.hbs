@@ -1,0 +1,87 @@
+<style>
+    thead{
+        background-color: wheat;
+    }
+    tbody tr{
+        background-color:beige;
+    }
+    tbody tr:nth-of-type(odd){
+        background-color:azure;
+    }
+</style>
+
+<h2>Khóa học</h2>
+<hr>
+    <div class="row" style="display:block;">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="text-success">Hoạt động</h4>
+        </div>
+        <div class="card-body" id="list-section" data-count="{{cou_length}}">
+            {{#if cou_empty}}
+            <h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có khóa học nào đang hoạt động</p>
+            {{else}} 
+            <table class="table table-hover" style="outline:1px solid grey;">
+            <thead>
+                <tr>
+                <th scope="col">Mã khóa học</th>
+                <th scope="col">Tên khóa học</th>
+                <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="active-body">
+                {{#each this.cou}}
+                <form method="GET" action="/course-detail/{{course_id}}" target="_blank"></form>
+                <tr data-url="/course-detail/{{course_id}}">
+                <th scope="row" onclick="javascript: $(this).parent('tr').prev().submit();">{{course_id}}</th>
+                <td onclick="javascript: $(this).parent('tr').prev().submit();">{{course_name}}</td>
+                <td class="text-right">
+                    <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn khóa học"
+                    data-id="{{course_id}}" role="button">Xóa
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+                </tr>
+                </a>
+                {{/each}}
+            </tbody>
+            </table>
+            {{/if}}
+        </div>
+    </div>
+<hr>
+<footer class="text-center">
+ <div class="mb-2">
+   <small>
+     © 2021 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="#">
+       EduOYK Team
+     </a>
+   </small>
+ </div>
+ <div>
+   <a href="https://github.com/TrashCodeEveryDay" target="_blank">
+     <img alt="GitHub followers" src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social" />
+   </a>
+   <a href="#" target="_blank">
+     <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social" />
+   </a>
+ </div>
+</footer>
+
+<script>
+    $(document).ready(function(){
+        $('body').on('click','#delete',function(e){
+            e.preventDefault();
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            
+            $.getJSON({
+                url: `/admin/course/delete/${id}`,
+                success: function(data){
+                    // do nothing
+                }
+            })
+            $(this).parent('td').parent('tr').remove();
+        })
+    })
+</script>

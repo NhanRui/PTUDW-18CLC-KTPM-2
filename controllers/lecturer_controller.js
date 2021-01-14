@@ -118,7 +118,7 @@ router.post('/addcourse',async function(req,res){
     course_name: req.body.name,
     description: req.body.des,
     intro_image: img,
-    price: 699000,
+    price: +req.body.price || 699000,
     deal_value: 0,
     course_intro_description: req.body.course_description,
     course_intro_video: vid,
@@ -275,7 +275,6 @@ router.post('/:courseid',async function(req,res){
  // console.log(req.body.chapter);  console.log(req.body.count);  console.log(req.body.video);  console.log(req.body.link);
   const id = req.params.courseid;
   if(req.session.ll!==null){
-    console.log('dang xoa');
     for(var i=0;i<req.session.ll.length;i++){
       var ll = await lecturerModel.delVideoList(req.session.ll[i].list_id);
     }
@@ -295,6 +294,7 @@ router.post('/:courseid',async function(req,res){
       }
       newses.push(lesson);
       await lecturerModel.addLessonList(lesson);
+      console.log(req.body.duration);
       for(var j=0;j<+req.body.count[i];j++){
         const video = {
           video_id: uniqid('V'),
@@ -309,6 +309,17 @@ router.post('/:courseid',async function(req,res){
       flag+=(+req.body.count[i]);
     }
   }
+  
+  var date = Date.now();
+  var update = moment(date).format("YYYY-MM-DD");
+
+  const patch={
+    course_id: id,
+    status: req.body.complete || 'Chưa hoàn thành',
+    update_date: update
+  };
+  //console.log(patch);
+  await lecturerModel.patchStatus(patch);
   req.session.ll = newses;
   res.redirect(`/lecturer/${id}`);
 })

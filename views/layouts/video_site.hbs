@@ -56,6 +56,14 @@
                                   var div = document.getElementById('duration_text_{{{video_id}}}');
                                   var minute = Math.floor({{video_duration}}/60);
                                   var second = {{video_duration}}-minute*60;
+                                  if (second.toString().length===1)
+                                  {
+                                      second="0"+second;
+                                  }
+                                  if (minute.toString().length===1)
+                                  {
+                                      minute="0"+minute;
+                                  }
                                   var format_time=minute+":"+second;
                                   div.innerHTML += format_time;
                             </script>

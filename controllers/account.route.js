@@ -156,7 +156,21 @@ router.get('/is-available-usname', async function (req, res) {
     if (user === null) {
       return res.render('layouts/SignIn', {
         layout: false,
-        err_message: 'Invalid username.'
+        err_message: 'Tài khoản không hợp lệ !!!'
+      });
+    }
+    if(user.role === 3 || user.role === 4){
+      return res.render('layouts/SignIn', {
+        layout: false,
+        err_message: 'Tài khoản này đang bị quản trị viên khóa !!!'
+      });
+    }
+    if(user.role === 5){
+      const condition = {user_id: user.user_id};
+      await db.del(condition,'user');
+      return res.render('layouts/SignIn', {
+        layout: false,
+        err_message: 'Tài khoản này đã bị xóa !!!'
       });
     }
   
@@ -193,16 +207,42 @@ router.get('/is-available-usname', async function (req, res) {
     res.redirect(url);
   })
 
+  router.get('/logout', async function (req, res) {
+    req.session.auth = false;
+    req.session.authUser = null;
+    req.session.retUrl = null;
+    console.log("Logging out");
+  
+    res.redirect('/');
+  })
+
   router.get('/profile',auth.auth, async function(req, res, next){
+    if (req.session.authUser.role===1)
+    {
+        return res.redirect('/lecturer');
+    }
+    if (req.session.authUser.role===2)
+    {
+        return res.redirect('/admin');
+    }
     const shopping_list=req.session.shopCart;
     const menuList=await menuCategory.getCateMenu();
     const submenuList=await menuCategory.getCateSubMenu();
     const allListMenu=[];
     const items=req.session.cart;
+    const listHot=await categoryModel.all();
+    const listNew=await categoryModel.getNewList();
     for (const i of menuList)
     {
       const menu_list=await categoryModel.allById(i.category_id);
       categoryModel.checkIsHaving(items,menu_list);
+      if (req.session.authUser!=null)
+      {
+        const listBuy=await categoryModel.getBuyList(req.session.authUser.user_id);
+        await categoryModel.checkBill(menu_list,listBuy);
+      }
+      await categoryModel.checkHot(menu_list,listHot);
+      await categoryModel.checkNew(menu_list,listNew);
       const item={
         menu: i.category_id,
         name: i.category_name,
@@ -240,15 +280,32 @@ router.get('/is-available-usname', async function (req, res) {
   })
 
   router.get('/wishlist',auth.auth, async function(req, res){
+    if (req.session.authUser.role===1)
+    {
+        return res.redirect('/lecturer');
+    }
+    if (req.session.authUser.role===2)
+    {
+        return res.redirect('/admin');
+    }
     const shopping_list=req.session.shopCart;
     const menuList=await menuCategory.getCateMenu();
     const submenuList=await menuCategory.getCateSubMenu();
     const allListMenu=[];
     const items=req.session.cart;
+    const listHot=await categoryModel.all();
+    const listNew=await categoryModel.getNewList();
     for (const i of menuList)
     {
       const menu_list=await categoryModel.allById(i.category_id);
       categoryModel.checkIsHaving(items,menu_list);
+      if (req.session.authUser!=null)
+      {
+        const listBuy=await categoryModel.getBuyList(req.session.authUser.user_id);
+        await categoryModel.checkBill(menu_list,listBuy);
+      }
+      await categoryModel.checkHot(menu_list,listHot);
+      await categoryModel.checkNew(menu_list,listNew);
       const item={
         menu: i.category_id,
         name: i.category_name,
@@ -273,6 +330,10 @@ router.get('/is-available-usname', async function (req, res) {
     const firstName = user.name.substr(user.name.indexOf(' ')+1);
     const lastName = user.name.substr(0, user.name.indexOf(' '));
     const fa_list=req.session.cart;
+
+    await categoryModel.checkHot(fa_list,listHot);
+    await categoryModel.checkNew(fa_list,listNew);
+
     const cart_list=req.session.shopCart;
     //console.log(fa_list[0].course_id);
     for (i=0;i<cart_list.length;i++)

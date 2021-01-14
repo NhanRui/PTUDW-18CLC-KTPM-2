@@ -1,0 +1,205 @@
+<style>
+    thead{
+        background-color: wheat;
+    }
+    tbody tr:nth-child(odd){
+        background-color:beige;
+    }
+    tbody tr:nth-child(even){
+        background-color:azure;
+    }
+    .blur{
+        opacity:0.3;
+    }
+    .clear{
+        opacity: none;
+    }
+    .card {
+        display: none;
+        position: fixed;
+        top:40vh;
+        left:90vh;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        font-family: arial;
+        transition: 1s;
+        padding: 5px;
+    }
+
+    .card .title {
+        color: grey;
+        margin-top: 5px;
+        font-size: 18px;
+    }
+
+    .card h4{
+        text-align: center;
+    }
+
+    .card a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+    .card p{
+        margin-left: 10px;
+        margin-bottom:15px;
+        font-weight: bolder;
+    }
+
+    .card span{
+        font-weight: normal;
+    }
+
+    .butn{
+        position: relative;
+        bottom:0;
+        left:190px;
+    }
+
+    #on-top{
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: whitesmoke;
+    }
+
+    #back{
+        position: fixed;
+        top: 1;
+        right:3;
+    }
+</style>
+
+<h2>Danh mục</h2>
+<hr>
+    <div class="row" style="display:block;">
+        <div class="card-header d-flex justify-content-between" id="on-top">
+          <h4 class="text-success">Hoạt động</h4>
+          <a name="" id="addCat" class="btn btn-primary" href="#" role="button">Thêm danh mục</a>
+        </div>
+        <div class="card-body" id="list-section" data-count="{{list_length}}">
+            {{#if cat_empty}}
+            <h5 class="card-title">Không có dữ liệu!</h5>
+            <p class="card-text">Không có danh mục nào đang hoạt động</p>
+            {{else}} 
+            <table class="table table-hover" style="outline:1px solid grey;">
+            <thead>
+                <tr>
+                <th scope="col">Mã danh mục</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Danh mục cha</th>
+                <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="active-body">
+                {{#each this.cat}}
+                <tr>
+                <th scope="row">{{category_id}}</th>
+                <td>{{category_name}}</td>
+                <td>{{parent_id}}</td>
+                <td class="text-right">
+                    <a name="" id="add" class="btn btn-sm btn-warning" title="Thêm danh mục con"
+                    data-id="{{category_id}}" data-count="{{count}}" role="button">Thêm
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="delete" class="btn btn-sm btn-danger text-light" title="Xóa vĩnh viễn tài khoản"
+                    data-id="{{category_id}}" data-count="{{count}}" role="button">Xóa
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+                </tr>
+                {{/each}}
+            </tbody>
+            </table>
+            {{/if}}
+        </div>
+    </div>
+<hr>
+<footer class="text-center">
+ <div class="mb-2">
+   <small>
+     © 2021 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="#">
+       EduOYK Team
+     </a>
+   </small>
+ </div>
+ <div>
+   <a href="https://github.com/TrashCodeEveryDay" target="_blank">
+     <img alt="GitHub followers" src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social" />
+   </a>
+   <a href="#" target="_blank">
+     <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social" />
+   </a>
+ </div>
+</footer>
+
+<div class="card" id="card1">
+<form method="POST" action="/admin/category/add" autocomplete="off" id="form1">
+  <h4><span>Sub-Category</span></h4>
+  <p>Name: <input type="text" name="name1" id="name"></p>
+  <p class="title">Parent category: <span id="p"></span></p>
+  <input type="hidden" name="parent_id" value="" id="parent_id">
+  <button class="btn btn-danger butt" id="back">Quay lại</button>
+  <button type="submit" class="btn btn-primary butn" onclick="javascript: $('#form1').submit();">Submit</button>
+</form>
+</div>
+
+<div class="card" id="card2">
+<form method="POST" action="/admin/category/addCat" autocomplete="off" id="form2">
+  <h4><span>Category</span></h4>
+  <p>Name: <input type="text" name="name2" id="name"></p>
+  <button class="btn btn-danger butt" id="back">Quay lại</button>
+  <button type="submit" class="btn btn-primary butn" onclick="javascript: $('#form2').submit();">Submit</button>
+</form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('body').on('click','#delete',function(e){
+            var count = $(this).attr('data-count');
+            var id = $(this).attr('data-id');
+            if(+count >0 ){
+                alert('Bạn không thể xóa một danh mục hiện đang được sử dụng');
+                return;
+            } 
+            
+            $.getJSON({
+                url: `/admin/category/delete/${id}`,
+                success: function(data){
+                    // do nothing
+                }
+            })
+            $(this).parent('td').parent('tr').remove();
+        })
+        
+        $('body').on('click','#add',function(e){
+            //$('body').addClass('blur');
+            //$('.card').css('opacity',1);
+            $('#card1').css('display','block');
+            var id = $(this).attr('data-id');
+            $('#p').html(id);
+            $('#parent_id').val(id);
+        })
+        
+        $('#form1').on('submit',function(e){
+            $('#card1').css('display','none');
+        })
+
+        $('#addCat').on('click',function(e){
+            e.preventDefault();
+            $('#card2').css('display','block');
+        })
+
+        $('#form2').on('submit',function(e){
+            $('#card2').css('display','none');
+        })
+
+        $('#back').on('click',function(e){
+            e.preventDefault();
+            $('.card').css('display','none');
+        })
+    })
+</script>

@@ -1,0 +1,152 @@
+/*------------Information section-------------------*/
+.title{
+    width: 226px;
+    height: 32px;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.33;
+    color: #232731;
+}
+
+.avatar-block{
+    display: flex;
+    margin-bottom: 39px;
+    margin-top: 55px;
+    text-align: center;
+    font-family: Montserrat;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+}
+
+.avatar-size{
+    width:150px;
+    height:150px;
+}
+
+.username{
+    text-align: left;
+    height: 29px;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    color: #232731;
+    margin-bottom: 15px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+}
+
+.teacher-info{
+    margin-bottom: 15px;
+    display: flex;
+    text-align: center;
+    font-family: Montserrat;
+    height: 100%;
+    color: rgba(0,0,0,.65);
+    line-height: 1.5;
+}
+
+.teacher-id{
+    display: flex;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.tc-title{
+    height: 24px;
+    font-family: Open Sans,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #232731;
+    margin-right: 5px;
+}
+
+.tc-title{
+    height: 24px;
+    font-family: Open Sans,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #232731;
+    font-weight: 700;
+}
+
+.basic-info-1{
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 28px;
+    display: inline-block;
+}
+
+button, input{
+    overflow: visible;
+}
+
+.input-box{
+    box-sizing: border-box;
+    height: 72px;
+    margin-bottom: 16px;
+    display: block;
+    width: 50%;
+    flex: 0 0 auto;
+    float: left;
+}
+
+.label{
+    font-size: 16px;
+    line-height: 1.5;
+    color: #232731;
+    width: 100%;
+    height: 24px;
+    font-family: Montserrat;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.input-type{
+    height: 40px;
+    padding-left: 16px;
+    border-radius: 4px;
+    border: 1px solid #b0b5c1;
+    background-color: #f9fafc;
+    font-family: Open Sans,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #232731;
+    width: 100%;
+    /**/
+    position: relative;
+    display: inline-block;
+}
+
+.choose-gender{
+    float: left;
+    margin-top: 8px;
+    font-family: Open Sans,sans-serif;
+    box-sizing: border-box;
+}
+
+.input-container{
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.input-element{
+    padding-left: 15px;
+    flex-grow: 1;
+    font-family: Open Sans,sans-serif;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #b0b5c1;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: .15px;
+    color: #4a4a4a;
+    margin-right: 8px;
+}

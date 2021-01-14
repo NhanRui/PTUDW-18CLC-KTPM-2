@@ -30,6 +30,28 @@
                                 </a>
                             </li>
                         {{else}}
+                            {{#if categoryByIdSub}}
+                            <li class="item {{#if active_5}}activate_choice noHover{{/if}}">
+                                <a href="/search/sub/{{Id}}/rating-5">
+                                    <label class="text_star {{#if active_5}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 5.0 </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_4}}activate_choice noHover{{/if}}">
+                                <a href="/search/sub/{{Id}}/rating-up-4">
+                                    <label class="text_star {{#if active_up_4}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 4.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_up_3}}activate_choice noHover{{/if}}" >
+                                <a href="/search/sub/{{Id}}/rating-up-3">
+                                    <label class="text_star {{#if active_up_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 3.0 trở lên </label>
+                                </a>
+                            </li>
+                            <li class="item {{#if active_down_3}}activate_choice noHover{{/if}}">
+                                <a href="/search/sub/{{Id}}/rating-down-3">
+                                    <label class="text_star {{#if active_down_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> Dưới 3.0 </label>
+                                </a>
+                            </li>
+                            {{else}}
                             <li class="item {{#if active_5}}activate_choice noHover{{/if}}">
                                 <a href="/search/keyword/{{Id}}/rating-5">
                                     <label class="text_star {{#if active_5}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> 5.0 </label>
@@ -50,6 +72,7 @@
                                     <label class="text_star {{#if active_down_3}}active_text{{/if}}"> <span class="rating-choice"><i class="fas fa-star"></i></span> Dưới 3.0 </label>
                                 </a>
                             </li>
+                            {{/if}}
                         {{/if}}
                         {{/with}}
                     </ul>
@@ -81,6 +104,29 @@
                 </a>
             </div>
             {{else}}
+            {{#if categoryByIdSub}}
+            <div class="menusub-choices">
+                <span class="style-submenu menu0">
+                    <i class="fas fa-sort-amount-up"></i> Sắp xếp
+                </span>
+                <span class="blur-style diff-char"> | </span>
+                <a href="/search/sub/{{Id}}/mode/most-study">
+                    <span class="style-submenu menu1 blur-style" {{#if active_m_st}}id="active_most"{{/if}}>Học nhiều nhất</span>
+                </a>
+                <a href="/search/sub/{{Id}}/mode/most-overall">
+                    <span class="style-submenu menu2 blur-style"{{#if active_m_ov}}id="active_most"{{/if}}>Đánh giá cao nhất</span>
+                </a>
+                <a href="/search/sub/{{Id}}/mode/newest">
+                    <span class="style-submenu menu3 blur-style" {{#if active_new}}id="active_most"{{/if}}>Mới nhất</span>
+                </a>
+                <a href="/search/sub/{{Id}}/mode/price-ascend">
+                    <span class="style-submenu menu4 blur-style"{{#if active_m_ap}}id="active_most"{{/if}}>Giá thấp đến cao</span>
+                </a>
+                <a href="/search/sub/{{Id}}/mode/price-descend">
+                    <span class="style-submenu menu5 blur-style"{{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
+                </a>
+            </div>
+            {{else}}
             <div class="menusub-choices">
                 <span class="style-submenu menu0">
                     <i class="fas fa-sort-amount-up"></i> Sắp xếp
@@ -102,6 +148,7 @@
                     <span class="style-submenu menu5 blur-style" {{#if active_m_dp}}id="active_most"{{/if}}>Giá cao đến thấp</span>
                 </a>
             </div>
+            {{/if}}
             {{/if}}
             {{/with}}
             <div class="container123">

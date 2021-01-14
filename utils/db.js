@@ -37,7 +37,7 @@ module.exports = {
                     GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
         WHERE status='Hoàn thành' AND active=0
     ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id
-    WHERE U.role=1 AND temp3.categoty_id=${id}`
+    WHERE U.role=1 AND temp3.categoty_id='${id}'`
     return promisePool.query(sql);
   },
   getCateBySearch(textSearch,offset){
@@ -76,7 +76,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id}
+        WHERE ct.parent_id='${id}'
         LIMIT ${paginate.limit} offset ${offset}`
     return promisePool.query(sql);
   },
@@ -95,7 +95,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id}
+        WHERE ct.category_id='${id}'
         LIMIT ${paginate.limit} offset ${offset}`
     return promisePool.query(sql);
   },
@@ -113,7 +113,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id} AND temp4.overall_star${condition}
+        WHERE ct.category_id='${id}' AND temp4.overall_star${condition}
         LIMIT ${paginate.limit} offset ${offset}`;
         if (condition==="<3")
         {
@@ -130,7 +130,7 @@ module.exports = {
                               GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
                   WHERE status='Hoàn thành' AND active=0
               ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-              WHERE ct.category_id=${id} AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
+              WHERE ct.category_id='${id}' AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
               LIMIT ${paginate.limit} offset ${offset}`;
         }
     return promisePool.query(sql);
@@ -149,7 +149,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id}
+        WHERE ct.category_id='${id}'
         ORDER BY temp4.${condition} ${mode}
         LIMIT ${paginate.limit} offset ${offset}`
     return promisePool.query(sql);
@@ -168,7 +168,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id} AND temp4.overall_star${condition}`;//(temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
+        WHERE ct.category_id='${id}' AND temp4.overall_star${condition}`;//(temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
       if (condition==="<3")
       {
         sql = `SELECT COUNT(*) AS total
@@ -184,7 +184,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id} AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))`;
+        WHERE ct.category_id='${id}' AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))`;
       }
     return promisePool.query(sql);
   },
@@ -202,7 +202,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.category_id=${id}`
+        WHERE ct.category_id='${id}'`
     return promisePool.query(sql);
   },
 //submenu
@@ -221,7 +221,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id} AND temp4.overall_star${condition}
+        WHERE ct.parent_id='${id}' AND temp4.overall_star${condition}
         LIMIT ${paginate.limit} offset ${offset}`;
         if (condition==="<3")
         {
@@ -238,7 +238,7 @@ module.exports = {
                               GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
                   WHERE status='Hoàn thành' AND active=0
               ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-              WHERE ct.parent_id=${id} AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
+              WHERE ct.parent_id='${id}' AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
               LIMIT ${paginate.limit} offset ${offset}`;
         }
     return promisePool.query(sql);
@@ -303,7 +303,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id}
+        WHERE ct.parent_id='${id}'
         ORDER BY temp4.${condition} ${mode}
         LIMIT ${paginate.limit} offset ${offset}`
     return promisePool.query(sql);
@@ -345,7 +345,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id}`
+        WHERE ct.parent_id='${id}'`
     return promisePool.query(sql);
   },
   countBySearch(textSearch){
@@ -382,7 +382,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id} AND temp4.overall_star${condition}`;//(temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
+        WHERE ct.parent_id='${id}' AND temp4.overall_star${condition}`;//(temp4.overall_star${condition} OR ISNULL(temp4.overall_star))
       if (condition==="<3")
       {
         sql = `SELECT COUNT(*) AS total
@@ -398,7 +398,7 @@ module.exports = {
                         GROUP BY c.course_id) AS temp2 ON temp1.course_id=temp2.course_id
             WHERE status='Hoàn thành' AND active=0
         ) AS TEMP3 JOIN USER U ON TEMP3.lecturer_id=U.user_id) AS temp4 JOIN category ct ON temp4.categoty_id = ct.category_id
-        WHERE ct.parent_id=${id} AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))`;
+        WHERE ct.parent_id='${id}' AND (temp4.overall_star${condition} OR ISNULL(temp4.overall_star))`;
       }
     return promisePool.query(sql);
   },

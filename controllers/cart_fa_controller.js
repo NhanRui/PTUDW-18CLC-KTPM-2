@@ -69,6 +69,12 @@ router.post('/add', async function(req, res){
 
 router.post('/addCart', async function(req, res){
     //console.log(req.session.authUser.user_id);
+    const listBuy=await categoryModel.getBuyList(req.session.authUser.user_id);
+    let isBuy=await categoryModel.checkBillById(req.body.id,listBuy);
+    if (isBuy)
+    {
+        return res.redirect(req.headers.referer);
+    }
     shopCart=await cartModel.getBuyCartById(req.session.authUser.user_id);
     let flag=true;
     const item = await cartModel.getCartItem(req.body.id);
@@ -77,13 +83,31 @@ router.post('/addCart', async function(req, res){
         if (i.course_id===req.body.id)
         {
             //await cartModel.removeByID(req.session.shopCart,item.course_id,req.session.authUser.user_id)
-            res.redirect('/cart');
-            break;
+            return res.redirect('/cart');
         }
     }
     if (flag){
         await cartModel.addCart(req.session.shopCart,req.session.authUser.user_id, item);
         await cartModel.removeByID(req.session.cart,item.course_id,req.session.authUser.user_id);
+    }
+    //cartModel.add(req.session.cart, item);
+    res.redirect(req.headers.referer);
+})
+
+router.post('/addCartNow', async function(req, res){
+    shopCart=await cartModel.getBuyCartById(req.session.authUser.user_id);
+    let flag=true;
+    const item = await cartModel.getCartItem(req.body.id);
+    for (const i of shopCart)
+    {
+        if (i.course_id===req.body.id)
+        {
+            return res.redirect('/cart');
+        }
+    }
+    if (flag){
+        await cartModel.addCart(req.session.shopCart,req.session.authUser.user_id, item);
+        return res.redirect('/cart');
     }
     //cartModel.add(req.session.cart, item);
     res.redirect(req.headers.referer)

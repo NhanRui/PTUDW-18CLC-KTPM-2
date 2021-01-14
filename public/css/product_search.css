@@ -266,3 +266,12 @@ p.new_tittle{
     background-color: rgba(216, 1, 1, 0.986);
     color: white;
 }
+
+.price_top5{
+    display: flex;
+    justify-content: flex-end;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 8px;
+}

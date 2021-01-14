@@ -1,0 +1,39 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/piexif.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/sortable.min.js" type="text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/themes/fas/theme.min.js"></script>
+
+<form method="POST" enctype="multipart/form-data">
+    <div style="width:170%;margin-left:50px;">
+        <div class="title">Lựa khóa học</div>
+        <div>
+            <!-- đây là chỗ mà phúc chia courses để nhấp vào chọn course nào cần upload video-->
+            <div class="title">Upload video</div>
+        </div>
+        <script>
+            $("#center").css('width','20%');
+        </script>
+        <!--Krajee file input-->
+        
+        <div id="finp">
+            <div class="file-loading">
+            <input id="input-41" name="video" type="file" multiple>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#input-41").fileinput({
+                    maxFileCount: 10,
+                    allowedFileTypes: ["video"],
+                    theme: 'fa'
+                    //allowedFileExtensions: ["mp4", "ogg", "wmv"]
+                    //allowedFileExtensions: ["jpg", "gif", "png", "txt"]
+                });
+            });
+        </script>
+        <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+    </div>
+</form>

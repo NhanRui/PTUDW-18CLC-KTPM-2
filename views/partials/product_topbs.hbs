@@ -1,42 +1,77 @@
-                        <div class="top-object">
-                            <h3 class="top-num">{{top}}</h3>
-                            <a href="/course-detail/{{course_id}}"><img src={{intro_image}} class="top-object-image"></a>
-                            {{#if IsBuy}}
-                            {{else}}
-                            <form action="/cart/add" method="POST" class="favourite_course_container_top">
-                                <input type="hidden" value="{{course_id}}" name="id">
-                                <button type="submit">
-                                    <i class="fa_ca far fa-heart" id="{{#if isHaving}}faActive{{/if}}"></i>
-                                </button>
-                            </form>
-                            {{/if}}
-                            {{#if IsHot}}
-                            <div class="hot-course-top">
-                                <p>HOT</p>
-                            </div>
-                            {{/if}}
-                            <div class="top-content">
-                                <a href="/course-detail/{{course_id}}" class="card-title-in-top">{{course_name}}</a>
-                                <div class="{{course_id}}_new">
-                                    <div class="wrap-stars-in-top">
-                                        <div class="stars-outer">
-                                            <div class="stars-inner"></div>
-                                        </div>
-                                        <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
-                                    </div>
-                                    {{#if IsNew}}
-                                    <div class="new-course-top">
-                                        <p>NEW</p>
-                                    </div>
-                                    {{/if}}
-                                </div>
-                                <script>
-                                    var ob_rating="{{{course_id}}}_new";
-                                    document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
-                                </script>
-                                <div class="price-in-top">
-                                    <div class="real-price">{{format_number price}}</div>
-                                    <div class="reduce-price">{{format_number reduce_price}}</div>
-                                </div>
-                            </div>
-                        </div>
+{{#if this.empty_top8}}
+<h5 class="card-title">Không có dữ liệu!</h5>
+<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+{{else}}
+{{#each this.product_top8bs}}
+<div class="card-product-topbs">
+        {{#if IsBuy}}
+        {{else}}
+        <form action="/cart/add" method="POST" class="favourite_course_container">
+            <input type="hidden" value="{{course_id}}" name="id">
+            <button type="submit">
+                <i class="fa_ca far fa-heart" id="{{#if IsHaving}}faActive{{/if}}"></i>
+            </button>
+        </form>
+        {{/if}}
+        <a href="/course-detail/{{course_id}}">
+        <div class="container_slide_up">
+            <div class="item__overlay">
+                <p class="number-students">Học viên: {{number_student}}</p>
+            </div>
+        </div>
+        <div class="container_slide_up_2">
+            <div class="item__overlay_2">
+                <p class="number-students">{{category_name}}</p>
+            </div>
+        </div>
+        {{#if IsHot}}
+        <div class="new_container">
+            <div class="for_new">
+                <p class="new_tittle"><i class="fas fa-fire"> HOT</i></p>
+            </div>
+        </div>
+        {{/if}}
+        </a>
+        <a href="/course-detail/{{course_id}}">
+        <div class="img-with-deal">
+            <img class="card-img" src={{intro_image}} alt="">
+            <div class="deal-img">
+                <p>-{{deal_value}}%</p>
+            </div>
+        </div>
+        </a>
+        <a href="/course-detail/{{course_id}}">
+        <div class="{{course_id}}_toplt">
+            <div class="wrap-stars">
+                <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                </div>
+                <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+            </div>
+            {{#if IsNew}}
+            <div class="container-for-new">
+                <p>NEW</p>
+            </div>
+            {{/if}}
+        </div>
+        <h4 class="card-title">{{course_name}}</h4>
+        </a>
+        <script>
+            var ob_rating="{{{course_id}}}_toplt";
+            document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
+        </script><!--về sau tham số là tên product-->
+        <div class="card-body">
+            <a href="/course-detail/{{course_id}}" class="card-text-author">
+                <img class="author-img" src={{author_image}} alt="">
+                <p class="author-name">{{author_name}}</p>
+            </a>
+            <a href="/course-detail/{{course_id}}">
+            <div class="price">
+                <div class="real-price">{{format_number price}}</div>
+                <div class="reduce-price">{{format_number reduce_price}}</div>
+            </div>
+            </a>
+        </div>
+</div>
+{{/each}}
+{{/if}}

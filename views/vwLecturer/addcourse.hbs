@@ -1,0 +1,278 @@
+<link href="./css/addcourse.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/piexif.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/sortable.min.js" type="text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/themes/fas/theme.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"> 
+<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>    
+<div style="width:90%;margin-left:50px;">
+<form method="POST" id="create_course">
+    <div>
+        <h1>Thông tin khóa học</h1>
+        <div class="basic-info">
+            <div class="basic-1">
+                <div class="basic1">
+                    <div class="bs-1">Tên khóa học</div>
+                    <input class="ant-input M-info-detail-name-txt " placeholder="VD: Thành thạo Tiếng Anh trong 30 ngày" type="text" name="name" id="name">
+                </div>
+                <div class="basic1">
+                    <div class="bs-1">Mô tả thêm</div>
+                    <input class="ant-input M-info-detail-name-txt " placeholder="VD: Trọn bộ kỹ năng tiếng anh cơ bản. Giao tiếp tiếng Anh từ con số 0." type="text" name="des" id="des">
+                </div>
+            </div>
+            <div class="basic-2">
+                <div class="basic2">
+                    <div id="image_choose">
+                        <div class="add-avatar">
+                            <div class="add-avatar-img"></div>
+                            <span class="add-avatar-txt">Ảnh khóa học</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="avtURL" id="avtURL" value="">
+                    <input type="hidden" name="introURL" id="introURL" value="">
+                </div>
+            </div>
+        </div>
+        <div class="M-category">
+            <div class="catalog_1">
+                <div class="bs-1">Danh mục</div>
+                <div>
+                    <div class="field">
+                        <div class="control">
+                            <div class="select is-success">
+                            <select id="cate" name="category" style="width:252px;">
+                                {{#each this.category}}
+                                    <option value="{{category_id}}">{{category_name}}</option>
+                                {{/each}}
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="catalog_2">
+                <div class="bs-1">Danh mục con</div>
+                <div>
+                    <div class="field">
+                        <div class="control">
+                            <div class="select is-primary">
+                            <select id="sub_cat" name="sub_category" style="width:252px;">
+                                <option value="2">Lập trình thiết bị di động</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="course_des">
+            <div class="des-txt">
+                <span>Giá niêm yết  </span>
+                <i class="fa fa-question-circle des-icon" aria-hidden="true"></i>
+            </div>
+            <div class="des-detail">
+                <div class="slidecontainer">
+                <input type="range" min="0" max="1000000" value="699000" class="slider" id="myRange">
+                <span>Giá:</span><input id="demo" name="price">
+                </div>
+                <script>
+                    var slider = $('#myRange');
+                    var output = $('#demo');
+                    output.val(slider.val());
+
+                    slider.on('input',function() {
+                        output.val(slider.val());
+                    })
+
+                    output.on('input',function() {
+                        slider.val(output.val());
+                    })
+                </script>
+            </div>
+        </div>
+        <div class="course_des">
+            <div class="des-txt">
+                <span>Lợi ích khóa học  </span>
+                <i class="fa fa-question-circle des-icon" aria-hidden="true"></i>
+            </div>
+            <div class="des-detail">
+                <textarea name="benefit" class="des-inp txtarea" width="500" height="100" placeholder="VD: Tự biết cách luyện phát âm tiếng Anh sao cho hiệu quả"></textarea>
+            </div>
+        </div>
+        <div class="course_des">
+            <div class="des-txt">
+                <span>Phù hợp với  </span>
+                <i class="fa fa-question-circle des-icon" aria-hidden="true"></i>
+            </div>
+            <div class="des-detail">
+                <textarea name="suitable" class="des-inp txtarea" rows="5" placeholder="VD: Những ai đã chán với việc đến trung tâm, đến lớp, tốn tiền học các khóa phát âm"></textarea>
+            </div>
+        </div>
+        <div class="course_des">
+            <div class="des-txt">
+                <span>Mô tả tổng quát  </span>
+                <i class="fa fa-question-circle des-icon" aria-hidden="true"></i>
+            </div>
+            <div class="des-detail">
+                <textarea id="txtArea" name="course_description" cols="50" rows="10" class="des-inp txtarea" 
+                placeholder="VD: Điểm đặc biệt của khóa học là người hướng dẫn cũng là người trực tiếp trải nghiệm 
+                phương pháp, đặt mình vào vị trí của người học để người học hình dung rõ được các bước đi và lộ trình"></textarea>
+                <script>
+                        CKEDITOR.replace( 'course_description' ,{
+                            language: 'vi',
+                            uiColor: '#dc3545',
+                            width: '100%',
+                            height: 300
+                        });
+                </script>
+            </div>
+        </div>
+        </form>
+        <!--
+        <form id="intro-add" enctype="multipart/form-data" method="POST" action="/lecturer/courseintro">
+            <div class="course_des" id="intro-form">
+                <div class="des-txt">
+                    <span>Intro khóa học</span>
+                    <i class="fa fa-question-circle des-icon" aria-hidden="true"></i>
+                </div>
+                <div class="des-detail">
+                    <div class="file-loading">
+                        <input id="input-42" name="video" type="file">
+                    </div>
+                    <script>
+                        $(document).ready(function() {
+                            $("#input-42").fileinput({
+                                maxFileCount: 1,
+                                allowedFileTypes: ["video"],
+                                theme: 'fa'
+                                //allowedFileExtensions: ["mp4", "ogg", "wmv"]
+                                //allowedFileExtensions: ["jpg", "gif", "png", "txt"]
+                            });
+                            $('#intro-form').on('click',function(){
+                                $('#intro-form').off('click');
+                                $('#input-42').click();
+                            })
+                            $('#input-42').change(function(){
+                                $('#intro-add').submit();
+                                
+                                $.getJSON({
+                                    url: `/lecturer/get_introURL`,
+                                    success: function(data){
+                                        if(data!==null){
+                                            $('#introURL').attr('value',data);
+                                            alert(data);
+                                        }
+                                        else    alert("Không load được video !!!");
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </form>
+        -->
+        <div class="btnarea">
+            <button type="button" class="btn-blue" onclick="send();">
+                <span>Lưu Lại</span>
+            </button>
+            <button type="button" class="btn-red" onclick="quayra();">
+                <span>Quay lại</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="test"></div>
+</div>
+
+
+<form id="avatar-add" enctype="multipart/form-data" method="POST" action="/lecturer/courseavatar">
+    <div style="display:none;" id="avatar">
+        <input id="input-41" name="avatar" type="file">
+    </div>
+</div>
+    <script>
+        $(document).ready(function() {
+            var str="";
+            $('.add-avatar').on('click',function(){
+                //$('avatar').css('display','block');
+                $('#input-41').click();
+            });
+            
+            $('#input-41').change(function(){
+                $('#avatar-add').submit();
+                $('#avtURL').attr('value',"ok");
+                $.getJSON({
+                    url: `/lecturer/get_avtURL`,
+                    success: function(data){
+                        if(data!==null){
+                            const str = "url('"+data+"')";
+                            $('#image_choose').attr('style',`background-image: ${str};background-size: cover;`);   //mai ko chay duoc
+                        }
+                        else    alert("Không load được hình !!!");
+                    }
+                });
+            });
+            $("#input-41").fileinput({
+                allowedFileTypes: ["image"],
+                theme: 'fa',
+                allowedFileExtensions: ["jpg", "gif", "png"]
+            });
+        });
+    </script>
+</form>
+
+<script>
+    function checknameNull(){
+        var name = $('#name');
+        if(name.val().length === 0 ){
+            alert("Không được để trống tên khóa học");
+            name.on('focus');
+            return false;
+        }
+        return true;
+    }
+
+    function checkdesNull(){
+        var des = $('#des');
+        if(des.val().length === 0 ){
+            alert("Xin hãy nhập mô tả khóa học");
+            des.on('focus');
+            return false;
+        }
+        return true;
+    }
+
+    function send(){
+        if(checknameNull()===false || checkdesNull()===false)  {
+            return;
+        }
+        $('#create_course').submit();
+    }
+
+    function quayra(){
+        location.replace('/lecturer/information');
+    }
+    
+    $(document).ready(function(){
+        $("#cate").change(function(){
+            var id="";
+            id=$("#cate").val();
+            $("#sub_cat").empty();
+            $.getJSON({
+                url: `/lecturer/get_subcat?id=${id}`,
+                success: function(data){
+                    if(data!==null){
+                        for(var i=0;i<data.length;i++){
+                            $("#sub_cat").append(`<option value="${data[i].category_id}">${data[i].category_name}</option>`);
+                        }
+                    }
+                }
+            })
+        })
+        $('#cate').change();
+    })
+</script>

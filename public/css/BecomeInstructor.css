@@ -1,0 +1,150 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+  
+header{
+    display:flex;
+    width:100%;
+    height:74px;
+    background: linear-gradient(to right,#16428e,#df322f);
+    position: fixed;
+    top:0;
+    z-index:10;
+}
+
+#left-header{
+    width:65%;
+    height:100px;
+}
+
+#left-header img{
+    margin-top:3px;
+    margin-left:50px;
+    width:250px;
+    height:65px;
+}
+
+#right-header{
+    width:35%;
+    display:flex;
+    padding-top:0px;
+    align-items: center;
+}
+
+#right-header a{
+    margin:0 5px;
+    font-family: cursive;
+    color: white;
+    font-size: 100%;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#dk{
+    background-color: #fd7e14;
+    display: block;
+    border-color:#fd7e14;
+    border-radius: 5px;
+    padding:3px 15px;
+}
+
+#dn{
+    background-color: #dc3545;
+    display: block;
+    border-color:#dc3545;
+    border-radius: 5px;
+    padding: 3px 15px;
+}
+
+#dn:hover{
+    border: 2px solid #fd7e14;
+}
+
+#dk:hover{
+    border: 2px solid #1809e4;
+}
+
+#co-hoi{
+    width:100%;
+    color: white;
+    font-family: "Roboto Condensed", Sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    text-align:center;
+    background: linear-gradient(to top,#16428e,#df322f);
+    padding-bottom: 50px;   
+}
+
+#co-hoi h3{
+    padding-top:10px;
+}
+
+#in4{
+    display:flex;
+    justify-content:center;
+}
+
+#in4 div{
+    width: 20%;
+}
+
+.counter{
+    color:white;
+    font-family: "Roboto Condensed", Sans-serif;
+    font-size: 200%;
+    font-weight: 700;
+    text-decoration: none;
+    border: 0;
+    line-height: 50px;
+}
+
+.suffix{
+    color: #f4cd78;
+    font-family: "Roboto Condensed", Sans-serif;
+    font-weight: 700;
+    font-size:140%;
+    text-align: center;
+    text-decoration: none;  
+    line-height: 30px;
+}
+
+.your-class{
+    padding-top:50px;
+    width:90%;
+    margin:0 auto;
+}
+
+.your-class div img{
+    width:250px;
+    height:250px;
+    margin:0 auto;
+}
+
+footer{
+    display:flex;
+    background: linear-gradient(to right,#16428e,#df322f);
+}
+
+#bo-ct{
+    display:flex;
+}
+
+#bo-ct img{
+    width:132px;
+    height:50px;
+    margin-bottom:20px;
+    margin-right:15px;
+}
+
+#right-footer{
+    margin-top:30px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+ul li a,a:hover{
+    color: white;
+}

@@ -71,7 +71,7 @@
     <table style="width:90%;margin-left:50px;" cellspacing="5px">
         <colgroup><col width="500px"></colgroup>
         <tr>
-            <td><img src="images/logo1.png" class="im" alt="logo"></td>
+            <td><a href="/"><img src="images/logo1.png" class="im" alt="logo"></a></td>
             <td align="right"><a href="/account/login" style="color:red;margin-right:110px;">Đăng nhập</a></td>
         </tr>
         <tr>
@@ -188,14 +188,13 @@
     }
 
     function validateEmail() {
-        var email = $('#tk').val;
-        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (re.test(email)===true){
-            alert('true');
+        var tk = document.getElementById('tk');
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (tk.value.match(validRegex)) {
             return true;
-        }else{
-            alert('Invalid email account');
-            $('#tk').focus();
+        } else {
+            alert("Invalid email address!");
+            tk.focus();
             return false;
         }
     }

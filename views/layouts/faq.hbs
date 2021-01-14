@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32"/>
+    <title>FAQ</title>
+    <link rel="stylesheet" href="./css/faq.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+    <div class="header" id="top">
+        <div class="upper-header">
+            <div id="main-logo">
+                <a href="index">
+                    <img src="./images/logo1.png" alt="main-logo">
+                </a>
+            </div>
+            <div id="nav-bar">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                      <a class="nav-link active text-light" href="index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light" href="account/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light" href="account/register">Sign up</a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+        <div class="lower-header">
+            <h1 style="color: whitesmoke; text-align: center;">Chúng tôi có thể giúp gì cho bạn?</h1>
+            <div id="search-field" class="d-flex justify-content-center">
+                <nav class="navbar navbar-light bg-transparent">
+                    <form class="form-inline">
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Type things you want to search" aria-label="Type things you want to search" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="button-addon2"><strong>Search</strong></button>
+                        </div>
+                      </div>
+                    </form>
+                  </nav>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+      <div class="cards-category">
+        <div class="row navbar">
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-hand-o-up" aria-hidden="true"></i></span>
+              <h5 class="card-title">Thông tin chung</h5>
+              <p class="card-text text-center">Các hình thức học tập và hướng dẫn cho người mới bắt đầu.</p>
+              <a href="#common-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+              <h5 class="card-title">Mua & thanh toán</h5>
+              <p class="card-text text-center">Tìm hiểu cách thức mua khóa học và hình thức thanh toán.</p>
+              <a href="#purchase-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-users"></i></span>
+              <h5 class="card-title">Tài khoản và kích hoạt</h5>
+              <p class="card-text text-center">Quản lí tài khoản và cách thức kích hoạt khóa học.</p>
+              <a href="#acount-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+        </div>
+        <div class="row navbar">
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-bug"></i></span>
+              <h5 class="card-title">Các vấn đề kĩ thuật</h5>
+              <p class="card-text text-center">Các vấn đề kĩ thuật thường gặp trên nền tảng OYK.</p>
+              <a href="#trouble-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-book"></i></span>
+              <h5 class="card-title">Giảng viên và học liệu</h5>
+              <p class="card-text text-center">Phản ánh về giảng viên và chất lượng học liệu.</p>
+              <a href="#teacher-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+          <div class="card" style="width: 22rem;">
+            <div class="card-body bg-white nav justify-content-center">
+              <span><i class="fa fa-bitcoin"></i></span>
+              <h5 class="card-title">Hoàn tiền</h5>
+              <p class="card-text text-center">Lí do và điều kiện để được hoàn tiền và hình thức hoàn tiền.</p>
+              <a href="#refund-info" class="btn btn-primary">Xem</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="common-questions">
+        <h1 class="display-3" id="common-info">Thông tin chung</h1>
+        <ul>
+          <li>
+            <p><strong>Học được gì trên EduOYK</strong></p>
+            <p>EduOYK - Siêu thị khóa học hàng đầu Việt Nam hợp tác phân phối khóa học cho các giảng viên, diễn giả, chuyên gia trong nhiều lĩnh vực khác nhau. Đa phần các kiến thức được chia sẻ trên EduOYK xuất phát từ kinh nghiệm thực tiễn của người chia sẻ, nên rất gần gũi, dễ hiểu đối với đại đa số người học. Các chủ đề cũng tập trung chủ yếu ở những kiến thức thường thức đời sống như nuôi dạy con, học đàn học hát, luyện tập thể dục, Yoga, Hôn nhân gia đình...Khóa học hiện tại trên EduOYK đa dạng phong phú, phù hợp với mọi nhu cầu của người học.</p>
+          </li>
+          <li>
+            <p><strong>Hình thức học tập thế nào?</strong></p>
+            <p>Các khóa học trên Edu OYK - Siêu thị khóa học hàng đầu Việt Nam được biên tập theo cấu trúc chuẩn, lên kịch bản bởi những chuyên gia đầu ngành. Các khóa học được ghi hình sẵn trong kho học liệu của học viên. Sau khi thanh toán mua khóa học, học viên vào Khóa Học Của Tôi thì có thể nhìn thấy các khóa học đã mua. Học viên chỉ việc mở video trong khóa học để xem. Thời lượng video được cấu trúc từ 3-5 phút, rất phù hợp cho việc học tập linh hoạt, mọi lúc mọi nơi của học viên.</p>
+          </li>
+          <li>
+            <p><strong>Tôi được sở hữu khóa học trong bao lâu?</strong></p>
+            <p>Tài khoản sau khi mua thành công khóa học, học viên có thể sử dụng khóa học không giới hạn thời gian. Học viên có thể vào Khóa Học Của Tôi để xem lại các video bất cứ lúc nào. Edu OYK luôn đồng hành cùng người học, khi nào Edu OYK còn được quyền phân phối khóa học đó trên sàn thì khi đó học viên còn được tham gia học tập.</p>
+          </li>
+          <li>
+            <p><strong>Tôi có cần phải tuân thủ lộ trình học tập không?</strong></p>
+            <p>Các khóa học trên Edu OYK - Siêu thị khóa học hàng đầu Việt Nam được sắp xếp theo bố cục tự do, mỗi phần mỗi chương không ràng buộc về lộ trình. Nên học viên hoàn toàn có thể xem bất kỳ bài nào mà không cần theo thứ tự gì. Tuy nhiên, để đạt hiệu quả tốt nhất, học viên nên theo hướng dẫn của Giảng viên trong lúc học.</p>
+          </li>
+          <li>
+            <p><strong>Tôi được mua khóa học để bán lại không?</strong></p>
+            <p>Theo quy định về Chính sách dịch vụ của Edu OYK. Quyền mua trên Edu OYK - Siêu thị khóa học trực tuyến hàng đầu Việt Nam là mua quyền xem video. Khách hàng cam kết sẽ sử dụng các Dịch vụ của Edu OYK  và bất kỳ Nội dung nào được cung cấp thông qua Edu OYK cho mục đích học tập và phi lợi nhuận. Khách hàng không có quyền cấp lại, chuyển nhượng hay chuyển giao bản quyền của bất kỳ Nội dung nào dưới bất kỳ hình thức nào. Quý Khách hàng không được sử dụng Edu OYK và/hoặc Nội dung để phục vụ các hoạt động công chúng hoặc trình chiếu cho số đông người xem.</p>
+          </li>
+          <li>
+            <p><strong>Tôi được học trên thiết bị nào?</strong></p>
+            <p>Hệ thống của Edu OYK được phát triển đa nền tảng nên học viên có thể học tập ở nhiều thiết bị khác nhau. Như truy cập website http://Edu OYK.vn trên máy tính, hoặc trên điện thoại; sử dụng app trên các hệ điều hành của Android, iOS. Edu OYK luôn nỗ lực từng ngày để mang lại trãi nghiệm tốt nhất cho khách hàng. Tuy nhiên, không tránh khỏi những sai xót về mặt kỹ thuật trong quá trình vận hành, đội ngũ hỗ trợ của chúng tôi hoạt động từ 7h00 đến 23h00 hàng ngày không bao gồm ngày lễ, luôn sẵn hàng hỗ trợ quý khách hàng.</p>
+          </li>
+          <li>
+            <p><strong>Tôi có được liên hệ trực tiếp với Giảng viên không?</strong></p>
+            <p>Các Giảng viên, Diễn giả, Chuyên gia tham gia giảng dạy trên Edu OYK - Siêu thị khóa học hàng đầu Việt Nam đều rất nhiệt tình trong việc chia sẻ kiến thức, giải đáp thắc  mắc cho học viên. Nếu bạn có bất kỳ thắc mắc gì có thể gửi câu hỏi trong mục Thảo Luận. Khi Giảng viên nhận được thông tin, họ sẽ trả lời cho bạn. Tuy nhiên, hiện tại Edu OYK chỉ cung cấp công cụ hỗ trợ học tập, với chi phí khóa học tương đối thấp phù hợp với mọi nhu cầu. Do đó, việc Giảng viên trả lời không nằm trong cam kết dịch vụ đối với học viên.</p>
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+        <h1 class="display-3" id="purchase-info">Mua & thanh toán</h1>
+        <ul>
+          <li>
+            <p><strong>Cách mua khóa học trên Edu OYK</strong></p>
+            <p>Để mua khóa học trên Edu OYK, vui lòng làm theo các bước sau:</p>
+            <ol>
+              <li>Tìm kiếm khóa học bạn muốn mua</li>
+              <img src="" alt="">
+              <li>Bấm "Mua ngay" </li>
+              <img src="" alt="">
+              <li>Nhập Mã giảm giá và chọn Áp dụng (nếu có)</li>
+              <img src="" alt="">
+              <li> Bấm "Tiến hành đặt mua" và chọn hình thức bạn muốn thanh toán (Các hình thức thanh toán)</li>
+            </ol>
+            <p>Mã khóa học của bạn sẽ được Edu OYK gửi tùy theo hình thức thanh toán mà bạn đã chọn.</p>
+          </li>
+          <li>
+            <p><strong>Tìm kiếm khóa học trên Edu OYK</strong></p>
+            <p><b>Cách 1: Tìm theo từ khóa</b></p>
+            <p>- Nhập từ khóa (tên giảng viên, tên khóa học,...) vào trong ô tìm kiếm; gõ Enter </p>
+            <img src="" alt="">
+            <p>- Kết quả là các khóa học liên quan đến từ khóa mà học viên đang tìm kiếm và các gợi ý liên quan</p>
+            <img src="" alt="">
+            <p><b>Cách 2: Tìm theo danh mục</b></p>
+            <p>- Chỉ chuột vào chủ đề khóa học bạn muốn tìm kiếm trong cột "Danh mục"</p>
+            <img src="" alt="">
+            <p>- Hệ thống hiển thị ra các chủ đề và gợi ý cho bạn các khóa học nổi bật thuộc danh mục mà bạn đang quan tâm</p>
+            <img src="" alt="">
+          </li>
+          <li>
+            <p><strong>Cách sử dụng mã khuyến mãi</strong></p>
+            <p>- Sau khi đã chọn được khóa học ưng ý, bạn chọn "Giỏ hàng" để tiến hành thanh toán</p>
+            <p>- Nhập mã khuyến mãi của bạn và tiến hành đặt mua.</p>
+            <img src="" alt="">
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+        <h1 class="display-3" id="acount-info">Tài khoản & kích hoạt</h1>
+        <ul>
+          <li>
+            <p><strong>Đăng ký tài khoản Edu OYK</strong></p>
+            <p>Để đăng kí tài khoản Edu OYK, vui lòng làm theo hướng dẫn sau.</p>
+            <p><b>Bước 1</b>: Truy cập https://Edu OYK.vn/, và bấm vào "Đăng ký". </p>
+            <img src="" alt="">
+            <p><b>Bước 2</b>: Bạn có thể lựa chọn việc sử dụng tài khoản Facebook hoặc Gmail của bạn làm tài khoản Edu OYK. Trong trường hợp muốn tạo tài khoản mới, vui lòng nhập đầy đủ các thông tin (Họ, Tên, Số điện thoại hoặc Email, mật khẩu của bạn) sau đó chọn "Đăng ký" </p>
+            <img src="" alt="">
+            <p><b>Bước 3</b>: Bấm "Xác thực tài khoản" </p>
+            <img src="" alt="">
+            <p><b>Bước 4</b>: Kiểm tra email của bạn. Mở email kích hoạt và làm theo hướng dẫn trong email cho đến khi có thông báo kích hoạt thành công.</p>
+            <img src="" alt="">
+            <p><b>Bước 5</b>: Đăng nhập với tài khoản bạn vừa đăng kí. </p>
+            <img src="" alt="">
+          </li>
+          <li>
+            <p><strong>Quên mật khẩu đăng nhập</strong></p>
+            <p>Bạn vui lòng lấy lại mật khẩu của mình theo hướng dẫn sau:</p>
+            <p><b>Bước 1</b>: Truy cập và chọn "Đăng nhập"</p>
+            <img src="" alt="">
+            <p><b>Bước 2</b>: Click vào dòng chữ: Quên mật khẩu</p>
+            <img src="" alt="">
+            <p><b>Bước 3</b>: Nhập thông tin tài khoản bạn đã đăng kí (email hoặc số điện thoại) và chọn "Khôi phục mật khẩu". Hệ thống sẽ gửi mã kích hoạt về email (hoặc số điện thoại) mà bạn vừa nhập</p>
+            <img src="" alt="">
+            <p><b>Bước 4</b>: Làm theo hướng dẫn bạn nhận được trong email (hoặc tin nhắn). Sau đó, tạo mật khẩu mới cho tài khoản của bạn trên Edu OYK</p>
+            <img src="" alt="">
+            <p>Mật khẩu của bạn đã được cập nhật. Bạn có thể sử dụng mật khẩu mới trong các lần đăng nhập sau</p>
+          </li>
+          <li>
+            <p><strong>Đổi mật khẩu tài khoản Edu OYK</strong></p>
+            <p>Để đổi mật khẩu, bạn cần Đăng nhập vào tài khoản trên Edu OYK. Sau đó thực hiện các thao tác sau:</p>
+            <p><b>Bước 1</b>: Đăng nhập vào tài khoản Edu OYK của bạn.</p>
+            <img src="" alt="">
+            <p><b>Bước 2</b>: Chọn dấu mũi tên cạnh tên của bạn, chọn tiếp "Thông tin tài khoản" </p>
+            <img src="" alt="">
+            <p><b>Bước 3</b>: Tại mục Thông tin tài khoản, chọn ô Thay đổi mật khẩu</p>
+            <img src="" alt="">
+            <p><b>Bước 4</b>: Nhập mật khẩu hiện tại và mật khẩu mới. Chọn "Đổi mật khẩu"</p>
+            <img src="" alt="">
+            <p>Mật khẩu của bạn đã được cập nhật. Bạn có thể sử dụng mật khẩu mới trong các lần đăng nhập sau</p>
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+        <h1 class="display-3" id="trouble-info">Các vấn đề kĩ thuật</h1>
+        <ul>
+          <li>
+            <p><strong>Điều chỉnh chất lượng video</strong></p>
+            <p>Edu OYK tự động tối ưu hóa độ phân giải video dựa trên tốc độ kết nối internet của bạn, nhưng chất lượng video có thể được điều chỉnh bất kỳ lúc nào bằng cách nhấp vào biểu tượng chữ HD ở góc dưới cùng bên phải của trình phát khóa học. Bạn có thể chọn độ phân giải 360p, 480p, 720p và 1080p (nếu có) cho chất lượng video. </p>
+            <img src="" alt="">
+          </li>
+          <li>
+            <p><strong>Video không có hình, load chậm</strong></p>
+            <p>Trong trường hợp gắp các lỗi liên quan đến video (không có hình, load chậm,...), học viên vui lòng:</p>
+            <ul>
+              <li>Kiểm tra lại kết nối mạng của mình</li>
+              <li>Kiểm tra lại thiết bị (đổi trình duyệt, mở bằng trang ẩn danh, đổi thiết bị)</li>
+              <li>Đối với ứng dụng Edu OYK trên điện thoại, xóa ứng dụng hiện tại và cài lại phiên bản mới nhất</li>
+            </ul>
+            <p>Trong trường hợp vẫn không khắc phục được lỗi, vui lòng liên hệ với bộ phận CSKH Edu OYK theo thông tin dưới đây để được hỗ trợ</p>
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+        <h1 class="display-3" id="teacher-info">Giảng viên và học liệu</h1>
+        <ul>
+          <li>
+            <p><strong>Cách đăng thảo luận, thắc mắc về bài học</strong></p>
+            <p>Khi bạn có những thắc mắc trong quá trình học, bạn có thể đăng câu hỏi lên mục thảo luận ngay một bên bài học để thầy sắp xếp thời gian hỗ trợ. Bạn vui lòng làm theo hướng dẫn sau:</p>
+            <p>- Mở khóa học bạn đang tham gia (Xem hướng dẫn)</p>
+            <p>- Nhấn vào mục "thảo luận"</p>
+            <img src="" alt="">
+            <p>- Đăng vấn đề của bạn để giảng viên giải đáp.</p>
+            <p><b>Lưu ý</b>: Phần thảo luận trên web điện thoại sẽ bị hạn chế ạ, bạn vui lòng đăng nhập bằng trình duyệt trên máy tính hoặc tham gia học trên app điện thoại để được hỗ trợ tốt nhất</p>
+          </li>
+          <li>
+            <p><strong>Tôi muốn xin email, facebook, số điện thoại của giảng viên</strong></p>
+            <p>Edu OYK có cam kết về việc bảo mật thông tin của giảng viên. Trong trường hợp cần giảng viên hỗ trợ giải đáp thắc mắc, vui lòng đăng tại mục thảo luận. (Xem hướng dẫn đăng thảo luận)</p>
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+        <h1 class="display-3" id="refund-info">Hoàn tiền</h1>
+        <ul>
+          <li>
+            <p><strong>Quy trình hoàn tiền</strong></p>
+            <p>Để được hoàn tiền, khóa học của bạn cần thỏa mãn điều kiện hoàn tiền (Chính sách hoàn tiền)</p>
+            <p>Với các khóa học đủ điều kiện hoàn tiền, bạn vui lòng làm theo hướng dẫn sau:</p>
+            <img src="" alt="">
+            <p><b>Bước 1</b>: Truy cập ..., đăng nhập bằng tài khoản Edu OYK</p>
+            <p>Chọn mục hỗ trợ ở góc phải màn hình. Điền đẩy đủ các thông tin trong cửa sổ hỗ trợ (bao gồm email, số điện thoại, họ tên, tên khóa học)</p>
+            <img src="" alt="">
+            <p><b>Bước 2</b>: Sau khi gửi yêu cầu, bạn vui lòng kiểm tra email phản hồi từ Edu OYK. Vui lòng cung cấp các thông tin hoàn tiền trong email để Edu OYK có thể hoàn tiền cho bạn. </p>
+            <img src="" alt="">
+          </li>
+          <li>
+            <p><strong>Tôi thanh toán thừa và muốn được hoàn lại</strong></p>
+            <p>Trong trường hợp bạn đã thanh toán thừa tiền cho khóa học, hoặc khi đổi sang khóa học có giá trị thấp hơn khóa học bạn đã thanh toán, Edu OYK sẽ hoàn lại phần tiền thừa của bạn. Vui lòng làm theo quy trình hoàn tiền (Xem hướng dẫn) để Edu OYK có thể hoàn lại phần thanh toán thừa cho bạn.</p>
+          </li>
+        </ul>
+        <a href="#top" class="btn btn-outline-primary" id="back-to-top">Back to top</a>
+      </div>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity = "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin = "anonymous"></script>
+</html>

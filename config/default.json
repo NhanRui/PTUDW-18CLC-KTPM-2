@@ -10,6 +10,6 @@
     "queueLimit": 0
   },
   "paginate": {
-    "limit": 1
+    "limit": 6
   }
 }

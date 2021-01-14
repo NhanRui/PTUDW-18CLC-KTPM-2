@@ -1,0 +1,551 @@
+
+body{
+    height: auto;
+}
+
+.large_container {
+    margin-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.slide_bar {
+    width: 300px;
+    background-color: #f0f1f4;
+    border-radius: 5px;
+}
+
+.slide_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.slide_head > button {
+    height: 28px;
+    width: 28px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.appear_button {
+    height: 28px;
+    width: 28px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.auto_play {
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f9fafc;
+    border-top: 1px solid #f9fafc;
+}
+
+.auto_play_line {
+    cursor: pointer;
+    margin: 5px 8px;
+    width: 30px;
+    height: 8px;
+    border-radius: 12px;
+    float: left;
+    position: relative;
+    background-color: #5c9cfe;
+}
+
+.auto_play_round {
+    right: 0;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 1px 10px 0 rgba(0,0,0,0.15);
+    background-color: #fff;
+    z-index: 9;
+    border-radius: 8px;
+    top: -5px;
+}
+
+.chap_name {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chap_name:hover {
+    cursor: pointer;
+}
+
+.lesson {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: auto;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.lesson_name{
+    margin-left: 10px;
+    color: #464d5d;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    line-height: 19px;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    font-weight: 500;
+}
+
+.lesson i{
+    color: #464d5d;
+    font-size: 18px;
+}
+
+.lessons:hover{
+    text-decoration: none;
+}
+
+.lesson:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.lesson > i {
+    margin-right: 5px;
+}
+
+.container-video{
+    width: 1020px;
+    margin: auto;
+    margin-left: 50px;
+}
+
+.container-video-tittle{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+#previous_video{
+    color: black;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+#next_video{
+    color: black;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+.title-video{
+    margin-left: 30px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    color: rgb(19, 18, 18);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+hr{
+    width: 100%;
+}
+
+.menu_info {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #ecedf1;
+    border-bottom: 1px solid #ecedf1;
+    padding: 8px 10px;
+}
+
+.active {
+    border-bottom: 4px solid red;
+}
+
+.menu_info span {
+    margin-right: 24px;
+    font-weight: 500;
+}
+
+.info_teacher {
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.info_teacher_left img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    float: left;
+}
+
+.info_teacher_right {
+    width: calc(100% - 80px);
+    float: left;
+    padding: 16px;
+}
+
+.name_teacher {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: 0.25px;
+    color: #232731;
+    margin-bottom: 4px;
+}
+
+.tab_teacher {
+    margin: 24px 0 0 0;
+}
+
+.history_teacher {
+    font-family: Open Sans,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    color: #464d5d;
+}
+
+.history_teacher p {
+    margin: 0 0 2px;
+}
+
+.tab_info_course {
+    margin: 24px 0 0 0;
+}
+
+.txt_title {
+    font-weight: 600;
+}
+
+.audience {
+    font-family: Open Sans,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    color: #464d5d;
+}
+
+.description{
+    font-family: Open Sans,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    color: #464d5d;
+}
+
+.requirement{
+    font-family: Open Sans,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+    color: #464d5d;
+}
+
+.tab_rating_course{
+    text-align: center;
+}
+
+.rating-container{
+    margin-top: 50px;
+}
+
+.tittle-rating{
+    margin: 32px auto 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.comment-review {
+    margin-top: 24px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.comment-review textarea {
+    border: none;
+    margin: auto;
+    width: 352px;
+    height: 80px;
+    border-radius: 6px;
+    background-color: #fc0707;
+    padding: 8px 16px;
+    font-family: Open Sans, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: 0.3px;
+    color: #464d5d;
+    resize: none;
+}
+
+#btn-review {
+    width: 170px;
+    height: 46px;
+    background: #df322f;
+    color: #fff;
+    border: #df322f;
+    line-height: 1;
+    padding: 14px 50px;
+    font-size: 14px;
+    transition: all ease 0.3s;
+    margin-top: 16px;
+}
+
+.btn_sumit_review{
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn_sumit_review:hover{
+    background: #232731;
+}
+
+.container_star{
+    margin-left: 300px;
+    position: relative;
+    width: 400px;
+    padding: 20px 30px;
+    /*border: 1px solid #444;*/
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 5px #b1afaf;
+}
+
+.container_star .post{
+    display: none;
+}
+
+.container_star .text{
+    font-size: 25px;
+    color: #666;
+    font-weight: 500;
+}
+
+.container_star .edit{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.container_star .star-widget input{
+    display: none;
+
+}
+
+.star-widget label{
+    font-size: 40px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2 ease;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~label{
+    color: #fd4;
+}
+
+input:checked ~ label{
+    color: #fd4;
+}
+
+input#rate-5:checked ~ label{
+    color: #fd4;
+    text-shadow: 0 0 20px #dadd20;
+}
+
+#rate-1:checked ~ .fucking_star header:before{
+    content: "Chúng tôi rất tiếc khi biết điều này...";
+}
+#rate-1:checked ~ .fucking_star input:before{
+    content: "1";
+}
+
+#rate-2:checked ~ .fucking_star header:before{
+    content: "Chúng tôi rất tiếc khi biết điều này...";
+}
+#rate-3:checked ~ .fucking_star header:before{
+    content: "Chúng tôi đã hiểu. Chúng tôi sẽ cố gắng cải thiện.";
+}
+#rate-4:checked ~ .fucking_star header:before{
+    content: "Tuyệt vời. Chúng tôi rất vui vì bạn thích khóa học này!";
+}
+#rate-5:checked ~ .fucking_star header:before{
+    content: "Tuyệt vời. Chúng tôi rất vui vì bạn thích khóa học này!";
+}
+
+.container_star .fucking_star{
+    display: none;
+}
+
+input:checked ~ .fucking_star{
+    display: block;
+}
+
+.fucking_star header{
+    width: 100%;
+    font-size: 15px;
+    color: #232731;
+    font-weight: 500;
+    margin: 5px 0 20px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.fucking_star .textarea{
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.fucking_star .textarea textarea{
+    border: none;
+    margin: auto;
+    width: 352px;
+    height: 80px;
+    border-radius: 6px;
+    background-color: #ededed;
+    padding: 8px 16px;
+    font-family: Open Sans, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: 0.3px;
+    color: #464d5d;
+    resize: none;
+}
+
+.fucking_star .btn{
+    width: 100%;
+}
+
+.fucking_star .btn button{
+    width: 170px;
+    height: 46px;
+    background: #df322f;
+    color: #fff;
+    border: #df322f;
+    line-height: 1;
+    padding: 14px 50px;
+    font-size: 14px;
+    transition: all ease 0.3s;
+    border-radius: 5px;
+}
+
+.fucking_star .btn button:hover{
+    background: #740a0a;
+}
+
+.teacher_info{
+    cursor: pointer;
+}
+
+.course_info{
+    cursor: pointer;
+}
+
+.rating{
+    cursor: pointer;
+}
+
+.comment{
+    cursor: pointer;
+}
+
+.tittle-of-video{
+    max-height: 46px;
+    max-width: 385px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: 0.15px;
+    color: #232731;
+    width: calc(100% - 142px);
+    float: left;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    border-left: 1px solid rgb(204, 199, 199);
+    margin-left: 16px;
+    padding-left: 16px;
+}
+
+.setting-img{
+    width: 126px;
+    height: 47px;
+}
+
+.container-title-video{
+    display: flex;
+    flex-direction: row;
+}
+/*./images/logo1.png*/
+.wrapper-video{
+    width: 950px;
+    height: 550px;
+    margin-right: 100px;
+}
+
+#check-complete{
+    color: green;
+}
+
+.yt_duration{
+    margin-left: 40px;
+    color: #464d5d;
+}
+
+.container-icon-tittle{
+    display: flex;
+    flex-direction: row;
+}
+
+.container-icon-tittle i{
+    margin-left: 10px;
+    margin-top: 1px;
+}

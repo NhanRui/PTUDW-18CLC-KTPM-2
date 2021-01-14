@@ -1,172 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Information</title>
-    <link rel="stylesheet" href="/css/accountInfo.css">
-    <link rel="stylesheet" href="/css/footer_homesite.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/public/css/user_Cart.css">
-</head>
 
-<body>
-    {{>search-header}}
-    <div class="header-top">
-        <ul class="direction">
-            <li><a href="#">Trang chủ</a></li>
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-            <li><a href="#">Giỏ hàng</a></li>
-        </ul>
-    </div>
-    <div class="page_wrapper">
-        <div class="left_container">
-            <!--? Popular Course Start -->
-            <div class="intro">Giỏ hàng ({{shopCartSummary}} khóa học)</div>
-            {{#each this.shoppingCart}}
-            <div class="popular-course section-padding30" style="padding-top: 0;">
-                <div class="container">
-                    <div class="row">
-                        <div class="course_container">
-                            <div class="course_img">
-                                <img src="{{intro_image}}" alt="course-image">
-                            </div>
-                            <div class="author">
-                                <p><strong>{{course_name}}</strong></p>
-                                <p style="font-size: 14px;color:#9b9b9b;">{{author_name}}</p>
-                            </div>
-                            <div class="price">
-                                <p>{{format_number price}}</p>
-                                <div class="reduce_price">{{format_number reduce_price}}</div>
-                            </div>
-                            <div class="buttons_group">
-                                <div class="form_btn">
-                                    <form action="/cart/del" method="POST">
-                                        <button type="submit" class="genric-btn danger circle"
-                                            data-animation="fadeInLeft" data-delay=".8s" tabindex="0"
-                                            style="animation-delay: 0.8s; height: 25px; display: flex; justify-content: center; align-items: center; padding: 0 0 !important">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                            <input type="hidden" value="{{course_id}}" name="id">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+    <div class="col-sm-3">
+        <div class="card-product">
+                <form action="/cart/add" method="POST" class="favourite_course_container">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <i class="fa_ca far fa-heart" id="faActive"></i>
+                    </button>
+                </form>
+                {{#if isHaving}}
+                <a href="/cart/" class="favourite_course_container">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <i class="sp_ca fas fa-shopping-cart" id="faActive"></i>
+                    </button>
+                </a>
+                {{else}}
+                <form action="/cart/addCart" method="POST" class="favourite_course_container">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <i class="sp_ca fas fa-shopping-cart" id=""></i>
+                    </button>
+                </form>
+                {{/if}}
+                {{#if IsHot}}
+                <div class="hot-course-in-account">
+                    <p><i class="fas fa-fire"> HOT</i></p>
+                </div>
+                {{/if}}
+                <!--<div class="favourite_course_container">
+                    <a href="#"><i class="fa_ca far fa-heart" id=""></i></a>
+                    <a href="#"><i class="sp_ca fas fa-shopping-cart" id="faActive"></i></a>
+                </div>-->
+                <a href="/course-detail/{{course_id}}">
+                <div class="container_slide_up">
+                    <div class="item__overlay">
+                        <p class="number-students">Học viên: {{number_student}}</p>
                     </div>
                 </div>
-            </div>
-            {{/each}}
-        </div>
-        <div class="right_container">
-            <div class="bill_title">
-                <p>Thông tin đơn hàng</p>
-            </div>
-            <div class="temp">
-                <span style="color: gray;">Tạm tính</span>
-                <span>{{format_number shopcartTotal}}</span>
-            </div>
-            <div class="total">
-                <span style="font-weight: 500;">Tổng tiền</span>
-                <span style="font-weight: 500; color: red; font-size: 20px">{{format_number shopcartTotal}}</span>
-            </div>
-            <div class="sale_off">
-                <p style="width: 100%; text-align: right; font-size: 13px; font-weight: 300">Chọn mã giảm giá</p>
-                <form class="sale_input">
-                    <input type="text" name="#" id="#" placeholder="Mã giảm giá (nếu có)">
-                    <input type="button" value="Áp dụng" class="sale_btn">
-                </form>
-            </div>
-            <div class="buy_btn">
-                <form action="/users/buy-all" class="buy" method="POST">
-                    <input type="submit" value="THANH TOÁN" class="buy_btn">
-                </form>
-            </div>
-            <div class="delivery_detail">
-                <div class="delivery_detail_line"><span><i class="fa fa-percent" aria-hidden="true"></i>Giảm 10% khi
-                        thanh toán online (tối đa 20K)</span></div>
-                <div class="delivery_detail_line"><span><i class="fa fa-truck" aria-hidden="true"></i>Miễn phí giao
-                        hàng</span></div>
-                <div class="delivery_detail_line"><span><i class="fa fa-undo" aria-hidden="true"></i>Cam kết hoàn
-                        tiền</span></div>
-                <div class="delivery_detail_line"><span><i class="fa fa-laptop" aria-hidden="true"></i>Học trên máy tính
-                        và ứng dụng di động</span></div>
-            </div>
-        </div>
-    </div>
-    <footer class="ctn_footer">
-        <div class="col_footer_1">
-            <div class="logo_footer">
-                <a href="#">
-                    <img src="/images/logo-bo-cong-thuong.png" title="Bộ công thương" alt="" width="150">
+                <div class="container_slide_up_2">
+                    <div class="item__overlay_2">
+                        <p class="number-students">{{category_name}}</p>
+                    </div>
+                </div>
                 </a>
-            </div>
-            <div>
-                <p class="company-full-name"><span>Công ty cổ phần Công nghệ và phát triển Đào tạo Topica Edumall</span>
-                    <br>MST: 0316316793 do Sở kế hoạch và Đầu tư thành phố Hồ Chí Minh cấp ngày 09 tháng 6 năm 2020
-                    <br>Địa chỉ: Số&nbsp;62 Trần Quang Khải, Phường Tân Định, quận 1, thành phố Hồ Chí Minh <br>Hotline:
-                    18006816 - Email: cskh@edumall.vn
-                </p>
-            </div>
-        </div>
-        <div class="col_footer_2">
-            <div class="introduce">
-                <h4>VỀ EDUOYK</h4>
-                <p>&nbsp;</p>
-                <ul>
-                    <li><a href="#">Điều khoản sử dụng</a></li>
-                    <li><a href="#">Quy chế hoạt động</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                    <li><a href="#">Trung tâm chăm sóc khách hàng</a></li>
-                    <li><a href="#">Chính sách hoàn tiền</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">YouTube</a></li>
-                    <li><a href="#">Blog </a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col_footer_3">
-            <div class="introduce">
-                <h4>CÁC KHÓA HỌC KHÁC</h4>
-                <p>&nbsp;</p>
-                <ul>
-                    <li><a href="#">Khóa học Ngoại ngữ</a></li>
-                    <li><a href="#">Khóa học Phát triển cá nhân</a></li>
-                    <li><a href="#">Khóa học Kinh doanh khởi nghiệp</a></li>
-                    <li><a href="#">Khóa học Multimedia</a></li>
-                    <li><a href="#">Chính sách hoàn tiền</a></li>
-                    <li><a href="#">Khóa học Hôn nhân gia đình</a></li>
-                    <li><a href="#">Học tiếng anh - Topica Native</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col_footer_3">
-            <div class="media">
-                <a href="#"> <img src="/images/app_icon.jpg" width="50"> </a>
-                <p>Tải ngay App Edumall <br> Học tốt hơn - thoải mái hơn</p>
-            </div>
-            <div class="cnt_app">
-                <div class="app">
-                    <a href="#"> <img src="/images/app_store_icon.png" width="111" height="34"> </a>
+                <a href="/course-detail/{{course_id}}">
+                <div class="img-with-deal">
+                    <img class="card-img" src={{intro_image}} alt="">
+                    <div class="deal-img">
+                        <p>-{{deal_value}}%</p>
+                    </div>
                 </div>
-                <div class="app-mobile">
-                    <a href="#"> <img title="Tải app Edumall" src="/images/google_store_icon.png" alt="Tải app Edumall"
-                            width="111" height="34"> </a>
+                </a>
+                <a href="/course-detail/{{course_id}}">
+                <div class="{{course_id}}">
+                    <div class="wrap-stars">
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                        <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
+                    </div>
+                    {{#if IsNew}}
+                    <div class="container-for-new">
+                        <p>NEW</p>
+                    </div>
+                    {{/if}}
                 </div>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+                <h4 class="card-title">{{course_name}}</h4>
+                </a>
+                <script>
+                    var ob_rating="{{{course_id}}}";
+                    document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
+                </script><!--về sau tham số là tên product-->
+                <div class="card-body">
+                    <a href="/course-detail/{{course_id}}" class="card-text-author">
+                        <img class="author-img" src="{{author_image}}" alt="">
+                        <p class="author-name">{{author_name}}</p>
+                    </a>
+                    <a href="/course-detail/{{course_id}}">
+                    <div class="price">
+                        <div class="real-price">{{format_number price}}</div>
+                        <div class="reduce-price">{{format_number reduce_price}}</div>
+                    </div>
+                    </a>
+                </div>
+        </div> 
+    </div>

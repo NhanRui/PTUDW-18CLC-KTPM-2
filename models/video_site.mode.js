@@ -15,7 +15,7 @@ module.exports={
         return rows;
     },
     async getListVideo(id){
-        const sql=`SELECT v.*,l.chapter_number,l.course_id, 0 as stt
+        const sql=`SELECT v.*,l.chapter_number,l.course_id, 0 as stt,0 as IsCp
         FROM video v join lesson_list l on v.list_id=l.list_id 
         WHERE l.course_id='${id}'`;
         const [rows, fields] = await db.load(sql);
@@ -27,6 +27,37 @@ module.exports={
         WHERE course_id='${course_id}' AND chapter_number=${chapter} AND video_number=${video}`;
         const [rows, fields] = await db.load(sql);
         return rows[0];
+    },
+    async add_complete(user_id,video_id){
+        const sql=`INSERT complete_video VALUES ('${user_id}','${video_id}')`;
+        const [rows, fields] = await db.load(sql);
+        return rows;
+    },
+    async getCompleteList(id_user){
+        const sql=`SELECT * FROM complete_video WHERE user_id='${id_user}'`;
+        const [rows, fields] = await db.load(sql);
+        return rows;
+    },
+    checkComplete(video_id,listComplete){
+        for (const i of listComplete)
+        {
+            if (i.video_id===video_id)
+            {
+                return true;
+            }
+        }
+        return false;
+    },
+    checkCompleteList(item,listComplete){
+        for (const i of listComplete)
+        {
+            if (i.video_id===item.video_id)
+            {
+                item.IsCp=1;
+                return true;
+            }
+        }
+        return false;
     },
     getPreviousVideo(chapter,video,list){
         let index=0;

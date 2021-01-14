@@ -10,10 +10,10 @@
         <div class="star">
             <i class="fa fa-star" aria-hidden="true" style="color: white;"></i>
         </div>
-        <span>---</span>
+        <span class = "no-rating">---</span>
         <!-- Button trigger modal -->
         <button type="button" id="{{course_id}}" class="rating_text" data-toggle="modal" data-target="#exampleModal">
-            Đáng giá khóa học
+            Đánh giá khóa học
         </button>
 
         <!-- Modal -->
@@ -61,15 +61,15 @@
             })</script>
     </div>
     <div class="description">
-        <a href="/course-detail/{{course_id}}">
+        <a href="/watch-video/{{course_id}}/1/1">
             <p class="course-name" style="margin-top: 10px">{{course_name}}</p>
         </a>
         <p class="author">{{lecturer_name}}</p>
     </div>
     <div class="progress_container">
-        <span style="font-size: 12px; color: #007bff">6%</span>
+        <span style="font-size: 12px; color: #007bff">{{progress}}%</span>
         <div class="progress" style="height: 4px; width: 84%; margin: auto">
-            <div class="progress-bar" role="progressbar" style="width: 6%;" aria-valuenow="25" aria-valuemin="0"
+            <div class="progress-bar" role="progressbar" style="width: {{progress}}%;" aria-valuenow="25" aria-valuemin="0"
                 aria-valuemax="100"></div>
         </div>
     </div>

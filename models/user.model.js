@@ -72,5 +72,17 @@ module.exports ={
         if(rows.length === 0)
             return null;
         return rows;
+    },
+
+    async cat(){
+        const sql = 'select a.*,count from (SELECT * from db.category) a LEFt JOIN (select categoty_id,count(categoty_id) as count from db.course GROUP BY categoty_id) b ON a.category_id=b.categoty_id';
+        const [rows, fields] = await db.load(sql);
+        if(rows.length === 0)   return null;
+        return rows;
+    },
+
+    async addCat(cat){
+        const [rows, fields] = await db.add(cat,'category');
+        return rows;
     }
 }

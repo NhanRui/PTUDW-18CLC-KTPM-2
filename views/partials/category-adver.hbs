@@ -3,13 +3,14 @@
         <div class="background-item">
             <ul>
                 <label class="category-label-item">
-                <p class="category-label">Danh mục</p>
+                <p class="category-label">Top danh mục</p>
                 </label>
                 {{#each this.menuList}}
                 <li class="category-menu-item" id="{{category_id}}">
                     <a class="main-category-level" href="/search/{{category_id}}">
                         <span class="item-level1" id="{{category_id}}_name">{{category_name}}</span>
                     </a>
+                    <div class="number-of-course">{{on_top}}</div>
                 </li>
                 {{/each}}
                 <!--<li class="category-menu-item" id="category-1">
@@ -39,7 +40,7 @@
                     </label>
                     {{#each this.submenu}}
                     <li class="category-menu-item" id="mini-menu-english"><!--khac id-->
-                        <a class="main-category-level" href="#">
+                        <a class="main-category-level" href="/search/sub/{{category_id}}">
                             <span class="item-level1">{{category_name}}</span>
                         </a>
                     </li>

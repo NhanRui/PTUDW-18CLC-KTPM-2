@@ -20,22 +20,22 @@
             </div>
             <div class="item-quick">
                 <span><i class="fa fa-user" aria-hidden="true"></i><span
-                        style="color: rgb(255, 187, 0); font-weight: 600">{{../object.num_of_student}}</span> học
+                        style="color: rgb(255, 187, 0); font-weight: 600">{{../num_of_students}}</span> học
                     viên</span>
             </div>
             <div class="item-quick">
 
-                <div class="{{../object.product_ID}}">
+                <div class="{{../object.product_ID}}_vd">
                     <div class="wrap-stars-menu">
                         <div class="stars-outer">
                             <div class="stars-inner"></div>
                         </div>
+                        <span class="number-rating"><b>{{../overallStar}}</b> ({{../comments.length}})</span>
                     </div>
                 </div>
                 <script>
-                    var ob_rating = "{{{object.product_ID}}}";
-                    document.addEventListener('DOMContentLoaded', getRatings({{ object.rating_stars }}, ob_rating))
-                    console.log({{ object.rating_stars }});
+                    var ob_rating = "{{{../object.product_ID}}}_vd";
+                    document.addEventListener('DOMContentLoaded', getRatings({{../overallStar}}, ob_rating));
                 </script>
                 <!--về sau tham số là tên product-->
 
@@ -56,7 +56,7 @@
         </div>
         <section class="course-intro-container" id="ttc">
             <div class="video">
-                <iframe width="620" height="420" src={{../object.course_video}}>
+                <iframe width="620" height="420" src="https://www.youtube.com/embed/8-HnsYs8cZY">
                 </iframe>
                 <p><i>Video giới thiệu khóa học</i></p>
             </div>
@@ -78,9 +78,9 @@
                 <span class="quick-lecture-item" style="flex: 2;">Thể loại: <b style="color: deepskyblue;">
                         {{../main}}</b></span>
                 <span class="quick-lecture-item"><i class="fa fa-play-circle" aria-hidden="true"></i>Số bài:
-                    <b style="color: deepskyblue;"> {{../lesson.length}}</b></span>
+                    <b style="color: deepskyblue;"> {{../num_of_lessons}}</b></span>
                 <span class="quick-lecture-item"><i class="fa fa-clock-o" aria-hidden="true"></i>Thời lượng:
-                    <b style="color: deepskyblue;"> {{../object.lecture_time}}</b></span>
+                    <b style="color: deepskyblue;"> {{../videos_duration}}</b></span>
             </div>
             <div class="lecture_content">
                 {{#each ../lesson as |ls|}}
@@ -94,6 +94,9 @@
                             <div class="lesson_name">
                                 <span><i class="fa fa-play-circle" aria-hidden="true"></i>Bài {{v.video_number}}:
                                     {{v.video_name}}</span>
+                            </div>
+                            <div class="lesson_duration">
+                                <span>{{v.duration}}</span>
                             </div>
                         </div>
                         {{/when}}
@@ -119,36 +122,34 @@
                 </div>
                 <div class="right_l_info">
                     <div>
-                        <p style="font-size: 25px; font-weight: 700">{{../object.total_courses}}</p>
+                        <p style="font-size: 25px; font-weight: 700">{{../num_of_courses}}</p>
                         <p style="font-size: 10px;">KHÓA HỌC</p>
                     </div>
                     <div>
-                        <p style="font-size: 25px; font-weight: 700">{{../object.total_students}}</p>
+                        <p style="font-size: 25px; font-weight: 700">{{../num_of_students}}</p>
                         <p style="font-size: 10px;">HỌC VIÊN</p>
                     </div>
                 </div>
             </div>
             <div class="lecturer_description">
-                {{#each ../object.lecturer_exp}}
                 <div>
-                    <p>{{this}}</p>
+                    <p>{{../lecturer.description}}</p>
                 </div>
-                {{/each}}
             </div>
         </section>
         <section class="comments" id="cm">
             <div class="static">
-                <p class="overall" style="text-align: center;">{{../object.overall}}</p>
+                <p class="overall" style="text-align: center;">{{../overallStar}}</p>
                 <div class="stars">
                     {{!-- added later --}}
                 </div>
                 <p class="num_of_comments" style="text-align: center;">{{../comments.length}} người đã bình luận</p>
-                {{#each ../object.stars}}
+                {{#each ../stars}}
                 <div class="rating_star">
-                    <span>{{this.star}} <i class="fa fa-star-o text-warning" aria-hidden="true"></i></span>
+                    <span>{{i}} <i class="fa fa-star-o text-warning" aria-hidden="true"></i></span>
                     <div class="progress" style="flex: 9;">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: {{this.rate}}%;"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{this.rate}}%</div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: {{#when percent 'eq' 1}}100{{/when}}{{#when percent 'noteq' 1}}{{percent}}{{/when}}%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{#when percent 'eq' 1}}100{{/when}}{{#when percent 'noteq' 1}}{{percent}}{{/when}}%</div>
                     </div>
                 </div>
                 {{/each}}
@@ -172,7 +173,7 @@
                                 <div class="stars-outer">
                                     <div class="stars-inner"></div>
                                 </div>
-                                <span class="number-rating"><b>{{num_star}}</b> ({{number_rating}})</span>
+                                <span class="number-rating"><b>{{num_star}}</b></span>
                             </div>
                         </div>
                         <script>
@@ -190,18 +191,48 @@
             <img src="{{intro_image}}" alt="course-intro-image">
         </div>
         <div class="under-intro-img">
+            {{#if IsBuy}}
+            <div class="price">
+                <span>Đã sở hữu</span>
+            </div>
+            {{else}}
             <div class="price">
                 <span class="old-price">{{price}}&nbsp;₫</span>
                 <span class="current-price">{{../new_price}}&nbsp;₫</span>
             </div>
+            {{/if}}
             <div class="favorite">
-                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                {{#if IsBuy}}
+                {{else}}
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" value="{{course_id}}" name="id">
+                    <button type="submit">
+                        <a href="#"><i class="far fa-heart" id="{{#if IsHaving}}faActiveC{{/if}}"></i></a>
+                    </button>
+                </form>
+                {{/if}}
             </div>
         </div>
         <div class="payment-buttons">
-            <button type="submit" class="buy-now-btn">MUA NGAY</button>
-            <button type="submit" class="add-cart-btn">THÊM GIỎ HÀNG</button>
+            {{#if IsBuy}}
+            <div class="learn-now-btn">
+            <a class="learn-now-a" href="/watch-video/{{course_id}}/1/1"><i class="fas fa-play-circle"></i> Bắt đầu học tập</a>
+            </div>
+            {{else}}
+            <form class="buy_form" action="/cart/addCartNow" method="POST">
+                <input type="hidden" value="{{course_id}}" name="id">
+                <button type="submit" class="buy-now-btn">MUA NGAY</button>
+            </form>
+            <form class="cart_form" action="/cart/addCart" method="POST">
+                <input type="hidden" value="{{course_id}}" name="id">
+                {{#if IsInCart}}
+                <button class="in_cart" type="submit" class="add-cart-btn">TỚI GIỎ HÀNG</button>
+                {{else}}
+                <button type="submit" class="add-cart-btn">THÊM GIỎ HÀNG</button>
+                {{/if}}
+            </form>
             <button type="submit" class="instruction-btn">TƯ VẤN</button>
+            {{/if}}
         </div>
         <div class="ship-area">
             <p class="ship-item"><i class="fa fa-percent" aria-hidden="true"></i>Giảm 10% khi thanh toán online (tối đa
@@ -214,6 +245,31 @@
     </div>
 </div>
 {{/with}}
+<div class="top-5-title">
+    Top 5 khóa học cùng lĩnh vực
+</div>
+<div class="container-top-5">
+    <div class="slider-top5">
+        <div class="slides-top5">
+            <input type="radio" name="radio-btn-top5" id="radio1">
+            <input type="radio" name="radio-btn-top5" id="radio2">
+            <input type="radio" name="radio-btn-top5" id="radio3">
+            {{#each list_top5}}
+            <div class="slide-top-5 {{#if first}}first{{/if}}">
+                {{>product_top_5}}
+            </div>
+            {{/each}}
+            <div class="navigation-auto-top5">
+                <div class="auto-btn1-top5"></div>
+                <div class="auto-btn2-top5"></div>
+            </div>
+        </div>
+        <div class="navigation-manual-top5">
+            <label for="radio1" class="manual-btn-top5"></label>
+            <label for="radio2" class="manual-btn-top5"></label>
+        </div>
+    </div>
+</div>
 <div class="footer">
     {{>footer-index}}
 </div>

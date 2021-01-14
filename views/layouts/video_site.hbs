@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Học Online tại EduOYK - Nền tảng học tập trực tuyến hàng đầu Đông Nam Á với hơn 3000+ Khoá Học và 3 triệu học viên. Đồng hành cùng EduOYK là đội ngũ giảng viên, chuyên gia hàng đầu trong nhiều lĩnh vực">
+    <link rel="icon" type="image/png" href="/images/icon.png" sizes="32x32" />
+    <title>Học Online với 3000+ Khoá Học từ những Chuyên Gia hàng đầu | EduOYK</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="/css/see_video.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/demo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="large_container">
+        <button type="button" class="appear_button" style="display: none;"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+        <div class="slide_bar">
+            <div class="slide_head">
+                <span style="font-size: 20px; font-weight:500;">Giáo trình</span>
+                <button type="button" class="slide_button" onclick="myFunction()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+            </div>
+            <div class="auto_play">
+                <span>Tự động chuyển bài</span>
+                <div class="auto_play_line">
+                    <div class="auto_play_round">
+                    </div>
+                </div>
+            </div>
+            {{#each this.allChapter}}
+            <div class="lesson_content">
+                <div class="chapter">
+                    <div class="chap_name">
+                        <span style="color: red">Chương {{chapter_number}}</span>
+                        <p>{{chapter_name}}</p>
+                    </div>
+                    {{#each this.list_video}}
+                    <a href="/watch-video/{{course_id}}/{{chapter_number}}/{{video_number}}" class="lessons">
+                        <div class="lesson">
+                            <div class="container-icon-tittle">
+                                {{#if IsCp}}
+                                <i class="far fa-check-circle" aria-hidden="true" id="check-complete"></i>
+                                {{else}}
+                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                {{/if}}
+                                <div class="lesson_name">
+                                    <span>Bài {{stt}}: {{video_name}}</span>
+                                </div>
+                            </div>
+                            <div class="yt_duration" id="duration_text_{{video_id}}"></div>
+                            <script>
+                                  var div = document.getElementById('duration_text_{{{video_id}}}');
+                                  var minute = Math.floor({{video_duration}}/60);
+                                  var second = {{video_duration}}-minute*60;
+                                  var format_time=minute+":"+second;
+                                  div.innerHTML += format_time;
+                            </script>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="container-video">
+            <div class="container-title-video">
+                <img src="/images/logo1.png" alt="" class="setting-img">
+                {{#each this.list_infor}}
+                <p class="tittle-of-video">{{course_name}}</p>
+                {{/each}}
+            </div>
+            <div class="wrapper-video">
+                <div id="player" data-plyr-provider="youtube" {{#with this.link}} data-plyr-embed-id="{{{url}}}"{{/with}}></div>
+            </div>
+            <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+
+            <form action="/watch-video/save" method="POST" id="saveProcess">
+                {{#with currentVideo}}
+                <input type="hidden" name="idVideo" value="{{video_id}}">
+                {{/with}}
+                {{#with nextVideo}}
+                <input type="hidden" name="link" value="/watch-video/{{course_id}}/{{chapter_number}}/{{video_number}}">
+                {{/with}}
+            </form>
+            <form action="/watch-video/save" method="POST" id="stopProcess">
+                {{#with currentVideo}}
+                <input type="hidden" name="idVideo" value="{{video_id}}">
+                <input type="hidden" name="link" value="/watch-video/{{course_id}}/{{chapter_number}}/{{video_number}}">
+                {{/with}}
+            </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    var mode='true';
+                    var allcookies = document.cookie;
+                    var cookiearray = allcookies.split(';');
+                    for (i=0;i<cookiearray.length;i++)
+                    {
+                        if (cookiearray[i].split('=')[0].trim()==='mode')
+                        {
+                            mode=cookiearray[i].split('=')[1];
+                            break;
+                        }
+                    }
+                    //console.log(allcookies);
+                    if (mode==='false'){
+                        const toggle_btn=document.getElementsByClassName("auto_play_round")[0];
+                        const toggle_bg=document.getElementsByClassName("auto_play_line")[0];
+                        toggle_bg.style.backgroundColor="#ccc";
+                        toggle_btn.style.left="0";
+                    }
+                    else{
+                        const toggle_btn=document.getElementsByClassName("auto_play_round")[0];
+                        const toggle_bg=document.getElementsByClassName("auto_play_line")[0];
+                        toggle_bg.style.backgroundColor="#5c9cfe";
+                        toggle_btn.style.left="";
+                    }
+                    //console.log(allcookies);
+                    document.getElementsByClassName('auto_play_line')[0]
+                    .addEventListener('click', function (event) {
+                        var allcookies = document.cookie;
+                        cookiearray = allcookies.split(';');
+                        mode=cookiearray[0].split('=')[1];
+                        for (i=0;i<cookiearray.length;i++)
+                        {
+                            if (cookiearray[i].split('=')[0].trim()==='mode')
+                            {
+                                mode=cookiearray[i].split('=')[1];
+                                break;
+                            }
+                        }
+                        //console.log(mode);
+                        if (mode==='false'){
+                            document.cookie = "mode=true; path=/;";
+                            mode='true';
+                        }
+                        else{
+                            document.cookie = "mode=false; path=/;";
+                            mode='false';
+                        }
+                        //console.log(document.cookie);
+                        //console.log(mode);
+                    });
+                    const player = new Plyr('#player', {autoplay: true,}); 
+                      player.on('ended', event => {
+                          if (mode==='true'){
+                            document.getElementById("saveProcess").submit();
+                          }
+                          else{
+                              document.getElementById("stopProcess").submit();
+                          }
+                          });
+                });
+            </script>
+            <!--<div class="plyr__video-embed" id="player">
+                <div id="player1"></div>
+            </div>-->
+            <!--<script>
+            function youtube_parser(url){
+            var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            return (match&&match[1].length==11)? match[1] : false;
+            }
+            {{#with this.link}}
+            var url=youtube_parser("{{{url}}}");
+            {{/with}}
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player1', {
+                height: '575',
+                width: '1020',
+                videoId: url,
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+                });
+            }
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                var temp=player.getDuration();
+                console.log(typeof temp);
+                event.target.playVideo();
+            }
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    console.log("Het video roi");
+                    {{#with this.nextVideo}}
+                    window.location.href = "http://localhost:3000/watch-video/{{{course_id}}}/{{{chapter_number}}}/{{{video_number}}}"
+                    {{/with}}
+                }
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+            </script>-->
+            <div class="container-video-tittle">
+                {{#with this.prevVideo}}
+                <a href="/watch-video/{{course_id}}/{{chapter_number}}/{{video_number}}"><i class="fas fa-step-backward" id="previous_video"></i></a>
+                {{/with}}
+                {{#with this.nextVideo}}
+                <a href="/watch-video/{{course_id}}/{{chapter_number}}/{{video_number}}"><i class="fas fa-step-forward" id="next_video"></i></a>
+                {{/with}}
+                {{#with currentVideo}}
+                <p class="title-video"> Bài {{stt}}: {{video_name}}</p>
+                {{/with}}
+            </div>
+            <div class="menu_info">
+                <span class="teacher_info" id="t_choice">Giảng viên</span>
+                <span class="course_info" id="c_choice">Thông tin chung</span>
+                <span class="rating" id="r_choice">Đánh giá</span>
+                <!--<span class="comment">Thảo luận</span>-->
+            </div>
+            {{#each this.list_infor}}
+            <div class="tab_teacher">
+                <div class="info_teacher">
+                    <div class="info_teacher_left">
+                        <img src="/upload/user_avatar/Uswyrp45kkj5e5nrw.jpg">
+                    </div>
+                    <div class="info_teacher_right">
+                        <p class="name_teacher">{{name}}</p>
+                    </div>
+                </div>
+                <div class="history_teacher">
+                    <p>{{{lecturer_des}}}</p>
+                </div>
+            </div>
+            <div class="tab_info_course">
+                <div class="audience">
+                    <p class="txt_title">Phù hợp với</p>
+                    <!--add db-->
+                    <p>{{{course_suitability}}}</p>
+                </div>
+                <div class="description">
+                    <p class="txt_title">Mô tả tổng quát</p>
+                    <!--add db-->
+                    <div class="description">
+                        <p>{{{course_intro_description}}}</p>
+                    </div>
+                </div>
+                <div class="requirement">
+                    <p class="txt_title">Lợi ích khóa học</p>
+                    <!--add db-->
+                    <p>{{{course_benefit_description}}}</p>
+                </div>
+            </div>
+            {{/each}}
+            <div class="tab_rating_course">
+                <div class="rating-container">
+                    <p class="tittle-rating">Đánh giá của bạn</p>
+
+                    <div class="container_star">
+                        <div class="star-widget">
+                            <div class="post">
+                                <div class="text">Cảm ơn đã đánh giá khóa học của tôi!</div>
+                                <div class="edit">EDIT</div>
+                            </div>
+                            <form action="/watch-video{{link_access}}/rating-by-video" method="post">
+                            <input type="text" name="num_star" id="num_star" style="display: none;">
+                            <input type="radio" name="rate" id="rate-5" value="5">
+                            <label for="rate-5" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-4" value="4">
+                            <label for="rate-4" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-3" value="3">
+                            <label for="rate-3" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-2" value="2">
+                            <label for="rate-2" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-1" value="1">
+                            <label for="rate-1" class="fas fa-star"></label>
+                            <div class="fucking_star" action="#">
+                                <header></header>
+                                <input type="text" name="star_value" id="num-star">
+                                <div class="textarea">
+                                    <textarea placeholder="Nhập ý kiến của bạn" cols="30" name="cmReview"></textarea>
+                                </div>
+                                <div class="btn">
+                                    <button type="submit">Đánh giá</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $('.star-widget input').on('change', function () {
+                                var setvalue = $("[type='radio']:checked").val();
+                                $('#num-star').val($("[type='radio']:checked").val());
+                            });
+                        });
+                    /*const setStar=document.querySelector(".num_star")
+                                const btn=document.querySelector("button");
+                                const post=document.querySelector(".post");
+                                const widget=document.querySelector(".star-widget");
+                                const editBtn=document.querySelector(".edit");
+                                btn.onclick=()=>{
+                                    let selected=document.querySelector('input[type="radio"]:checked');
+                                    console.log(selected.value);
+                                    setStar.innerHTML=selected.value;
+                                    widget.style.display="none";
+                                    post.style.display="block";
+                                    editBtn.onclick()=>{
+                                        widget.style.display="block";
+                                        post.style.display="none";
+                                        return false;
+                                    }
+                                    return false;
+                                }*/
+                    </script>
+                </div>
+            </div>
+            <script>
+                const teacher_info = document.getElementById("t_choice");
+                const course_info = document.getElementById("c_choice");
+                const rating_info = document.getElementById("r_choice");
+                const tab_teacher = document.getElementsByClassName("tab_teacher")[0];
+                const tab_infor_course = document.getElementsByClassName("tab_info_course")[0];
+                const tab_rating = document.getElementsByClassName("tab_rating_course")[0];
+                tab_teacher.style.display = "block";
+                tab_infor_course.style.display = "none";
+                tab_rating.style.display = "none";
+                teacher_info.style.borderBottom = "4px solid red";
+                teacher_info.addEventListener("click", function (event) {
+                    teacher_info.style.borderBottom = "4px solid red";
+                    course_info.style.borderBottom = "none";
+                    rating_info.style.borderBottom = "none";
+                    tab_teacher.style.display = "block";
+                    tab_infor_course.style.display = "none";
+                    tab_rating.style.display = "none";
+                });
+                course_info.addEventListener("click", function (event) {
+                    teacher_info.style.borderBottom = "none";
+                    course_info.style.borderBottom = "4px solid red";
+                    rating_info.style.borderBottom = "none";
+                    tab_teacher.style.display = "none";
+                    tab_infor_course.style.display = "block";
+                    tab_rating.style.display = "none";
+                });
+                rating_info.addEventListener("click", function (event) {
+                    teacher_info.style.borderBottom = "none";
+                    course_info.style.borderBottom = "none";
+                    rating_info.style.borderBottom = "4px solid red";
+                    tab_teacher.style.display = "none";
+                    tab_infor_course.style.display = "none";
+                    tab_rating.style.display = "block";
+                });
+            </script>
+        </div>
+    </div>
+    <script src="https://cdn.plyr.io/3.6.3/demo.js"></script>
+</body>
+<script src="/public/javascript/videos.js"></script>
+</html>

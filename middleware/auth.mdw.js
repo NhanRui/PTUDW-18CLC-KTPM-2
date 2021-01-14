@@ -9,6 +9,46 @@ module.exports = {
             req.session.retUrl = req.originalUrl;
             return res.redirect('/account/login');
         }
+        /*else{
+            if (req.session.authUser.role===1)
+            {
+                return res.redirect('/lecturer');
+            }
+        }*/
+        next();
+    },
+
+    authIndex(req,res,next){
+        if(req.session.auth===true)
+        {
+            if (req.session.authUser.role===1)
+            {
+                return res.redirect('/lecturer');
+            }
+            if (req.session.authUser.role===2)
+            {
+                return res.redirect('/admin');
+            }
+        }
+        next();
+    },
+
+    authIndexCart(req,res,next){
+        if(req.session.auth===true)
+        {
+            if (req.session.authUser.role===1)
+            {
+                return res.redirect('/lecturer');
+            }
+            if (req.session.authUser.role===2)
+            {
+                return res.redirect('/admin');
+            }
+        }
+        else
+        {
+            return res.redirect('/account/login');
+        }
         next();
     },
 

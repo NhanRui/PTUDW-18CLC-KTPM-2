@@ -3,15 +3,23 @@
         <div class="image-menu-product">
             <img src={{intro_image}} alt="">
         </div>
+        {{#if IsBuy}}
+        {{else}}
         <form action="/cart/add" method="POST" class="favourite_course_container_mn">
             <input type="hidden" value="{{course_id}}" name="id">
             <button type="submit">
                 <i class="fa_ca far fa-heart" id="{{#if isHaving}}faActive{{/if}}"></i>
             </button>
         </form>
+        {{/if}}
+        {{#if IsHot}}
+            <div class="hot-course-menu">
+                <p>HOT</p>
+            </div>
+        {{/if}}
     </a>
     <div class="container-content-mnproduct">
-        <a href="/course-detail/{{course_id}}"><p class="tittle-menu-product">{{description}}</p></a>
+        <a href="/course-detail/{{course_id}}"><p class="tittle-menu-product">{{course_name}}</p></a>
         <div class="{{course_id}}-mnhv">
             <div class="wrap-stars-menu">
                 <div class="stars-outer">
@@ -19,6 +27,11 @@
                 </div>
                 <span class="number-rating"><b>{{overall_star}}</b> ({{number_rating}})</span><!--Về sau thay đổi star và number people-->
             </div>
+            {{#if IsNew}}
+            <div class="new-course-menu">
+                <p>NEW</p>
+            </div>
+            {{/if}}
         </div>
         <script>
             var ob_rating="{{{course_id}}}-mnhv";

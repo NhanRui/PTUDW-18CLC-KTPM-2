@@ -17,7 +17,7 @@
                             {{/if}}
                             <div class="top-content">
                                 <a href="/course-detail/{{course_id}}" class="card-title-in-top">{{course_name}}</a>
-                                <div class="{{course_id}}_new">
+                                <div class="{{course_id}}_view">
                                     <div class="wrap-stars-in-top">
                                         <div class="stars-outer">
                                             <div class="stars-inner"></div>
@@ -31,7 +31,7 @@
                                     {{/if}}
                                 </div>
                                 <script>
-                                    var ob_rating="{{{course_id}}}_new";
+                                    var ob_rating="{{{course_id}}}_view";
                                     document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
                                 </script>
                                 <div class="price-in-top">

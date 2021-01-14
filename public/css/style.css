@@ -673,3 +673,15 @@ button.sign-in-bg:hover
     background-color: #edf1f1;
     color: #d10d0d;
 }
+
+.number-of-course{
+    width: 10%;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.842);
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+    position: absolute;
+    margin-left: 5px;
+}

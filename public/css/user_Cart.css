@@ -165,13 +165,12 @@ body {
     padding: 0 20px;
 }
 
-.price {
-    flex: 2;
+.price_in_bill {
     font-size: 18px;
     color: #df322f;
 }
 
-.price > p {
+.price_in_bill > p {
     color: #df322f;
     font-size: 18px;
     text-align: center;
@@ -264,5 +263,4 @@ a {
     letter-spacing: -.2px;
     color: #9b9b9b;
     text-decoration: line-through;
-    margin-left: 34px;
 }

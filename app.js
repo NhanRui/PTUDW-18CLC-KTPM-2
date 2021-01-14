@@ -29,7 +29,7 @@ app.use(session({
   secret: 'SECRET_KEY',
   resave: false,
   saveUnitialized: true,
-  store: sessionStore,
+  //store: sessionStore,
   cookie: {
     //secure: true
   }
@@ -97,14 +97,14 @@ app.use(async function (req,res,next){
 })
 
 //--------------------------------view------------------------------------------
-app.use('/', require('./controllers/product_controller'));
-app.use('/index', require('./controllers/product_controller'));
+app.all('/',auth.authIndex,require('./controllers/product_controller'));
+app.use('/index',auth.authIndex, require('./controllers/product_controller'));
 app.use('/', require('./controllers/course_detail_controller'));
-app.use('/cart/',auth.auth,require('./controllers/cart_fa_controller'));
+app.use('/cart/',auth.authIndexCart,require('./controllers/cart_fa_controller'));
 
 app.use('/account',require('./controllers/account.route'));
-app.use('/search',require('./controllers/product_search_controller'));
-app.use('/watch-video',require('./controllers/video_controller'));
+app.use('/search',auth.authIndex,require('./controllers/product_search_controller'));
+app.use('/watch-video'/*,auth.auth*/,require('./controllers/video_controller'));
 app.get('/signin', function (req, res) {
   res.render('home', { layout: 'SignIn.hbs' });
 });
@@ -141,7 +141,7 @@ app.get('/AccountInformation', function (req, res) {
 
 app.use('/lecturer',auth.authLecturer, require('./controllers/lecturer_controller'));
 app.use('/admin',auth.authAdmin, require('./controllers/admin_controller'));
-app.use('/MyCourse', require('./controllers/courses_controller'));
+app.use('/MyCourse',auth.authIndexCart, require('./controllers/courses_controller'));
 
 const PORT = 3000;
 app.listen(PORT, function () {

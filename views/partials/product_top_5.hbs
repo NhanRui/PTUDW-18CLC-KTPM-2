@@ -1,11 +1,6 @@
-{{#if this.empty_top8}}
-<h5 class="card-title">Không có dữ liệu!</h5>
-<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-{{else}}
-<div class="row">
-{{#each this.product_top8}}
-    <div class="col-sm-3">
+
         <div class="card-product">
+                <div class="stt-top-5"><i class="fas fa-crown"></i> {{stt}}</div>
                 {{#if IsBuy}}
                 {{else}}
                 <form action="/cart/add" method="POST" class="favourite_course_container">
@@ -43,7 +38,7 @@
                 </div>
                 </a>
                 <a href="/course-detail/{{course_id}}">
-                <div class="{{course_id}}_top8">
+                <div class="{{course_id}}">
                     <div class="wrap-stars">
                         <div class="stars-outer">
                             <div class="stars-inner"></div>
@@ -59,23 +54,19 @@
                 <h4 class="card-title">{{course_name}}</h4>
                 </a>
                 <script>
-                    var ob_rating="{{{course_id}}}_top8";
+                    var ob_rating="{{{course_id}}}";
                     document.addEventListener('DOMContentLoaded',getRatings({{overall_star}},ob_rating))
                 </script><!--về sau tham số là tên product-->
                 <div class="card-body">
                     <a href="/course-detail/{{course_id}}" class="card-text-author">
-                        <img class="author-img" src={{author_image}} alt="">
+                        <img class="author-img" src="{{author_image}}" alt="">
                         <p class="author-name">{{author_name}}</p>
                     </a>
                     <a href="/course-detail/{{course_id}}">
-                    <div class="price">
+                    <div class="price_top5">
                         <div class="real-price">{{format_number price}}</div>
                         <div class="reduce-price">{{format_number reduce_price}}</div>
                     </div>
                     </a>
                 </div>
-        </div>
-    </div>
-{{/each}}
-</div>
-{{/if}}
+        </div> 

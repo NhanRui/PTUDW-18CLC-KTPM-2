@@ -5,8 +5,9 @@ const menuCategory=require('../models/category-menu.model');
 
 router.get('/', async function (req, res) {
     const list_music_menu=categoryModel.all_music_menu();
-    const menuList=await menuCategory.getCateMenu();
+    const menuList=await menuCategory.getCateMenuNumReg();
     const submenuList=await menuCategory.getCateSubMenu();
+
     let numberOfitems=0;
     const items=req.session.cart;
     const shopping_list=req.session.shopCart;

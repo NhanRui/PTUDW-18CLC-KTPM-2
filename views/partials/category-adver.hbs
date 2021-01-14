@@ -3,16 +3,19 @@
         <div class="background-item">
             <ul>
                 <label class="category-label-item">
-                <p class="category-label">Top danh mục</p>
+                <p class="category-label">Top 5 danh mục</p>
                 </label>
                 {{#each this.menuList}}
                 <li class="category-menu-item" id="{{category_id}}">
                     <a class="main-category-level" href="/search/{{category_id}}">
                         <span class="item-level1" id="{{category_id}}_name">{{category_name}}</span>
                     </a>
-                    <div class="number-of-course">{{on_top}}</div>
+                    <div class="number-of-course">{{numReg}}</div>
                 </li>
                 {{/each}}
+                <div class="graduate">
+                    <img src="/images/tot.png" alt="">
+                </div>
                 <!--<li class="category-menu-item" id="category-1">
                     <a class="main-category-level" href="#">
                         <span class="item-level1" id="ngoai-ngu">Ngoại ngữ</span>

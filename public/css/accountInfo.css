@@ -55,7 +55,7 @@
 
         .search-button {
             background: rgb(221, 31, 31);
-            padding: 10px;
+            padding: 5px;
             color: white;
             border-radius: 5px;
             border: 1px solid #ff0000;
@@ -70,13 +70,13 @@
             padding: 0 40px;
         }
 
-        .header-cart a {
+        /*.header-cart a {
             color: black;
         }
 
         .header-favor a {
             color: black;
-        }
+        }*/
 
         .header-notification a {
             color: black;
@@ -93,10 +93,10 @@
 
     .header-lower li {
         display: inline-block;
-        margin: 0 20px;
+        /*margin-left: 20px;*/
     }
 
-    .header-lower ul li a {
+    /*.header-lower ul li a {
         font-size: 15px;
         font-weight: 600;
         line-height: 1.33;
@@ -109,16 +109,16 @@
         line-height: 32px;
         font-family: Open Sans,sans-serif;
         text-decoration: none;
-        }
+        }*/
 
     .activate-btn {
         margin: 0px;
     }
 
-    .header-lower li:hover {
+    /*.header-lower li:hover {
         background-color: whitesmoke;
         border-radius: 4px;
-    }
+    }*/
 
     .list-options {
         padding-left: 15px;
@@ -454,4 +454,53 @@ body {
 
 .ctn_footer{
     margin-top: 100px;
+}
+
+.my-course-option{
+    margin-left: 40px;
+}
+
+.btn-activation{
+    padding: 5px 10px;
+}
+
+.btn-activation span{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.33;
+    letter-spacing: -.2px;
+    color: #464646;
+    position: relative;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    font-family: Open Sans,sans-serif;
+    text-decoration: none;
+}
+
+.container-for-cate div{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.33;
+    letter-spacing: -.2px;
+    color: #464646;
+    position: relative;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    font-family: Open Sans,sans-serif;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+.container-for-cate:hover div{
+    background-color: whitesmoke;
+    border-radius: 4px;
+    color: #464646;
+    cursor: pointer;
+}
+
+.btn-activation:hover{
+    background-color: whitesmoke;
+    border-radius: 4px;
 }

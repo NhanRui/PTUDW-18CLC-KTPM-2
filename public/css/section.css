@@ -20,7 +20,7 @@
     background: white;
     background-size: 50px;
     width: 258px;
-    height: 542px;
+    height: auto;
     margin-left: 120px;
     margin-top: 135px;
     padding-right: -200px;
@@ -323,6 +323,7 @@
 }
 
 .all-subcategory-container{
+    height: 678px;
     display: flex;
     flex-direction: row;
     z-index: 1;
@@ -596,4 +597,14 @@
     flex-direction: row;
     margin-left: 100px;
     margin-top: 30px;
+}
+
+.graduate
+{
+    height: 100px;
+}
+
+.graduate img{
+    width: 100%;
+    height: auto;
 }

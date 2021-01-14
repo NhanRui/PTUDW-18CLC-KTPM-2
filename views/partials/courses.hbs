@@ -3,6 +3,11 @@
 {{else}}
 {{#each allCourses}}
 <div class="course">
+    {{#if IsDone}}
+    <div class="check-progess-done">
+        Hoàn Thành <i class="fas fa-check"></i>
+    </div>
+    {{/if}}
     <div class="picture">
         <img src="{{intro_image}}" alt="course-img">
     </div>
@@ -61,7 +66,7 @@
             })</script>
     </div>
     <div class="description">
-        <a href="/watch-video/{{course_id}}/1/1">
+        <a href="/course-detail/{{course_id}}">
             <p class="course-name" style="margin-top: 10px">{{course_name}}</p>
         </a>
         <p class="author">{{lecturer_name}}</p>
